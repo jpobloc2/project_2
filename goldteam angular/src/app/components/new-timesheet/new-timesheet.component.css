@@ -1,0 +1,11 @@
+.list{
+    position: relative;
+    left: 350px;
+    max-width: 100px;
+    align-content: right;
+    bottom: 25px;
+}
+
+.calendar{
+    max-width:250px;
+}

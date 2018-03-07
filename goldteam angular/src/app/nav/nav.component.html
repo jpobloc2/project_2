@@ -1,0 +1,41 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04"
+    aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarsExample04">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" routerLink="/home">Home
+          <span class="sr-only">(current)</span>
+        </a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" routerLink="/timesheet">Timesheet Portal
+          <span class="sr-only">(current)</span>
+        </a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" routerLink="/advance">Payment Advance
+          <span class="sr-only">(current)</span>
+        </a>
+      </li>
+      <li class="nav-item">
+      </li>
+      <li ngbDropdown class="d-inline-block">
+        <a class="nav-link dropdown-toggle" id="dropdownBasic1" ngbDropdownToggle>Reimbursement Tickets</a>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+          <button class="dropdown-item" routerLink="/reimbs">View Reimbursements</button>
+          <button class="dropdown-item" routerLink="/new-reimbursement" >Create Reimbursement Ticket</button>
+        </div>
+      </li>
+      <li class="nav-item mr-sm-2">
+        
+      </li>
+    </ul>
+    <ul class="navbar-nav mr-auto" style="float:right!important; padding-top:10px;">
+      <a class="nav-link logg" routerLink="/login">Log Out</a>
+    </ul>
+  </div>
+</nav>

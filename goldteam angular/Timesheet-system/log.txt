@@ -1,0 +1,382 @@
+2018-02-20 15:43:43 TRACE ReimburseDAOJDBC:32 - attempting to log in
+2018-02-20 15:43:45 TRACE ReimburseDAOJDBC:36 - Connection established!
+2018-02-20 15:44:03 TRACE ReimburseDAOJDBC:32 - attempting to log in
+2018-02-20 15:44:04 TRACE ReimburseDAOJDBC:36 - Connection established!
+2018-02-20 15:44:58 TRACE ReimburseDAOJDBC:32 - attempting to log in
+2018-02-20 15:44:59 TRACE ReimburseDAOJDBC:36 - Connection established!
+2018-02-20 15:45:16 TRACE ReimburseDAOJDBC:32 - attempting to log in
+2018-02-20 15:45:17 TRACE ReimburseDAOJDBC:36 - Connection established!
+2018-02-20 15:45:17 WARN  ReimburseDAOJDBC:49 - No user found.
+2018-02-20 15:45:35 TRACE ReimburseDAOJDBC:32 - attempting to log in
+2018-02-20 15:45:36 TRACE ReimburseDAOJDBC:36 - Connection established!
+2018-02-20 15:46:27 TRACE ReimburseDAOJDBC:32 - attempting to log in
+2018-02-20 15:46:29 TRACE ReimburseDAOJDBC:36 - Connection established!
+2018-02-20 15:47:09 TRACE ReimburseDAOJDBC:32 - attempting to log in
+2018-02-20 15:47:10 TRACE ReimburseDAOJDBC:36 - Connection established!
+2018-02-20 15:49:22 TRACE ReimburseDAOJDBC:33 - attempting to log in
+2018-02-20 15:49:23 TRACE ReimburseDAOJDBC:37 - Connection established!
+2018-02-20 15:50:01 TRACE ReimburseDAOJDBC:33 - attempting to log in
+2018-02-20 15:50:03 TRACE ReimburseDAOJDBC:37 - Connection established!
+2018-02-20 15:52:46 TRACE ReimburseDAOJDBC:33 - attempting to log in
+2018-02-20 15:52:47 TRACE ReimburseDAOJDBC:37 - Connection established!
+2018-02-20 15:52:47 TRACE ReimburseDAOJDBC:69 - attempting to log in
+2018-02-20 15:52:48 TRACE ReimburseDAOJDBC:73 - Connection established!
+2018-02-20 15:55:24 TRACE ReimburseDAOJDBC:69 - attempting to log in
+2018-02-20 15:55:25 TRACE ReimburseDAOJDBC:73 - Connection established!
+2018-02-21 16:26:35 TRACE ReimburseDAOJDBC:69 - attempting to log in
+2018-02-21 16:26:36 TRACE ReimburseDAOJDBC:73 - Connection established!
+2018-02-21 16:26:36 WARN  ReimburseDAOJDBC:88 - Unable to login.
+2018-02-21 16:26:52 TRACE ReimburseDAOJDBC:33 - attempting to log in
+2018-02-21 16:26:53 TRACE ReimburseDAOJDBC:37 - Connection established!
+2018-02-21 16:31:07 TRACE ReimburseDAOJDBC:33 - attempting to log in
+2018-02-21 16:31:08 TRACE ReimburseDAOJDBC:37 - Connection established!
+2018-02-21 16:35:16 TRACE ReimburseDAOJDBC:33 - attempting to log in
+2018-02-21 16:35:17 TRACE ReimburseDAOJDBC:37 - Connection established!
+2018-02-21 16:40:01 TRACE ReimburseDAOJDBC:33 - attempting to log in
+2018-02-21 16:40:02 TRACE ReimburseDAOJDBC:37 - Connection established!
+2018-02-21 16:42:59 TRACE ReimburseDAOJDBC:33 - attempting to log in
+2018-02-21 16:43:02 TRACE ReimburseDAOJDBC:37 - Connection established!
+2018-02-21 16:43:17 TRACE ReimburseDAOJDBC:33 - attempting to log in
+2018-02-21 16:43:19 TRACE ReimburseDAOJDBC:37 - Connection established!
+2018-02-23 10:38:20 TRACE ReimburseDAOJDBC:34 - attempting to log in
+2018-02-23 10:38:21 TRACE ReimburseDAOJDBC:36 - Connection established!
+2018-02-23 10:39:05 TRACE ReimburseDAOJDBC:34 - attempting to log in
+2018-02-23 10:39:06 TRACE ReimburseDAOJDBC:36 - Connection established!
+2018-02-23 10:39:06 WARN  ReimburseDAOJDBC:49 - No user found.
+2018-02-23 10:59:42 TRACE ReimburseDAOJDBC:71 - attempting to log in
+2018-02-23 10:59:43 TRACE ReimburseDAOJDBC:73 - Connection established!
+2018-02-23 10:59:44 WARN  ReimburseDAOJDBC:88 - Unable to login.
+2018-02-23 11:00:24 TRACE ReimburseDAOJDBC:71 - attempting to log in
+2018-02-23 11:00:25 TRACE ReimburseDAOJDBC:73 - Connection established!
+2018-02-23 11:00:25 WARN  ReimburseDAOJDBC:89 - Unable to login.
+2018-02-23 11:01:31 TRACE ReimburseDAOJDBC:71 - attempting to log in
+2018-02-23 11:01:32 TRACE ReimburseDAOJDBC:73 - Connection established!
+2018-02-23 11:25:11 TRACE ReimburseDAOJDBC:66 - attempting to log in
+2018-02-23 11:25:12 TRACE ReimburseDAOJDBC:68 - Connection established!
+2018-02-23 11:25:21 TRACE ReimburseDAOJDBC:66 - attempting to log in
+2018-02-23 11:25:22 TRACE ReimburseDAOJDBC:68 - Connection established!
+2018-02-23 11:25:22 TRACE ReimburseDAOJDBC:102 - attempting to log in
+2018-02-23 11:25:22 TRACE ReimburseDAOJDBC:104 - Connection established!
+2018-02-23 11:26:15 TRACE ReimburseDAOJDBC:64 - attempting to log in
+2018-02-23 11:26:16 TRACE ReimburseDAOJDBC:66 - Connection established!
+2018-02-23 11:26:16 TRACE ReimburseDAOJDBC:100 - attempting to log in
+2018-02-23 11:26:17 TRACE ReimburseDAOJDBC:102 - Connection established!
+2018-02-23 11:26:17 TRACE ReimburseDAOJDBC:105 - created prepared statement for login
+2018-02-23 11:27:27 TRACE ReimburseDAOJDBC:64 - attempting to log in
+2018-02-23 11:27:28 TRACE ReimburseDAOJDBC:66 - Connection established!
+2018-02-23 11:27:41 TRACE ReimburseDAOJDBC:64 - attempting to log in
+2018-02-23 11:27:42 TRACE ReimburseDAOJDBC:66 - Connection established!
+2018-02-23 11:27:43 TRACE ReimburseDAOJDBC:100 - attempting to log in
+2018-02-23 11:27:43 TRACE ReimburseDAOJDBC:102 - Connection established!
+2018-02-23 11:27:43 TRACE ReimburseDAOJDBC:105 - created prepared statement for view my reimbursements
+2018-02-23 11:27:43 WARN  ReimburseDAOJDBC:111 -  No reimbursements with this user found. 
+2018-02-23 11:28:16 TRACE ReimburseDAOJDBC:33 - attempting to log in
+2018-02-23 11:28:17 TRACE ReimburseDAOJDBC:35 - Connection established!
+2018-02-23 11:28:17 TRACE ReimburseDAOJDBC:38 - created prepared statement for login
+2018-02-23 11:28:18 TRACE ReimburseDAOJDBC:45 - executed query
+2018-02-23 11:28:18 TRACE ReimburseDAOJDBC:49 - current user id is 1
+2018-02-23 11:28:18 TRACE ReimburseDAOJDBC:64 - attempting to log in
+2018-02-23 11:28:18 TRACE ReimburseDAOJDBC:66 - Connection established!
+2018-02-23 11:28:18 TRACE ReimburseDAOJDBC:100 - attempting to log in
+2018-02-23 11:28:19 TRACE ReimburseDAOJDBC:102 - Connection established!
+2018-02-23 11:28:19 TRACE ReimburseDAOJDBC:105 - created prepared statement for view my reimbursements
+2018-02-23 11:28:19 WARN  ReimburseDAOJDBC:111 -  No reimbursements with this user found. 
+2018-02-23 11:28:42 TRACE ReimburseDAOJDBC:33 - attempting to log in
+2018-02-23 11:28:43 TRACE ReimburseDAOJDBC:35 - Connection established!
+2018-02-23 11:28:43 TRACE ReimburseDAOJDBC:38 - created prepared statement for login
+2018-02-23 11:28:44 TRACE ReimburseDAOJDBC:45 - executed query
+2018-02-23 11:28:44 TRACE ReimburseDAOJDBC:49 - current user id is 1
+2018-02-23 11:28:44 TRACE ReimburseDAOJDBC:64 - attempting to log in
+2018-02-23 11:28:44 TRACE ReimburseDAOJDBC:66 - Connection established!
+2018-02-23 11:28:45 TRACE ReimburseDAOJDBC:100 - attempting to log in
+2018-02-23 11:28:45 TRACE ReimburseDAOJDBC:102 - Connection established!
+2018-02-23 11:28:45 TRACE ReimburseDAOJDBC:105 - created prepared statement for view my reimbursements
+2018-02-23 11:28:45 WARN  ReimburseDAOJDBC:111 -  No reimbursements with this user found. 
+2018-02-23 11:29:43 TRACE ReimburseDAOJDBC:33 - attempting to log in
+2018-02-23 11:29:43 TRACE ReimburseDAOJDBC:35 - Connection established!
+2018-02-23 11:29:44 TRACE ReimburseDAOJDBC:38 - created prepared statement for login
+2018-02-23 11:29:44 TRACE ReimburseDAOJDBC:45 - executed query
+2018-02-23 11:29:44 TRACE ReimburseDAOJDBC:49 - current user id is 2
+2018-02-23 11:29:44 TRACE ReimburseDAOJDBC:64 - attempting to log in
+2018-02-23 11:29:44 TRACE ReimburseDAOJDBC:66 - Connection established!
+2018-02-23 11:29:44 TRACE ReimburseDAOJDBC:100 - attempting to log in
+2018-02-23 11:29:45 TRACE ReimburseDAOJDBC:102 - Connection established!
+2018-02-23 11:29:45 TRACE ReimburseDAOJDBC:105 - created prepared statement for view my reimbursements
+2018-02-23 11:30:29 TRACE ReimburseDAOJDBC:33 - attempting to log in
+2018-02-23 11:30:30 TRACE ReimburseDAOJDBC:35 - Connection established!
+2018-02-23 11:30:30 TRACE ReimburseDAOJDBC:38 - created prepared statement for login
+2018-02-23 11:30:30 TRACE ReimburseDAOJDBC:45 - executed query
+2018-02-23 11:30:30 TRACE ReimburseDAOJDBC:49 - current user id is 2
+2018-02-23 11:30:30 TRACE ReimburseDAOJDBC:64 - attempting to log in
+2018-02-23 11:30:31 TRACE ReimburseDAOJDBC:66 - Connection established!
+2018-02-23 11:30:31 TRACE ReimburseDAOJDBC:100 - attempting to log in
+2018-02-23 11:30:31 TRACE ReimburseDAOJDBC:102 - Connection established!
+2018-02-23 11:30:31 TRACE ReimburseDAOJDBC:105 - created prepared statement for view my reimbursements
+2018-02-23 11:30:31 TRACE ReimburseDAOJDBC:114 - executed query
+2018-02-23 11:32:37 TRACE ReimburseDAOJDBC:33 - attempting to log in
+2018-02-23 11:32:39 TRACE ReimburseDAOJDBC:35 - Connection established!
+2018-02-23 11:32:39 TRACE ReimburseDAOJDBC:38 - created prepared statement for login
+2018-02-23 11:32:39 TRACE ReimburseDAOJDBC:45 - executed query
+2018-02-23 11:32:39 TRACE ReimburseDAOJDBC:49 - current user id is 2
+2018-02-23 11:32:39 TRACE ReimburseDAOJDBC:100 - attempting to log in
+2018-02-23 11:32:40 TRACE ReimburseDAOJDBC:102 - Connection established!
+2018-02-23 11:32:40 TRACE ReimburseDAOJDBC:105 - created prepared statement for view my reimbursements
+2018-02-23 11:32:40 TRACE ReimburseDAOJDBC:108 - setting prepared statement value to 2
+2018-02-23 11:32:40 TRACE ReimburseDAOJDBC:115 - executed query
+2018-02-23 11:33:26 TRACE ReimburseDAOJDBC:33 - attempting to log in
+2018-02-23 11:33:26 TRACE ReimburseDAOJDBC:35 - Connection established!
+2018-02-23 11:33:27 TRACE ReimburseDAOJDBC:38 - created prepared statement for login
+2018-02-23 11:33:27 TRACE ReimburseDAOJDBC:45 - executed query
+2018-02-23 11:33:27 TRACE ReimburseDAOJDBC:49 - current user id is 2
+2018-02-23 11:33:27 TRACE ReimburseDAOJDBC:100 - attempting to log in
+2018-02-23 11:33:27 TRACE ReimburseDAOJDBC:102 - Connection established!
+2018-02-23 11:33:27 TRACE ReimburseDAOJDBC:105 - created prepared statement for view my reimbursements
+2018-02-23 11:33:27 TRACE ReimburseDAOJDBC:108 - setting prepared statement value to 2
+2018-02-23 11:33:27 TRACE ReimburseDAOJDBC:115 - executed query
+2018-02-23 11:34:01 TRACE ReimburseDAOJDBC:33 - attempting to log in
+2018-02-23 11:34:03 TRACE ReimburseDAOJDBC:35 - Connection established!
+2018-02-23 11:34:03 TRACE ReimburseDAOJDBC:38 - created prepared statement for login
+2018-02-23 11:34:03 TRACE ReimburseDAOJDBC:45 - executed query
+2018-02-23 11:34:03 TRACE ReimburseDAOJDBC:49 - current user id is 2
+2018-02-23 11:34:03 TRACE ReimburseDAOJDBC:100 - attempting to log in
+2018-02-23 11:34:04 TRACE ReimburseDAOJDBC:102 - Connection established!
+2018-02-23 11:34:04 TRACE ReimburseDAOJDBC:105 - created prepared statement for view my reimbursements
+2018-02-23 11:34:04 TRACE ReimburseDAOJDBC:108 - setting prepared statement value to 2
+2018-02-23 11:34:04 TRACE ReimburseDAOJDBC:115 - executed query
+2018-02-23 11:36:11 TRACE ReimburseDAOJDBC:33 - attempting to log in
+2018-02-23 11:36:11 TRACE ReimburseDAOJDBC:35 - Connection established!
+2018-02-23 11:36:12 TRACE ReimburseDAOJDBC:38 - created prepared statement for login
+2018-02-23 11:36:12 TRACE ReimburseDAOJDBC:45 - executed query
+2018-02-23 11:36:12 TRACE ReimburseDAOJDBC:49 - current user id is 2
+2018-02-23 11:36:12 TRACE ReimburseDAOJDBC:100 - Connection established!
+2018-02-23 11:36:12 TRACE ReimburseDAOJDBC:103 - created prepared statement for view my reimbursements
+2018-02-23 11:36:12 TRACE ReimburseDAOJDBC:106 - setting prepared statement value to 2
+2018-02-23 11:36:12 TRACE ReimburseDAOJDBC:113 - executed query
+2018-02-23 11:37:37 TRACE ReimburseDAOJDBC:33 - attempting to log in
+2018-02-23 11:37:38 TRACE ReimburseDAOJDBC:35 - Connection established!
+2018-02-23 11:37:38 TRACE ReimburseDAOJDBC:38 - created prepared statement for login
+2018-02-23 11:37:38 TRACE ReimburseDAOJDBC:45 - executed query
+2018-02-23 11:37:38 TRACE ReimburseDAOJDBC:49 - current user id is 2
+2018-02-23 11:37:38 TRACE ReimburseDAOJDBC:100 - Connection established!
+2018-02-23 11:37:38 TRACE ReimburseDAOJDBC:103 - created prepared statement for view my reimbursements
+2018-02-23 11:37:38 TRACE ReimburseDAOJDBC:106 - setting prepared statement value to 2
+2018-02-23 11:37:38 TRACE ReimburseDAOJDBC:113 - executed query
+2018-02-23 11:37:38 TRACE ReimburseDAOJDBC:114 - false
+2018-02-23 11:38:11 TRACE ReimburseDAOJDBC:33 - attempting to log in
+2018-02-23 11:38:12 TRACE ReimburseDAOJDBC:35 - Connection established!
+2018-02-23 11:38:12 TRACE ReimburseDAOJDBC:38 - created prepared statement for login
+2018-02-23 11:38:12 TRACE ReimburseDAOJDBC:45 - executed query
+2018-02-23 11:38:12 TRACE ReimburseDAOJDBC:49 - current user id is 2
+2018-02-23 11:38:12 TRACE ReimburseDAOJDBC:100 - Connection established!
+2018-02-23 11:38:12 TRACE ReimburseDAOJDBC:103 - created prepared statement for view my reimbursements
+2018-02-23 11:38:12 TRACE ReimburseDAOJDBC:106 - setting prepared statement value to 2
+2018-02-23 11:38:12 TRACE ReimburseDAOJDBC:110 - executed query
+2018-02-23 11:38:12 TRACE ReimburseDAOJDBC:111 - true
+2018-02-23 11:38:39 TRACE ReimburseDAOJDBC:33 - attempting to log in
+2018-02-23 11:38:40 TRACE ReimburseDAOJDBC:35 - Connection established!
+2018-02-23 11:38:40 TRACE ReimburseDAOJDBC:38 - created prepared statement for login
+2018-02-23 11:38:41 TRACE ReimburseDAOJDBC:45 - executed query
+2018-02-23 11:38:41 TRACE ReimburseDAOJDBC:49 - current user id is 2
+2018-02-23 11:38:41 TRACE ReimburseDAOJDBC:100 - Connection established!
+2018-02-23 11:38:41 TRACE ReimburseDAOJDBC:103 - created prepared statement for view my reimbursements
+2018-02-23 11:38:41 TRACE ReimburseDAOJDBC:106 - setting prepared statement value to 2
+2018-02-23 11:38:41 TRACE ReimburseDAOJDBC:110 - executed query
+2018-02-23 11:38:41 TRACE ReimburseDAOJDBC:113 - while loop started
+2018-02-23 13:03:32 TRACE ReimburseDAOJDBC:33 - attempting to log in
+2018-02-23 13:03:33 TRACE ReimburseDAOJDBC:35 - Connection established!
+2018-02-23 13:03:33 TRACE ReimburseDAOJDBC:38 - created prepared statement for login
+2018-02-23 13:03:33 TRACE ReimburseDAOJDBC:45 - executed query
+2018-02-23 13:03:33 TRACE ReimburseDAOJDBC:49 - current user id is 2
+2018-02-23 13:03:34 TRACE ReimburseDAOJDBC:100 - Connection established!
+2018-02-23 13:03:34 TRACE ReimburseDAOJDBC:103 - created prepared statement for view my reimbursements
+2018-02-23 13:03:34 TRACE ReimburseDAOJDBC:106 - setting prepared statement value to 2
+2018-02-23 13:03:34 TRACE ReimburseDAOJDBC:110 - executed query
+2018-02-23 13:03:34 TRACE ReimburseDAOJDBC:113 - while loop started
+2018-02-23 13:04:04 TRACE ReimburseDAOJDBC:33 - attempting to log in
+2018-02-23 13:04:05 TRACE ReimburseDAOJDBC:35 - Connection established!
+2018-02-23 13:04:05 TRACE ReimburseDAOJDBC:38 - created prepared statement for login
+2018-02-23 13:04:05 TRACE ReimburseDAOJDBC:45 - executed query
+2018-02-23 13:04:05 TRACE ReimburseDAOJDBC:49 - current user id is 2
+2018-02-23 13:04:05 TRACE ReimburseDAOJDBC:64 - attempting to log in
+2018-02-23 13:04:05 TRACE ReimburseDAOJDBC:66 - Connection established!
+2018-02-23 13:04:06 TRACE ReimburseDAOJDBC:100 - Connection established!
+2018-02-23 13:04:06 TRACE ReimburseDAOJDBC:103 - created prepared statement for view my reimbursements
+2018-02-23 13:04:06 TRACE ReimburseDAOJDBC:106 - setting prepared statement value to 2
+2018-02-23 13:04:06 TRACE ReimburseDAOJDBC:110 - executed query
+2018-02-23 13:04:06 TRACE ReimburseDAOJDBC:113 - while loop started
+2018-02-23 13:05:05 TRACE ReimburseDAOJDBC:33 - attempting to log in
+2018-02-23 13:05:06 TRACE ReimburseDAOJDBC:35 - Connection established!
+2018-02-23 13:05:07 TRACE ReimburseDAOJDBC:38 - created prepared statement for login
+2018-02-23 13:05:07 TRACE ReimburseDAOJDBC:45 - executed query
+2018-02-23 13:05:07 TRACE ReimburseDAOJDBC:49 - current user id is 2
+2018-02-23 13:05:07 TRACE ReimburseDAOJDBC:64 - attempting to log in
+2018-02-23 13:05:07 TRACE ReimburseDAOJDBC:66 - Connection established!
+2018-02-23 13:05:08 TRACE ReimburseDAOJDBC:100 - Connection established!
+2018-02-23 13:05:08 TRACE ReimburseDAOJDBC:103 - created prepared statement for view my reimbursements
+2018-02-23 13:05:08 TRACE ReimburseDAOJDBC:106 - setting prepared statement value to 2
+2018-02-23 13:05:08 TRACE ReimburseDAOJDBC:110 - executed query
+2018-02-23 13:05:08 TRACE ReimburseDAOJDBC:113 - while loop started
+2018-02-23 13:05:33 TRACE ReimburseDAOJDBC:33 - attempting to log in
+2018-02-23 13:05:34 TRACE ReimburseDAOJDBC:35 - Connection established!
+2018-02-23 13:05:34 TRACE ReimburseDAOJDBC:38 - created prepared statement for login
+2018-02-23 13:05:34 TRACE ReimburseDAOJDBC:45 - executed query
+2018-02-23 13:05:34 TRACE ReimburseDAOJDBC:49 - current user id is 2
+2018-02-23 13:05:34 TRACE ReimburseDAOJDBC:64 - attempting to log in
+2018-02-23 13:05:35 TRACE ReimburseDAOJDBC:66 - Connection established!
+2018-02-23 13:05:35 TRACE ReimburseDAOJDBC:100 - Connection established!
+2018-02-23 13:05:35 TRACE ReimburseDAOJDBC:103 - created prepared statement for view my reimbursements
+2018-02-23 13:05:35 TRACE ReimburseDAOJDBC:106 - setting prepared statement value to 2
+2018-02-23 13:05:35 TRACE ReimburseDAOJDBC:110 - executed query
+2018-02-23 13:05:35 TRACE ReimburseDAOJDBC:113 - while loop started
+2018-02-23 13:06:28 TRACE ReimburseDAOJDBC:33 - attempting to log in
+2018-02-23 13:06:29 TRACE ReimburseDAOJDBC:35 - Connection established!
+2018-02-23 13:06:29 TRACE ReimburseDAOJDBC:38 - created prepared statement for login
+2018-02-23 13:06:29 TRACE ReimburseDAOJDBC:45 - executed query
+2018-02-23 13:06:29 TRACE ReimburseDAOJDBC:49 - current user id is 1
+2018-02-23 13:06:29 TRACE ReimburseDAOJDBC:64 - attempting to log in
+2018-02-23 13:06:30 TRACE ReimburseDAOJDBC:66 - Connection established!
+2018-02-23 13:06:30 TRACE ReimburseDAOJDBC:100 - Connection established!
+2018-02-23 13:06:30 TRACE ReimburseDAOJDBC:103 - created prepared statement for view my reimbursements
+2018-02-23 13:06:30 TRACE ReimburseDAOJDBC:106 - setting prepared statement value to 1
+2018-02-23 13:06:30 TRACE ReimburseDAOJDBC:110 - executed query
+2018-02-23 13:06:54 TRACE ReimburseDAOJDBC:33 - attempting to log in
+2018-02-23 13:06:55 TRACE ReimburseDAOJDBC:35 - Connection established!
+2018-02-23 13:06:55 TRACE ReimburseDAOJDBC:38 - created prepared statement for login
+2018-02-23 13:06:55 TRACE ReimburseDAOJDBC:45 - executed query
+2018-02-23 13:06:55 TRACE ReimburseDAOJDBC:49 - current user id is 1
+2018-02-23 13:06:55 TRACE ReimburseDAOJDBC:64 - attempting to log in
+2018-02-23 13:06:56 TRACE ReimburseDAOJDBC:66 - Connection established!
+2018-02-23 13:06:56 TRACE ReimburseDAOJDBC:100 - Connection established!
+2018-02-23 13:06:56 TRACE ReimburseDAOJDBC:103 - created prepared statement for view my reimbursements
+2018-02-23 13:06:56 TRACE ReimburseDAOJDBC:106 - setting prepared statement value to 1
+2018-02-23 13:06:56 TRACE ReimburseDAOJDBC:110 - executed query
+2018-02-23 13:06:56 TRACE ReimburseDAOJDBC:113 - while loop started
+2018-02-23 13:54:55 TRACE ReimburseDAOJDBC:35 - attempting to log in
+2018-02-23 13:54:56 TRACE ReimburseDAOJDBC:37 - Connection established!
+2018-02-23 13:54:56 TRACE ReimburseDAOJDBC:40 - created prepared statement for login
+2018-02-23 13:54:56 TRACE ReimburseDAOJDBC:47 - executed query
+2018-02-23 13:54:56 TRACE ReimburseDAOJDBC:51 - current user id is 1
+2018-02-23 13:54:56 TRACE ReimburseDAOJDBC:66 - attempting to log in
+2018-02-23 13:54:57 TRACE ReimburseDAOJDBC:68 - Connection established!
+2018-02-23 13:54:57 TRACE ReimburseDAOJDBC:103 - Connection established!
+2018-02-23 13:54:57 TRACE ReimburseDAOJDBC:106 - created prepared statement for view my reimbursements
+2018-02-23 13:54:57 TRACE ReimburseDAOJDBC:109 - setting prepared statement value to 1
+2018-02-23 13:54:57 TRACE ReimburseDAOJDBC:113 - executed query
+2018-02-23 13:54:57 TRACE ReimburseDAOJDBC:117 - while loop started
+2018-02-23 13:58:17 TRACE ReimburseDAOJDBC:35 - attempting to log in
+2018-02-23 13:58:18 TRACE ReimburseDAOJDBC:37 - Connection established!
+2018-02-23 13:58:19 TRACE ReimburseDAOJDBC:40 - created prepared statement for login
+2018-02-23 13:58:19 TRACE ReimburseDAOJDBC:47 - executed query
+2018-02-23 13:58:19 TRACE ReimburseDAOJDBC:51 - current user id is 1
+2018-02-23 13:58:19 TRACE ReimburseDAOJDBC:66 - attempting to log in
+2018-02-23 13:58:19 TRACE ReimburseDAOJDBC:68 - Connection established!
+2018-02-23 13:58:20 TRACE ReimburseDAOJDBC:103 - Connection established!
+2018-02-23 13:58:20 TRACE ReimburseDAOJDBC:106 - created prepared statement for view my reimbursements
+2018-02-23 13:58:20 TRACE ReimburseDAOJDBC:109 - setting prepared statement value to 1
+2018-02-23 13:58:20 TRACE ReimburseDAOJDBC:113 - executed query
+2018-02-23 13:58:20 TRACE ReimburseDAOJDBC:117 - while loop started
+2018-02-23 13:58:49 TRACE ReimburseDAOJDBC:35 - attempting to log in
+2018-02-23 13:58:50 TRACE ReimburseDAOJDBC:37 - Connection established!
+2018-02-23 13:58:50 TRACE ReimburseDAOJDBC:40 - created prepared statement for login
+2018-02-23 13:58:50 TRACE ReimburseDAOJDBC:47 - executed query
+2018-02-23 13:58:50 TRACE ReimburseDAOJDBC:51 - current user id is 1
+2018-02-23 13:58:50 TRACE ReimburseDAOJDBC:66 - attempting to log in
+2018-02-23 13:58:51 TRACE ReimburseDAOJDBC:68 - Connection established!
+2018-02-23 13:58:51 TRACE ReimburseDAOJDBC:103 - Connection established!
+2018-02-23 13:58:51 TRACE ReimburseDAOJDBC:106 - created prepared statement for view my reimbursements
+2018-02-23 13:58:51 TRACE ReimburseDAOJDBC:109 - setting prepared statement value to 1
+2018-02-23 13:58:51 TRACE ReimburseDAOJDBC:113 - executed query
+2018-02-23 13:58:51 TRACE ReimburseDAOJDBC:117 - while loop started
+2018-02-23 14:44:24 TRACE ReimburseDAOJDBC:36 - attempting to log in
+2018-02-23 14:44:25 TRACE ReimburseDAOJDBC:38 - Connection established!
+2018-02-23 14:44:25 TRACE ReimburseDAOJDBC:41 - created prepared statement for login
+2018-02-23 14:44:25 TRACE ReimburseDAOJDBC:48 - executed query
+2018-02-23 14:44:25 TRACE ReimburseDAOJDBC:52 - current user id is 1
+2018-02-23 14:44:25 TRACE ReimburseDAOJDBC:67 - attempting to log in
+2018-02-23 14:44:26 TRACE ReimburseDAOJDBC:69 - Connection established!
+2018-02-23 15:47:39 TRACE ReimburseDAOJDBC:37 - attempting to log in
+2018-02-23 15:47:41 TRACE ReimburseDAOJDBC:39 - Connection established!
+2018-02-23 15:47:41 TRACE ReimburseDAOJDBC:42 - created prepared statement for login
+2018-02-23 15:47:41 TRACE ReimburseDAOJDBC:49 - executed query
+2018-02-23 15:47:41 TRACE ReimburseDAOJDBC:53 - current user id is 1
+2018-02-23 15:47:41 WARN  ReimburseDAOJDBC:63 - Unable to login.
+2018-02-23 15:47:41 TRACE ReimburseDAOJDBC:72 - attempting to log in
+2018-02-23 15:47:42 TRACE ReimburseDAOJDBC:74 - Connection established!
+2018-02-23 15:54:53 TRACE ReimburseDAOJDBC:37 - attempting to log in
+2018-02-23 15:54:54 TRACE ReimburseDAOJDBC:39 - Connection established!
+2018-02-23 15:54:54 TRACE ReimburseDAOJDBC:42 - created prepared statement for login
+2018-02-23 15:54:54 TRACE ReimburseDAOJDBC:49 - executed query
+2018-02-23 15:54:54 TRACE ReimburseDAOJDBC:53 - current user id is 1
+2018-02-23 15:54:54 WARN  ReimburseDAOJDBC:63 - Unable to login.
+2018-02-23 15:55:28 TRACE ReimburseDAOJDBC:37 - attempting to log in
+2018-02-23 15:55:29 TRACE ReimburseDAOJDBC:39 - Connection established!
+2018-02-23 15:55:29 TRACE ReimburseDAOJDBC:42 - created prepared statement for login
+2018-02-23 15:55:29 TRACE ReimburseDAOJDBC:49 - executed query
+2018-02-23 15:55:29 TRACE ReimburseDAOJDBC:53 - current user id is 1
+2018-02-23 15:55:29 WARN  ReimburseDAOJDBC:63 - Unable to login.
+2018-02-23 15:56:04 TRACE ReimburseDAOJDBC:37 - attempting to log in
+2018-02-23 15:56:05 TRACE ReimburseDAOJDBC:39 - Connection established!
+2018-02-23 15:56:05 TRACE ReimburseDAOJDBC:42 - created prepared statement for login
+2018-02-23 15:56:05 TRACE ReimburseDAOJDBC:49 - executed query
+2018-02-23 15:56:05 TRACE ReimburseDAOJDBC:53 - current user id is 1
+2018-02-23 15:56:05 WARN  ReimburseDAOJDBC:63 - Unable to login.
+2018-02-23 15:56:52 TRACE ReimburseDAOJDBC:37 - attempting to log in
+2018-02-23 15:56:53 TRACE ReimburseDAOJDBC:39 - Connection established!
+2018-02-23 15:56:53 TRACE ReimburseDAOJDBC:43 - created prepared statement for login
+2018-02-23 15:56:53 TRACE ReimburseDAOJDBC:50 - executed query
+2018-02-23 15:56:53 TRACE ReimburseDAOJDBC:54 - current user id is 1
+2018-02-23 15:57:14 TRACE ReimburseDAOJDBC:37 - attempting to log in
+2018-02-23 15:57:15 TRACE ReimburseDAOJDBC:39 - Connection established!
+2018-02-23 15:57:15 TRACE ReimburseDAOJDBC:43 - created prepared statement for login
+2018-02-23 15:57:15 TRACE ReimburseDAOJDBC:50 - executed query
+2018-02-23 15:57:15 TRACE ReimburseDAOJDBC:54 - current user id is 1
+2018-02-23 15:57:15 TRACE Launcher:17 - thisuser
+2018-02-23 15:57:28 TRACE ReimburseDAOJDBC:37 - attempting to log in
+2018-02-23 15:57:29 TRACE ReimburseDAOJDBC:39 - Connection established!
+2018-02-23 15:57:29 TRACE ReimburseDAOJDBC:43 - created prepared statement for login
+2018-02-23 15:57:29 TRACE ReimburseDAOJDBC:50 - executed query
+2018-02-23 15:57:29 TRACE ReimburseDAOJDBC:54 - current user id is 1
+2018-02-23 15:57:29 TRACE Launcher:17 - AuthUser [id=1, manager=0]
+2018-02-23 16:04:05 TRACE ReimburseDAOJDBC:37 - attempting to log in
+2018-02-23 16:04:06 TRACE ReimburseDAOJDBC:39 - Connection established!
+2018-02-23 16:04:06 TRACE ReimburseDAOJDBC:43 - created prepared statement for login
+2018-02-23 16:04:07 TRACE ReimburseDAOJDBC:50 - executed query
+2018-02-23 16:04:07 TRACE ReimburseDAOJDBC:54 - current user id is 1
+2018-02-23 16:04:07 TRACE Launcher:17 - my user is AuthUser [id=1, manager=0]
+2018-02-25 16:55:02 TRACE ReimburseDAOJDBC:37 - attempting to log in
+2018-02-25 16:55:03 TRACE ReimburseDAOJDBC:39 - Connection established!
+2018-02-25 16:55:04 TRACE ReimburseDAOJDBC:43 - created prepared statement for login
+2018-02-25 16:55:04 TRACE ReimburseDAOJDBC:50 - executed query
+2018-02-25 16:55:04 TRACE ReimburseDAOJDBC:54 - current user id is 1
+2018-02-25 16:55:04 TRACE ReimburseDAOJDBC:55 - current role id is 0
+2018-02-25 16:55:04 TRACE Launcher:17 - my user is AuthUser [id=1, manager=0]
+2018-02-25 16:55:50 TRACE ReimburseDAOJDBC:37 - attempting to log in
+2018-02-25 16:55:51 TRACE ReimburseDAOJDBC:39 - Connection established!
+2018-02-25 16:55:51 TRACE ReimburseDAOJDBC:43 - created prepared statement for login
+2018-02-25 16:55:51 TRACE ReimburseDAOJDBC:50 - executed query
+2018-02-25 16:55:51 TRACE ReimburseDAOJDBC:54 - current user id is 1
+2018-02-25 16:55:51 TRACE ReimburseDAOJDBC:55 - current role id is 0
+2018-02-25 16:55:51 TRACE Launcher:17 - my user is AuthUser [id=1, manager=0]
+2018-02-25 16:55:51 TRACE ReimburseDAOJDBC:37 - attempting to log in
+2018-02-25 16:55:52 TRACE ReimburseDAOJDBC:39 - Connection established!
+2018-02-25 16:55:52 TRACE ReimburseDAOJDBC:43 - created prepared statement for login
+2018-02-25 16:55:52 TRACE ReimburseDAOJDBC:50 - executed query
+2018-02-25 16:55:52 TRACE ReimburseDAOJDBC:54 - current user id is 5
+2018-02-25 16:55:52 TRACE ReimburseDAOJDBC:55 - current role id is 1
+2018-02-25 16:55:52 TRACE Launcher:21 - my user is AuthUser [id=5, manager=1]
+2018-02-26 12:36:44 TRACE ReimburseDAOJDBC:40 - attempting to log in
+2018-02-26 12:36:45 TRACE ReimburseDAOJDBC:42 - Connection established!
+2018-02-26 12:36:45 TRACE ReimburseDAOJDBC:46 - created prepared statement for login
+2018-02-26 12:36:45 TRACE ReimburseDAOJDBC:53 - executed query
+2018-02-26 12:36:45 TRACE ReimburseDAOJDBC:57 - current user id is 2
+2018-02-26 12:36:45 TRACE ReimburseDAOJDBC:58 - current role id is 0
+2018-02-26 12:36:45 TRACE Launcher:17 - my user is AuthUser [id=2, manager=0]
+2018-02-26 12:36:46 TRACE ReimburseDAOJDBC:132 - Connection established!
+2018-02-26 12:36:46 TRACE ReimburseDAOJDBC:135 - created prepared statement for view my reimbursements
+2018-02-26 12:36:46 TRACE ReimburseDAOJDBC:138 - setting prepared statement value to 2
+2018-02-26 12:36:46 TRACE ReimburseDAOJDBC:142 - executed query
+2018-02-26 12:36:46 TRACE ReimburseDAOJDBC:146 - while loop started
+2018-02-26 12:36:46 TRACE ReimburseDAOJDBC:146 - while loop started
+2018-02-26 12:36:46 TRACE ReimburseDAOJDBC:146 - while loop started
+2018-02-26 12:36:46 TRACE ReimburseDAOJDBC:146 - while loop started
+2018-02-26 15:00:53 TRACE ReimburseDAOJDBC:40 - attempting to log in

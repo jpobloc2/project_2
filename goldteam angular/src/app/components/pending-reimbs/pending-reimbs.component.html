@@ -1,0 +1,65 @@
+<div class="container">
+    <table class="table table-striped">
+        <thead class="thead-light">
+            <tr>
+                <th>ID</th>
+                <th>Amount</th>
+                <th>Date Submitted</th>
+                <th>Description</th>
+                <th>Author ID</th>
+                <th>Type</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr *ngFor="let reimbursement of reimbs">
+                <ng-container *ngIf="reimbursement.reimb_status_id == 0">
+                    <td>{{reimbursement.r_id}}</td>
+                    <td>{{reimbursement.amount | currency:'USD':'symbol':'1.2'}}</td>
+                    <td>{{reimbursement.submitted | date:'fullDate'}}</td>
+                    <td>{{reimbursement.description}}</td>
+                    <td>{{reimbursement.author_id}}</td>
+                    <!-- <td>{{reimbursement.reimb_type_id}}</td> -->
+                    <div *ngIf="reimbursement.reimb_type_id == 0">
+                        <td>Lodging</td>
+                    </div>
+                    <div *ngIf="reimbursement.reimb_type_id == 1">
+                        <td>Travel</td>
+                    </div>
+                    <div *ngIf="reimbursement.reimb_type_id == 2">
+                        <td>Food</td>
+                    </div>
+                    <div *ngIf="reimbursement.reimb_type_id == 3">
+                        <td>Other</td>
+                    </div>
+                    <td>
+                        <form class="managerbutton" *ngIf="cookieManagerVal.manager === 1 && cookieManagerVal.id != reimbursement.author_id">
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                                <button type="submit" (click)="updateStatus(reimbursement, 1)" value=1 name="approve" class="btn btn-secondary btn-sm">Approve</button>
+                                <button type="submit" (click)="updateStatus(reimbursement, 2)" value=2 name="deny" class="btn btn-secondary btn-sm">Deny</button>
+                            </div>
+                        </form>
+                    </td>
+
+
+                </ng-container>
+
+            </tr>
+
+
+
+
+        </tbody>
+    </table>
+</div>
+
+
+<!-- 
+<div *ngFor="let r of reimbs">
+    <div *ngIf="r.status == 1">
+  
+      <app-reimbursement [reimbs]="r"></app-reimbursement>
+    </div>
+  
+  </div> -->

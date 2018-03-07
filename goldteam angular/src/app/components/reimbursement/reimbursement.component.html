@@ -1,0 +1,31 @@
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Amount</th>
+                <th>Date Submitted</th>
+                <th>Date Resolved</th>
+                <th>Description</th>
+                <th>Author</th>
+                <th>Resolver</th>
+                <th>Status</th>
+                <th>Type</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let r of reimbs">
+                <td>{{reimbs.id}}</td>
+                <td>{{reimbs.amount}}</td>
+                <td>{{reimbs.date_submitted}}</td>
+                <td>{{reimbs.date_resolved}}</td>
+                <td>{{reimbs.description}}</td>
+                <td>{{reimbs.author}}</td>
+                <td>{{reimbs.resolver}}</td>
+                <td>{{reimbs.status}}</td>
+                <td>{{reimbs.type}}</td>
+            </tr>
+
+        </tbody>
+    </table>
+</div>

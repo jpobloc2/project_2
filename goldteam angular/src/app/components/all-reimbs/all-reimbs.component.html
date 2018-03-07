@@ -1,0 +1,52 @@
+
+
+    <div class="container">
+        <table class="table table-striped">
+            <thead class="thead-light">
+                <tr>
+                    <th>ID</th>
+                    <th>Amount</th>
+                    <th>Date Submitted</th>
+                    <th>Date Resolved</th>
+                    <th>Description</th>
+                    <th>Author ID</th>
+                    <th>Resolver</th>
+                    <th>Status</th>
+                    <th>Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let reimbursement of reimbs">
+                    <td>{{reimbursement.r_id}}</td>
+                    <td>{{reimbursement.amount | currency:'USD':'symbol':'1.2'}}</td>
+                    <td>{{reimbursement.submitted | date:'fullDate'}}</td>
+                    <td>{{reimbursement.resolved | date:'fullDate'}}</td>
+                    <td>{{reimbursement.description}}</td>
+                    <td>{{reimbursement.author_id}}</td>
+                    <!-- <td>{{reimbursement.resolver_id}}</td> -->
+                    <td *ngIf="reimbursement.resolver_id != 0 else b">{{reimbursement.resolver_id}}</td>
+                    <ng-template #b>
+                        <td>N/A</td>
+                    </ng-template>
+                    <!-- <td>{{reimbursement.reimb_status_id}}</td> -->
+                    <td *ngIf="reimbursement.reimb_status_id == 0"><button class="btn btn-warning">Pending</button></td>
+                    <td *ngIf="reimbursement.reimb_status_id == 1"><button class="btn btn-success">Approved</button></td>
+                    <td *ngIf="reimbursement.reimb_status_id == 2"><button class="btn btn-danger">Denied</button></td>
+                    <!-- <td>{{reimbursement.reimb_type_id | }}</td> -->
+                    <div *ngIf="reimbursement.reimb_type_id == 0"><td>Lodging</td></div>
+                    <div *ngIf="reimbursement.reimb_type_id == 1"><td>Travel</td></div>
+                    <div *ngIf="reimbursement.reimb_type_id == 2"><td>Food</td></div>
+                    <div *ngIf="reimbursement.reimb_type_id == 3"><td>Other</td></div>
+                    
+                </tr>
+    
+            </tbody>
+        </table>
+    </div>
+
+  
+    
+
+  <!-- <app-reimbursement [reimbs]="r"></app-reimbursement> -->
+
+

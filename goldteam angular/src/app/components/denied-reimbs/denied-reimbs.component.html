@@ -1,0 +1,52 @@
+
+<div class="container">
+        <table class="table table-striped">
+            <thead class="thead-light">
+                <tr>
+                    <th>ID</th>
+                    <th>Amount</th>
+                    <th>Date Submitted</th>
+                    <th>Date Resolved</th>
+                    <th>Description</th>
+                    <th>Author ID</th>
+                    <th>Resolver</th>
+                    <th>Type</th>
+                </tr>
+            </thead>
+            <tbody>
+    
+                <tr *ngFor="let reimbursement of reimbs">
+                    <ng-container *ngIf="reimbursement.reimb_status_id == 2">
+                        <td>{{reimbursement.r_id}}</td>
+                        <td>{{reimbursement.amount | currency:'USD':'symbol':'1.2'}}</td>
+                        <td>{{reimbursement.submitted | date:'fullDate'}}</td>
+                        <td>{{reimbursement.resolved | date:'fullDate'}}</td>
+                        <td>{{reimbursement.description}}</td>
+                        <td>{{reimbursement.author_id}}</td>
+                        <td>{{reimbursement.resolver_id}}</td>
+                        <!-- <td>{{reimbursement.reimb_type_id}}</td> -->
+                        <div *ngIf="reimbursement.reimb_type_id == 0"><td>Lodging</td></div>
+                        <div *ngIf="reimbursement.reimb_type_id == 1"><td>Travel</td></div>
+                        <div *ngIf="reimbursement.reimb_type_id == 2"><td>Food</td></div>
+                        <div *ngIf="reimbursement.reimb_type_id == 3"><td>Other</td></div>
+                    </ng-container>
+                </tr>
+    
+    
+    
+    
+            </tbody>
+        </table>
+    </div>
+    
+    
+
+    
+ 
+<!-- <div *ngFor="let r of reimbs">
+    <div *ngIf="r.status == 2">
+  
+      <app-reimbursement [reimbs]="r"></app-reimbursement>
+    </div>
+  
+  </div> -->

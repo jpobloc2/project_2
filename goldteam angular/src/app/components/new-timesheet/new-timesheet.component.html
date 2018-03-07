@@ -1,0 +1,31 @@
+<app-nav></app-nav>
+
+<div class='container'>
+  <div class='calendar'>
+    <form (ngSubmit)="submitTimesheet()" >
+      <my-date-picker name="mydate" [options]="myDatePickerOptions" [(ngModel)]="model" required></my-date-picker>
+
+    
+  <div class='list'>
+    <label class="col-md-3" for="monamount">Monday</label>
+    <input type="number" name="monamount" [(ngModel)]="fullSheet.monday">
+    <label class="col-md-3" for="monamount">Tuesday</label>
+    <input type="number" name="tuesamount" [(ngModel)]="fullSheet.tuesday">
+    <label class="col-md-3" for="monamount">Wednesday</label>
+    <input type="number" name="wedamount" [(ngModel)]="fullSheet.wednesday">
+    <label class="col-md-3" for="monamount">Thursday</label>
+    <input type="number" name="thursamount" [(ngModel)]="fullSheet.thursday">
+    <label class="col-md-3" for="monamount">Friday</label>
+    <input type="number" name="friamount" [(ngModel)]="fullSheet.friday">
+
+  
+    <!-- <p>{{model.date.month}}</p>
+    <p>{{model.date.day}}</p>
+    <p>{{model.date.year}}</p> -->
+
+
+
+
+
+
+<button class='btn btn-primary' type='button' style='margin-top:25px' (click)="submitTimesheet()" routerLink='/timesheet'>Submit Timesheet</button>

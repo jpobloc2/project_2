@@ -20,6 +20,7 @@ public class ReimbController {
 	@Autowired
 	private ReimbServiceInterface rs;
 	
+	@JsonView(View.Summary.class)
 	@GetMapping("all")
 	public List<Reimbursement> findAll() {
 		return rs.findAll();

@@ -25,15 +25,15 @@ public class Users {
 	@Column(name="USER_ID")
 	@SequenceGenerator(name="USERID_SEQ", sequenceName="USERID_SEQ")
 	@GeneratedValue(generator="USERID_SEQ", strategy=GenerationType.AUTO)
-	private Integer userid;
+	private Integer userId;
 	
 	private String username;
 	private String password;
 	@JsonView(View.Summary.class)
-	private String first_name;
+	private String firstName;
 	@JsonView(View.Summary.class)
-	private String last_name;
-	private String user_email;
+	private String lastName;
+	private String userEmail;
 	
 	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="USER_ROLE")
@@ -70,12 +70,12 @@ public class Users {
 	public Users(int userid, String username, String password, String first_name, String last_name, String user_email,
 			UserRole role, Double wage, Users employer_id, Double debt) {
 		super();
-		this.userid = userid;
+		this.userId = userid;
 		this.username = username;
 		this.password = password;
-		this.first_name = first_name;
-		this.last_name = last_name;
-		this.user_email = user_email;
+		this.firstName = first_name;
+		this.lastName = last_name;
+		this.userEmail = user_email;
 		this.role = role;
 		this.wage = wage;
 		this.employer = employer_id;
@@ -94,12 +94,12 @@ public class Users {
 		int result = 1;
 		result = prime * result + ((debt == null) ? 0 : debt.hashCode());
 		result = prime * result + ((employer == null) ? 0 : employer.hashCode());
-		result = prime * result + ((first_name == null) ? 0 : first_name.hashCode());
-		result = prime * result + ((last_name == null) ? 0 : last_name.hashCode());
+		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
+		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
-		result = prime * result + ((user_email == null) ? 0 : user_email.hashCode());
+		result = prime * result + ((userEmail == null) ? 0 : userEmail.hashCode());
 		result = prime * result + ((role == null) ? 0 : role.hashCode());
-		result = prime * result + userid;
+		result = prime * result + userId;
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		result = prime * result + ((wage == null) ? 0 : wage.hashCode());
 		return result;
@@ -123,32 +123,32 @@ public class Users {
 				return false;
 		} else if (!employer.equals(other.employer))
 			return false;
-		if (first_name == null) {
-			if (other.first_name != null)
+		if (firstName == null) {
+			if (other.firstName != null)
 				return false;
-		} else if (!first_name.equals(other.first_name))
+		} else if (!firstName.equals(other.firstName))
 			return false;
-		if (last_name == null) {
-			if (other.last_name != null)
+		if (lastName == null) {
+			if (other.lastName != null)
 				return false;
-		} else if (!last_name.equals(other.last_name))
+		} else if (!lastName.equals(other.lastName))
 			return false;
 		if (password == null) {
 			if (other.password != null)
 				return false;
 		} else if (!password.equals(other.password))
 			return false;
-		if (user_email == null) {
-			if (other.user_email != null)
+		if (userEmail == null) {
+			if (other.userEmail != null)
 				return false;
-		} else if (!user_email.equals(other.user_email))
+		} else if (!userEmail.equals(other.userEmail))
 			return false;
 		if (role == null) {
 			if (other.role != null)
 				return false;
 		} else if (!role.equals(other.role))
 			return false;
-		if (userid != other.userid)
+		if (userId != other.userId)
 			return false;
 		if (username == null) {
 			if (other.username != null)
@@ -163,10 +163,10 @@ public class Users {
 		return true;
 	}
 	public int getUserid() {
-		return userid;
+		return userId;
 	}
 	public void setUserid(int userid) {
-		this.userid = userid;
+		this.userId = userid;
 	}
 	public String getUsername() {
 		return username;
@@ -181,22 +181,22 @@ public class Users {
 		this.password = password;
 	}
 	public String getFirst_name() {
-		return first_name;
+		return firstName;
 	}
 	public void setFirst_name(String first_name) {
-		this.first_name = first_name;
+		this.firstName = first_name;
 	}
 	public String getLast_name() {
-		return last_name;
+		return lastName;
 	}
 	public void setLast_name(String last_name) {
-		this.last_name = last_name;
+		this.lastName = last_name;
 	}
 	public String getUser_email() {
-		return user_email;
+		return userEmail;
 	}
 	public void setUser_email(String user_email) {
-		this.user_email = user_email;
+		this.userEmail = user_email;
 	}
 	public UserRole getUser_role() {
 		return role;
@@ -241,7 +241,7 @@ public class Users {
 		this.subordinates = subordinates;
 	}
 	public void setUserid(Integer userid) {
-		this.userid = userid;
+		this.userId = userid;
 	}
 	public Set<Timesheet> getTimesheets() {
 		return timesheets;

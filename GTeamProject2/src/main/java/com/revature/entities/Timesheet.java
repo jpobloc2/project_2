@@ -20,16 +20,16 @@ public class Timesheet {
 	@Column(name="TS_ID")
 	@SequenceGenerator(name="TSID_SEQ", sequenceName="TSID_SEQ")
 	@GeneratedValue(generator="TSID_SEQ", strategy=GenerationType.AUTO)
-	private Integer timesheetid;
+	private Integer timesheetId;
 	
 	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL) // Remove Cascade
 	@JoinColumn(name="AUTHOR_ID")
 	private Users author;
 	
-	private Timestamp start_date;
-	private Timestamp submitted_date;
-	private Timestamp resolved_date;
-	private Double hours_total;
+	private Timestamp startDate;
+	private Timestamp submittedDate;
+	private Timestamp resolvedDate;
+	private Double hoursTotal;
 	
 	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="STATUS")
@@ -39,7 +39,7 @@ public class Timesheet {
 	@JoinColumn(name="RESOLVER_ID")
 	private Users resolver;
 	
-	private String ts_comment;
+	private String tsComment;
 	private Double sunday;
 	private Double monday;
 	private Double tuesday;
@@ -56,15 +56,15 @@ public class Timesheet {
 			Double sunday, Double monday, Double tuesday, Double wednesday, Double thursday, Double friday,
 			Double saturday) {
 		super();
-		this.timesheetid = timesheetid;
+		this.timesheetId = timesheetid;
 		this.author = author;
-		this.start_date = start_date;
-		this.submitted_date = submitted_date;
-		this.resolved_date = resolved_date;
-		this.hours_total = hours_total;
+		this.startDate = start_date;
+		this.submittedDate = submitted_date;
+		this.resolvedDate = resolved_date;
+		this.hoursTotal = hours_total;
 		this.status = status;
 		this.resolver = resolver;
-		this.ts_comment = ts_comment;
+		this.tsComment = ts_comment;
 		this.sunday = sunday;
 		this.monday = monday;
 		this.tuesday = tuesday;
@@ -75,9 +75,9 @@ public class Timesheet {
 	}
 	@Override
 	public String toString() {
-		return "Timesheet [timesheetid=" + timesheetid + ", author=" + author.getUsername() + ", start_date=" + start_date
-				+ ", submitted_date=" + submitted_date + ", resolved_date=" + resolved_date + ", hours_total="
-				+ hours_total + ", status=" + status + ", resolver=" + resolver.getUsername() + ", ts_comment=" + ts_comment
+		return "Timesheet [timesheetid=" + timesheetId + ", author=" + author.getUsername() + ", start_date=" + startDate
+				+ ", submitted_date=" + submittedDate + ", resolved_date=" + resolvedDate + ", hours_total="
+				+ hoursTotal + ", status=" + status + ", resolver=" + resolver.getUsername() + ", ts_comment=" + tsComment
 				+ ", sunday=" + sunday + ", monday=" + monday + ", tuesday=" + tuesday + ", wednesday=" + wednesday
 				+ ", thursday=" + thursday + ", friday=" + friday + ", saturday=" + saturday + "]";
 	}
@@ -87,18 +87,18 @@ public class Timesheet {
 		int result = 1;
 		result = prime * result + ((author == null) ? 0 : author.hashCode());
 		result = prime * result + ((friday == null) ? 0 : friday.hashCode());
-		result = prime * result + ((hours_total == null) ? 0 : hours_total.hashCode());
+		result = prime * result + ((hoursTotal == null) ? 0 : hoursTotal.hashCode());
 		result = prime * result + ((monday == null) ? 0 : monday.hashCode());
-		result = prime * result + ((resolved_date == null) ? 0 : resolved_date.hashCode());
+		result = prime * result + ((resolvedDate == null) ? 0 : resolvedDate.hashCode());
 		result = prime * result + ((resolver == null) ? 0 : resolver.hashCode());
 		result = prime * result + ((saturday == null) ? 0 : saturday.hashCode());
-		result = prime * result + ((start_date == null) ? 0 : start_date.hashCode());
+		result = prime * result + ((startDate == null) ? 0 : startDate.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
-		result = prime * result + ((submitted_date == null) ? 0 : submitted_date.hashCode());
+		result = prime * result + ((submittedDate == null) ? 0 : submittedDate.hashCode());
 		result = prime * result + ((sunday == null) ? 0 : sunday.hashCode());
 		result = prime * result + ((thursday == null) ? 0 : thursday.hashCode());
-		result = prime * result + ((timesheetid == null) ? 0 : timesheetid.hashCode());
-		result = prime * result + ((ts_comment == null) ? 0 : ts_comment.hashCode());
+		result = prime * result + ((timesheetId == null) ? 0 : timesheetId.hashCode());
+		result = prime * result + ((tsComment == null) ? 0 : tsComment.hashCode());
 		result = prime * result + ((tuesday == null) ? 0 : tuesday.hashCode());
 		result = prime * result + ((wednesday == null) ? 0 : wednesday.hashCode());
 		return result;
@@ -122,20 +122,20 @@ public class Timesheet {
 				return false;
 		} else if (!friday.equals(other.friday))
 			return false;
-		if (hours_total == null) {
-			if (other.hours_total != null)
+		if (hoursTotal == null) {
+			if (other.hoursTotal != null)
 				return false;
-		} else if (!hours_total.equals(other.hours_total))
+		} else if (!hoursTotal.equals(other.hoursTotal))
 			return false;
 		if (monday == null) {
 			if (other.monday != null)
 				return false;
 		} else if (!monday.equals(other.monday))
 			return false;
-		if (resolved_date == null) {
-			if (other.resolved_date != null)
+		if (resolvedDate == null) {
+			if (other.resolvedDate != null)
 				return false;
-		} else if (!resolved_date.equals(other.resolved_date))
+		} else if (!resolvedDate.equals(other.resolvedDate))
 			return false;
 		if (resolver == null) {
 			if (other.resolver != null)
@@ -147,20 +147,20 @@ public class Timesheet {
 				return false;
 		} else if (!saturday.equals(other.saturday))
 			return false;
-		if (start_date == null) {
-			if (other.start_date != null)
+		if (startDate == null) {
+			if (other.startDate != null)
 				return false;
-		} else if (!start_date.equals(other.start_date))
+		} else if (!startDate.equals(other.startDate))
 			return false;
 		if (status == null) {
 			if (other.status != null)
 				return false;
 		} else if (!status.equals(other.status))
 			return false;
-		if (submitted_date == null) {
-			if (other.submitted_date != null)
+		if (submittedDate == null) {
+			if (other.submittedDate != null)
 				return false;
-		} else if (!submitted_date.equals(other.submitted_date))
+		} else if (!submittedDate.equals(other.submittedDate))
 			return false;
 		if (sunday == null) {
 			if (other.sunday != null)
@@ -172,15 +172,15 @@ public class Timesheet {
 				return false;
 		} else if (!thursday.equals(other.thursday))
 			return false;
-		if (timesheetid == null) {
-			if (other.timesheetid != null)
+		if (timesheetId == null) {
+			if (other.timesheetId != null)
 				return false;
-		} else if (!timesheetid.equals(other.timesheetid))
+		} else if (!timesheetId.equals(other.timesheetId))
 			return false;
-		if (ts_comment == null) {
-			if (other.ts_comment != null)
+		if (tsComment == null) {
+			if (other.tsComment != null)
 				return false;
-		} else if (!ts_comment.equals(other.ts_comment))
+		} else if (!tsComment.equals(other.tsComment))
 			return false;
 		if (tuesday == null) {
 			if (other.tuesday != null)
@@ -195,10 +195,10 @@ public class Timesheet {
 		return true;
 	}
 	public Integer getTimesheetid() {
-		return timesheetid;
+		return timesheetId;
 	}
 	public void setTimesheetid(Integer timesheetid) {
-		this.timesheetid = timesheetid;
+		this.timesheetId = timesheetid;
 	}
 	public Users getAuthor() {
 		return author;
@@ -207,28 +207,28 @@ public class Timesheet {
 		this.author = author;
 	}
 	public Timestamp getStart_date() {
-		return start_date;
+		return startDate;
 	}
 	public void setStart_date(Timestamp start_date) {
-		this.start_date = start_date;
+		this.startDate = start_date;
 	}
 	public Timestamp getSubmitted_date() {
-		return submitted_date;
+		return submittedDate;
 	}
 	public void setSubmitted_date(Timestamp submitted_date) {
-		this.submitted_date = submitted_date;
+		this.submittedDate = submitted_date;
 	}
 	public Timestamp getResolved_date() {
-		return resolved_date;
+		return resolvedDate;
 	}
 	public void setResolved_date(Timestamp resolved_date) {
-		this.resolved_date = resolved_date;
+		this.resolvedDate = resolved_date;
 	}
 	public Double getHours_total() {
-		return hours_total;
+		return hoursTotal;
 	}
 	public void setHours_total(Double hours_total) {
-		this.hours_total = hours_total;
+		this.hoursTotal = hours_total;
 	}
 	public Status getStatus() {
 		return status;
@@ -243,10 +243,10 @@ public class Timesheet {
 		this.resolver = resolver;
 	}
 	public String getTs_comment() {
-		return ts_comment;
+		return tsComment;
 	}
 	public void setTs_comment(String ts_comment) {
-		this.ts_comment = ts_comment;
+		this.tsComment = ts_comment;
 	}
 	public Double getSunday() {
 		return sunday;

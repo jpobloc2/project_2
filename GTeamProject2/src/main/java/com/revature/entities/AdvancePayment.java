@@ -22,7 +22,7 @@ public class AdvancePayment {
 	@Column(name="ADV_ID")
 	@SequenceGenerator(name="ADVID_SEQ", sequenceName="ADVID_SEQ")
 	@GeneratedValue(generator="ADVID_SEQ", strategy=GenerationType.AUTO)
-	private Integer advid;
+	private Integer advId;
 	
 	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL) // Remove Cascade
 	@JoinColumn(name="AUTHOR_ID")
@@ -33,14 +33,14 @@ public class AdvancePayment {
 	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL) // Remove Cascade
 	@JoinColumn(name="STATUS")
 	private Status status;
-	private Timestamp submit_date;
-	private Timestamp resolve_date;
+	private Timestamp submitDate;
+	private Timestamp resolveDate;
 	
 	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL) // Remove Cascade
 	@JoinColumn(name="RESOLVER_ID")
 	private Users resolver;
 	
-	private String adv_comment;
+	private String advComment;
 
 	public AdvancePayment() {
 		super();
@@ -50,37 +50,37 @@ public class AdvancePayment {
 	public AdvancePayment(Integer advid, Users author, double amount, Status status, Timestamp submit_date,
 			Timestamp resolve_date, Users resolver, String adv_comment) {
 		super();
-		this.advid = advid;
+		this.advId = advid;
 		this.author = author;
 		this.amount = amount;
 		this.status = status;
-		this.submit_date = submit_date;
-		this.resolve_date = resolve_date;
+		this.submitDate = submit_date;
+		this.resolveDate = resolve_date;
 		this.resolver = resolver;
-		this.adv_comment = adv_comment;
+		this.advComment = adv_comment;
 	}
 
 	@Override
 	public String toString() {
-		return "AdvancePayment [advid=" + advid + ", author=" + author.getUsername() + ", amount=" + amount + ", status=" + status
-				+ ", submit_date=" + submit_date + ", resolve_date=" + resolve_date + ", resolver=" + resolver.getUsername()
-				+ ", adv_comment=" + adv_comment + "]";
+		return "AdvancePayment [advid=" + advId + ", author=" + author.getUsername() + ", amount=" + amount + ", status=" + status
+				+ ", submit_date=" + submitDate + ", resolve_date=" + resolveDate + ", resolver=" + resolver.getUsername()
+				+ ", adv_comment=" + advComment + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((adv_comment == null) ? 0 : adv_comment.hashCode());
-		result = prime * result + ((advid == null) ? 0 : advid.hashCode());
+		result = prime * result + ((advComment == null) ? 0 : advComment.hashCode());
+		result = prime * result + ((advId == null) ? 0 : advId.hashCode());
 		long temp;
 		temp = Double.doubleToLongBits(amount);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + ((author == null) ? 0 : author.hashCode());
-		result = prime * result + ((resolve_date == null) ? 0 : resolve_date.hashCode());
+		result = prime * result + ((resolveDate == null) ? 0 : resolveDate.hashCode());
 		result = prime * result + ((resolver == null) ? 0 : resolver.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
-		result = prime * result + ((submit_date == null) ? 0 : submit_date.hashCode());
+		result = prime * result + ((submitDate == null) ? 0 : submitDate.hashCode());
 		return result;
 	}
 
@@ -93,15 +93,15 @@ public class AdvancePayment {
 		if (getClass() != obj.getClass())
 			return false;
 		AdvancePayment other = (AdvancePayment) obj;
-		if (adv_comment == null) {
-			if (other.adv_comment != null)
+		if (advComment == null) {
+			if (other.advComment != null)
 				return false;
-		} else if (!adv_comment.equals(other.adv_comment))
+		} else if (!advComment.equals(other.advComment))
 			return false;
-		if (advid == null) {
-			if (other.advid != null)
+		if (advId == null) {
+			if (other.advId != null)
 				return false;
-		} else if (!advid.equals(other.advid))
+		} else if (!advId.equals(other.advId))
 			return false;
 		if (Double.doubleToLongBits(amount) != Double.doubleToLongBits(other.amount))
 			return false;
@@ -110,10 +110,10 @@ public class AdvancePayment {
 				return false;
 		} else if (!author.equals(other.author))
 			return false;
-		if (resolve_date == null) {
-			if (other.resolve_date != null)
+		if (resolveDate == null) {
+			if (other.resolveDate != null)
 				return false;
-		} else if (!resolve_date.equals(other.resolve_date))
+		} else if (!resolveDate.equals(other.resolveDate))
 			return false;
 		if (resolver == null) {
 			if (other.resolver != null)
@@ -125,20 +125,20 @@ public class AdvancePayment {
 				return false;
 		} else if (!status.equals(other.status))
 			return false;
-		if (submit_date == null) {
-			if (other.submit_date != null)
+		if (submitDate == null) {
+			if (other.submitDate != null)
 				return false;
-		} else if (!submit_date.equals(other.submit_date))
+		} else if (!submitDate.equals(other.submitDate))
 			return false;
 		return true;
 	}
 
 	public Integer getAdvid() {
-		return advid;
+		return advId;
 	}
 
 	public void setAdvid(Integer advid) {
-		this.advid = advid;
+		this.advId = advid;
 	}
 
 	public Users getAuthor() {
@@ -166,19 +166,19 @@ public class AdvancePayment {
 	}
 
 	public Timestamp getSubmit_date() {
-		return submit_date;
+		return submitDate;
 	}
 
 	public void setSubmit_date(Timestamp submit_date) {
-		this.submit_date = submit_date;
+		this.submitDate = submit_date;
 	}
 
 	public Timestamp getResolve_date() {
-		return resolve_date;
+		return resolveDate;
 	}
 
 	public void setResolve_date(Timestamp resolve_date) {
-		this.resolve_date = resolve_date;
+		this.resolveDate = resolve_date;
 	}
 
 	public Users getResolver() {
@@ -190,11 +190,11 @@ public class AdvancePayment {
 	}
 
 	public String getAdv_comment() {
-		return adv_comment;
+		return advComment;
 	}
 
 	public void setAdv_comment(String adv_comment) {
-		this.adv_comment = adv_comment;
+		this.advComment = adv_comment;
 	}
 
 	

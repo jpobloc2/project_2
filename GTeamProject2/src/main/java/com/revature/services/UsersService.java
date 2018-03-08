@@ -16,9 +16,9 @@ public class UsersService implements UsersServiceInterface {
 	public Users createNew(Users u) {
 		
 		// Service logic
-		UserRole role = new UserRole();
-		role.set
-		u.setRole(role);
+//		UserRole role = new UserRole();
+//		role.setUserRoleId(0);
+//		u.setRole(role);
 		
 		return usersRepo.save(u);
 	}

@@ -21,6 +21,18 @@ export class AdvancepaymentComponent implements OnInit {
   constructor(private client: HttpClient) { }
 
   ngOnInit() {
+    this.client.get('http://localhost:8080/advpay/all')
+    .subscribe(
+      succ => {
+        this.payments = succ;
+        console.log(succ);
+        return this.payments;
+
+      }, err => {
+        alert('failed to retrieve payments');
+      }
+
+    );
   }
 
   submitPayment() {

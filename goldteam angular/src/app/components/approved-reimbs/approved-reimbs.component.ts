@@ -18,7 +18,7 @@ export class ApprovedReimbsComponent implements OnInit {
   ngOnInit() {
     // this.reimbs = this.reimbService.getReimbs();
 
-    this.client.get('http://localhost:8080/Reimbursement-System/reimbursement/all', { withCredentials: true })
+    this.client.get('http://localhost:8080/reimbs/all', { withCredentials: true })
     .subscribe(
       (succ: Array<Reimbursement>) => {
         this.reimbs = succ;

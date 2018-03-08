@@ -16,7 +16,7 @@ export class ReimbsComponent implements OnInit {
   constructor(private reimbService: ReimburseService, private client: HttpClient) { }
 
   ngOnInit() {
-     this.reimbs = this.reimbService.getReimbs();
+    //  this.reimbs = this.reimbService.getReimbs();
   }
 
 //   getReimbs() {

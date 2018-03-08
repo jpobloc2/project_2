@@ -23,7 +23,7 @@ export class PendingReimbsComponent implements OnInit {
     this.cookieManagerVal = this.cookie.getObject('user');
     console.log(this.cookieManagerVal.manager);
     // this.reimbs = this.reimbService.getReimbs();
-    this.client.get('http://localhost:8080/Reimbursement-System/reimbursement/all', { withCredentials: true })
+    this.client.get('http://localhost:8080/reimbs/all', { withCredentials: true })
     .subscribe(
       (succ: Array<Reimbursement>) => {
         this.reimbs = succ;

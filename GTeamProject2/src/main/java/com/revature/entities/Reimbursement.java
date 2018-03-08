@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Reimbursement {
 	@Id
@@ -26,12 +28,14 @@ public class Reimbursement {
 	private Timestamp reimb_resolved;
 	private String reimb_description;
 	
-	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	@JoinColumn(name="REIMB_AUTHOR")
+	@JsonIgnore
 	private Users reimb_author;
 	
-	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	@JoinColumn(name="REIMB_RESOLVER")
+	@JsonIgnore 	 	
 	private Users reimb_resolver;
 	
 	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
@@ -59,10 +63,11 @@ public class Reimbursement {
 	}
 	@Override
 	public String toString() {
-		return "Reimbursement [reimbid=" + reimbid + ", reimb_amount=" + reimb_amount + ", reimb_submitted="
-				+ reimb_submitted + ", reimb_resolved=" + reimb_resolved + ", reimb_description=" + reimb_description
-				+ ", reimb_author=" + reimb_author.getUsername() + ", reimb_resolver=" + reimb_resolver.getUsername() + ", reimb_status="
-				+ reimb_status + ", reimb_type=" + reimb_type + "]";
+//		return "Reimbursement [reimbid=" + reimbid + ", reimb_amount=" + reimb_amount + ", reimb_submitted="
+//				+ reimb_submitted + ", reimb_resolved=" + reimb_resolved + ", reimb_description=" + reimb_description
+//				+ ", reimb_author=" + reimb_author.getUsername() + ", reimb_resolver=" + reimb_resolver.getUsername() + ", reimb_status="
+////				+ reimb_status + ", reimb_type=" + reimb_type + "]";
+		return "*****************reimbursement tostring********";
 	}
 	@Override
 	public int hashCode() {

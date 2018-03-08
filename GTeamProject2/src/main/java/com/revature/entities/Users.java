@@ -15,6 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Users {
 	@Id
@@ -36,6 +38,7 @@ public class Users {
 	private Double wage;
 	
 	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	@JsonIgnore
 	@JoinColumn(name="EMPLOYER_ID")
 	private Users employer;
 
@@ -43,9 +46,11 @@ public class Users {
 	private Set<Users> subordinates = new HashSet<Users>();
 	
 	@OneToMany(mappedBy="author", fetch = FetchType.LAZY)
+	@JsonIgnore	
 	private Set<Timesheet> timesheets = new HashSet<Timesheet>();
 	
 	@OneToMany(mappedBy="reimb_author", fetch = FetchType.LAZY)
+	@JsonIgnore
 	private Set<Reimbursement> reimbursements = new HashSet<Reimbursement>();
 	
 	@OneToMany(mappedBy="author", fetch = FetchType.LAZY)
@@ -72,9 +77,10 @@ public class Users {
 	}
 	@Override
 	public String toString() {
-		return "Users [userid=" + userid + ", username=" + username + ", password=" + password + ", first_name="
-				+ first_name + ", last_name=" + last_name + ", user_email=" + user_email + ", user_role=" + role
-				+ ", wage=" + wage + ", employer_id=" + ", debt=" + debt + "]";
+//		return "Users [userid=" + userid + ", username=" + username + ", password=" + password + ", first_name="
+//				+ first_name + ", last_name=" + last_name + ", user_email=" + user_email + ", user_role=" + role
+//				+ ", wage=" + wage + ", employer_id=" + ", debt=" + debt + "]";
+		return "users tostring********************************";
 	}
 	@Override
 	public int hashCode() {

@@ -4,11 +4,15 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.revature.views.View;
+
 @Entity
 @Table(name="USER_ROLES")
 public class UserRole {
 	@Id
 	private Integer userRoleId;
+	@JsonView(View.UserInfo.class)
 	private String userRole;
 	public UserRole() {
 		super();

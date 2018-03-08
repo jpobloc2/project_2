@@ -24,8 +24,10 @@ public class Users {
 	@Column(name = "USER_ID")
 	@SequenceGenerator(name = "USERID_SEQ", sequenceName = "USERID_SEQ")
 	@GeneratedValue(generator = "USERID_SEQ", strategy = GenerationType.AUTO)
+	@JsonView(View.UserInfo.class)
 	private Integer userId;
 
+	@JsonView(View.UserInfo.class)
 	private String username;
 	private String password;
 	@Column(name="FIRST_NAME")
@@ -34,35 +36,34 @@ public class Users {
 	@JsonView(View.Summary.class)
 	@Column(name="LAST_NAME")
 	private String lastName;
+	@JsonView(View.UserInfo.class)
 	private String userEmail;
 
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "USER_ROLE")
+	@JsonView(View.UserInfo.class)
 	private UserRole role;
 
+	@JsonView(View.UserInfo.class)
 	private Double wage;
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "EMPLOYER_ID")
-
 	private Users employer;
 
 	@OneToMany(mappedBy = "employer", fetch = FetchType.LAZY)
-
 	private Set<Users> subordinates = new HashSet<Users>();
 
 	@OneToMany(mappedBy = "author", fetch = FetchType.LAZY)
-
 	private Set<Timesheet> timesheets = new HashSet<Timesheet>();
 
 	@OneToMany(mappedBy = "reimbAuthor", fetch = FetchType.LAZY)
-
 	private Set<Reimbursement> reimbursements = new HashSet<Reimbursement>();
 
 	@OneToMany(mappedBy = "author", fetch = FetchType.LAZY)
-
 	private Set<AdvancePayment> advancePayments = new HashSet<AdvancePayment>();
 
+	@JsonView(View.UserInfo.class)
 	private Double debt;
 
 	public Users() {

@@ -4,6 +4,6 @@ import com.revature.entities.Users;
 
 public interface UsersServiceInterface {
 
-	Users createNew(Users u, int manager_id);
+	Users createNew(Users u);
 
 }

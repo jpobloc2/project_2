@@ -15,7 +15,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.revature.views.View;
 
@@ -43,23 +42,23 @@ public class Users {
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "EMPLOYER_ID")
-	@JsonIgnore
+
 	private Users employer;
 
 	@OneToMany(mappedBy = "employer", fetch = FetchType.LAZY)
-	@JsonIgnore
+
 	private Set<Users> subordinates = new HashSet<Users>();
 
 	@OneToMany(mappedBy = "author", fetch = FetchType.LAZY)
-	@JsonIgnore
+
 	private Set<Timesheet> timesheets = new HashSet<Timesheet>();
 
 	@OneToMany(mappedBy = "reimbAuthor", fetch = FetchType.LAZY)
-	@JsonIgnore
+
 	private Set<Reimbursement> reimbursements = new HashSet<Reimbursement>();
 
 	@OneToMany(mappedBy = "author", fetch = FetchType.LAZY)
-	@JsonIgnore
+
 	private Set<AdvancePayment> advancePayments = new HashSet<AdvancePayment>();
 
 	private Double debt;

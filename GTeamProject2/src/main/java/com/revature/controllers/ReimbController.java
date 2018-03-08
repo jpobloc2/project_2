@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,16 +17,17 @@ import com.revature.views.View;
 
 @RestController
 @RequestMapping("reimb")
+@CrossOrigin(origins = "http://localhost:4200")
 public class ReimbController {
 	@Autowired
 	private ReimbServiceInterface rs;
-	
+
 	@JsonView(View.Summary.class)
 	@GetMapping("all")
 	public List<Reimbursement> findAll() {
 		return rs.findAll();
 	}
-	
+
 	@JsonView(View.Summary.class)
 	@GetMapping("{id}")
 	public Set<Reimbursement> findByuserid(@PathVariable int id) {

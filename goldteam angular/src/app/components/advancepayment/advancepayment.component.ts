@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-advancepayment',
@@ -8,6 +9,8 @@ import { Component, OnInit } from '@angular/core';
 export class AdvancepaymentComponent implements OnInit {
 
 
+  payments: any = [];
+
   private newPayment = {
 
     amount: 0,
@@ -15,7 +18,7 @@ export class AdvancepaymentComponent implements OnInit {
 
   };
 
-  constructor() { }
+  constructor(private client: HttpClient) { }
 
   ngOnInit() {
   }

@@ -22,14 +22,14 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.client.post('http://localhost:8080/Reimbursement-System/login', this.credentials,
-      { withCredentials: true })
+    this.client.post('http://localhost:8080/users', this.credentials,
+    )
       .subscribe(
         (succ: any) => {
-          alert(this.credentials.username +  ` has logged in`);
+          alert(this.credentials.username + ` has logged in`);
           this.cookie.putObject('user', succ);
           this.router.navigateByUrl('home');
-          console.log(this.cookie);
+          console.log(succ);
         },
         (err) => {
           alert('failed to log in');

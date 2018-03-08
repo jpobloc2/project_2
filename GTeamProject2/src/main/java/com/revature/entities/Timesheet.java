@@ -14,39 +14,69 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.revature.views.View;
+
 @Entity
 public class Timesheet {
 	@Id
 	@Column(name="TS_ID")
 	@SequenceGenerator(name="TSID_SEQ", sequenceName="TSID_SEQ")
 	@GeneratedValue(generator="TSID_SEQ", strategy=GenerationType.AUTO)
+	@JsonView(View.Summary.class)
 	private Integer timesheetId;
 	
-	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL) // Remove Cascade
+	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	@JoinColumn(name="AUTHOR_ID")
+	@JsonView(View.Summary.class)
 	private Users author;
 	
+	@JsonView(View.Summary.class)
 	private Timestamp startDate;
+	
+	@JsonView(View.Summary.class)
 	private Timestamp submittedDate;
+	
+	@JsonView(View.Summary.class)
 	private Timestamp resolvedDate;
+	
+	@JsonView(View.Summary.class)
 	private Double hoursTotal;
 	
 	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="STATUS")
+	@JsonView(View.Summary.class)
 	private Status status;
 	
 	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL) // Remove Cascade
 	@JoinColumn(name="RESOLVER_ID")
+	@JsonView(View.Summary.class)
 	private Users resolver;
 	
+	@JsonView(View.Summary.class)
 	private String tsComment;
+	
+	@JsonView(View.Summary.class)
 	private Double sunday;
+	
+	@JsonView(View.Summary.class)
 	private Double monday;
+	
+	@JsonView(View.Summary.class)
 	private Double tuesday;
+	
+	@JsonView(View.Summary.class)
 	private Double wednesday;
+	
+	@JsonView(View.Summary.class)
 	private Double thursday;
+	
+	@JsonView(View.Summary.class)
 	private Double friday;
+	
+	@JsonView(View.Summary.class)
 	private Double saturday;
+	
 	public Timesheet() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -290,7 +320,6 @@ public class Timesheet {
 	public void setSaturday(Double saturday) {
 		this.saturday = saturday;
 	}
-	
 	
 	
 }

@@ -4,11 +4,15 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.revature.views.View;
+
 @Entity
 @Table(name="STATUS_TABLE")
 public class Status {
 	@Id
 	private Integer statusId;
+	@JsonView(View.Summary.class)
 	private String status;
 	public Status() {
 		super();

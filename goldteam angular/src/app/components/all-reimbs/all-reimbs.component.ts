@@ -10,17 +10,20 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AllReimbsComponent implements OnInit {
 
-  reimbs: Array<Reimbursement> = [];
+  // reimbs: Array<Reimbursement> = [];
   // newReimb = new Reimbursement();
+
+  reimbs: any = [];
 
   constructor(private reimbService: ReimburseService, private client: HttpClient) { }
 
   ngOnInit() {
     // this.reimbs = this.reimbService.getReimbs();
-    this.client.get('http://localhost:8080/Reimbursement-System/reimbursement/all', { withCredentials: true })
+    this.client.get('http://localhost:8080/reimb/all')
     .subscribe(
       (succ: Array<Reimbursement>) => {
         this.reimbs = succ;
+        console.log(succ);
         return this.reimbs;
       },
       err => {

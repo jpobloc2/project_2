@@ -38,12 +38,11 @@ public class Users {
 	private Double wage;
 	
 	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
-	@JoinColumn(name="EMPLOYER_ID")
 	@JsonIgnore
+	@JoinColumn(name="EMPLOYER_ID")
 	private Users employer;
 
 	@OneToMany(mappedBy="employer", fetch = FetchType.LAZY)
-	@JsonIgnore
 	private Set<Users> subordinates = new HashSet<Users>();
 	
 	@OneToMany(mappedBy="author", fetch = FetchType.LAZY)
@@ -55,7 +54,6 @@ public class Users {
 	private Set<Reimbursement> reimbursements = new HashSet<Reimbursement>();
 	
 	@OneToMany(mappedBy="author", fetch = FetchType.LAZY)
-	@JsonIgnore
 	private Set<AdvancePayment> advancePayments = new HashSet<AdvancePayment>();
 	
 	private Double debt;

@@ -30,10 +30,12 @@ public class Reimbursement {
 	
 	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	@JoinColumn(name="REIMB_AUTHOR")
+	@JsonIgnore
 	private Users reimb_author;
 	
 	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
-	@JoinColumn(name="REIMB_RESOLVER")	
+	@JoinColumn(name="REIMB_RESOLVER")
+	@JsonIgnore 	 	
 	private Users reimb_resolver;
 	
 	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)

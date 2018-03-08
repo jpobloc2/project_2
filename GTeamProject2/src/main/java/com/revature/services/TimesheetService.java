@@ -13,7 +13,7 @@ public class TimesheetService implements TimesheetServiceInterface {
 	@Autowired
 	private TimesheetRepo timesheetRepo;
 	@Autowired
-	private AuthenticationServiceInterface asi;
+	private AuthenticationService asi;
 
 	@Override
 	public List<Timesheet> findAll() {

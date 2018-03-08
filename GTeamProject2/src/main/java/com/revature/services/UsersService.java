@@ -22,6 +22,13 @@ public class UsersService implements UsersServiceInterface {
 		return null;
 //		return usersRepo.save(u);
 	}
+	
+	@Override
+	public Users login(String username, String password) {
+		return usersRepo.findByUsername(username);
+	}
+	
+	
 
 
 

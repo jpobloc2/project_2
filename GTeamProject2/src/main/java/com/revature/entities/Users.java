@@ -86,12 +86,11 @@ public class Users {
 
 	@Override
 	public String toString() {
-		// return "Users [userid=" + userid + ", username=" + username + ", password=" +
-		// password + ", first_name="
-		// + first_name + ", last_name=" + last_name + ", user_email=" + user_email + ",
-		// user_role=" + role
-		// + ", wage=" + wage + ", employer_id=" + ", debt=" + debt + "]";
-		return "users tostring********************************";
+		 return "Users [userid=" + userId + ", username=" + username + ", password=" +
+		 password + ", first_name="
+		 + firstName + ", last_name=" + lastName + ", user_email=" + userEmail + ", user_role=" + role
+		 + ", wage=" + wage + ", employer_id=" + ", debt=" + debt + "]";
+		
 	}
 
 	@Override

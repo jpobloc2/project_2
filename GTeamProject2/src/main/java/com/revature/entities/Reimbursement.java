@@ -13,7 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
+import com.revature.views.View;
 
 @Entity
 public class Reimbursement {
@@ -21,25 +22,34 @@ public class Reimbursement {
 	@Column(name="REIMB_ID")
 	@SequenceGenerator(name="REIMBID_SEQ", sequenceName="REIMBID_SEQ")
 	@GeneratedValue(generator="REIMBID_SEQ", strategy=GenerationType.AUTO)
+	@JsonView(View.Summary.class)
 	private Integer reimbid;
 	
+	@JsonView(View.Summary.class)
 	private double reimb_amount;
+	@JsonView(View.Summary.class)
 	private Timestamp reimb_submitted;
+	@JsonView(View.Summary.class)
 	private Timestamp reimb_resolved;
+	@JsonView(View.Summary.class)
 	private String reimb_description;
 	
 	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	@JoinColumn(name="REIMB_AUTHOR")
+	@JsonView(View.Summary.class)
 	private Users reimb_author;
 	
 	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
-	@JoinColumn(name="REIMB_RESOLVER")	
+	@JoinColumn(name="REIMB_RESOLVER")
+	@JsonView(View.Summary.class)
 	private Users reimb_resolver;
 	
 	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="REIMB_STATUS")
+	@JsonView(View.Summary.class)
 	private Status reimb_status;
 	
+	@JsonView(View.Summary.class)
 	private String reimb_type;
 	public Reimbursement() {
 		super();

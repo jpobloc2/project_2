@@ -20,11 +20,7 @@ public class TimesheetController {
 	@Autowired
 	private TimesheetServiceInterface tss;
 
-	
 	@JsonView(View.Summary.class)
-
-
-
 	@GetMapping("all")
 	public List<Timesheet> findAll() {
 		return tss.findAll();

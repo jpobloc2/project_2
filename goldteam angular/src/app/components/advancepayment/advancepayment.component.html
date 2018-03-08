@@ -70,10 +70,10 @@
     <tr *ngFor="let advpay of payments">
       <td>{{advpay.advId}}</td>
       <td>{{advpay.author.firstName}}</td>
-      <td>{{advpay.amount}}</td>
+      <td>{{advpay.amount | currency:'USD':'symbol':'1.2'}}</td>
       <td>{{advpay.status.status}}</td>
-      <td>{{advpay.submitDate}}</td>
-      <td>{{advpay.resolveDate}}</td>
+      <td>{{advpay.submitDate | date:'fullDate'}}</td>
+      <td>{{advpay.resolveDate | date:'fullDate'}}</td>
       <td>{{advpay.resolver.firstName}}</td>
     </tr>
   </tbody>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-timesheets',
@@ -7,9 +8,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TimesheetsComponent implements OnInit {
 
-  constructor() { }
+  sheets: any = [];
+
+  constructor(private client: HttpClient) { }
 
   ngOnInit() {
+
+    this.client.get('http://localhost:8080/timesheet/all')
+    .subscribe(
+      succ => {
+        this.sheets = succ;
+        console.log(succ);
+        return this.sheets;
+
+      }, err => {
+        alert('failed to retrieve timesheets');
+      }
+
+    );
   }
 
 }

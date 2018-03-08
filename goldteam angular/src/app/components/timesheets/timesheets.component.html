@@ -8,30 +8,39 @@
         <tr>
             <th>Timesheet ID</th>
             <th>Employee Name</th>
+            <th>Submitted on</th>
             <th>Start date</th>
             <th>End Date</th>
+            <th>Resolved on</th>
             <th>Hours</th>
             <th>Status</th>
+            <th>Resolver</th>
         </tr>
     </thead>
     <tfoot>
         <tr>
             <th>Timesheet ID</th>
             <th>Employee Name</th>
+            <th>Submitted on</th>
             <th>Start date</th>
             <th>End Date</th>
+            <th>Resolved on</th>
             <th>Hours</th>
             <th>Status</th>
+            <th>Resolver</th>
         </tr>
     </tfoot>
     <tbody>
-        <tr>
-            <td>1</td>
-            <td>Brandon Cross</td>
-            <td>3/5/2018</td>
-            <td>3/9/2018</td>
-            <td>40</td>
-            <td>Pending</td>
+        <tr *ngFor="let ts of sheets">
+            <td>{{ts.timesheetId}}</td>
+            <td>{{ts.author.firstName}}</td>
+            <td>{{ts.submittedDate | date:'fullDate'}}</td>
+            <td>{{ts.startDate | date:'fullDate'}}</td>
+            <td>{{ts.endDate | date:'fullDate'}}</td>
+            <td>{{ts.resolvedDate | date:'fullDate'}}</td>
+            <td>{{ts.hoursTotal}}</td>
+            <td>{{ts.status.status}}</td>
+            <td>{{ts.resolver.firstName}}</td>
         </tr>
     </tbody>
 </table>

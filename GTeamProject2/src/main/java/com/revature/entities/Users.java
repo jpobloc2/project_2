@@ -24,43 +24,46 @@ public class Users {
 	@Column(name = "USER_ID")
 	@SequenceGenerator(name = "USERID_SEQ", sequenceName = "USERID_SEQ")
 	@GeneratedValue(generator = "USERID_SEQ", strategy = GenerationType.AUTO)
+	@JsonView(View.UserInfo.class)
 	private Integer userId;
 
+	@JsonView(View.UserInfo.class)
 	private String username;
 	private String password;
+	@Column(name="FIRST_NAME")
 	@JsonView(View.Summary.class)
 	private String firstName;
 	@JsonView(View.Summary.class)
+	@Column(name="LAST_NAME")
 	private String lastName;
+	@JsonView(View.UserInfo.class)
 	private String userEmail;
 
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "USER_ROLE")
+	@JsonView(View.UserInfo.class)
 	private UserRole role;
 
+	@JsonView(View.UserInfo.class)
 	private Double wage;
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "EMPLOYER_ID")
-
 	private Users employer;
 
 	@OneToMany(mappedBy = "employer", fetch = FetchType.LAZY)
-
 	private Set<Users> subordinates = new HashSet<Users>();
 
 	@OneToMany(mappedBy = "author", fetch = FetchType.LAZY)
-
 	private Set<Timesheet> timesheets = new HashSet<Timesheet>();
 
 	@OneToMany(mappedBy = "reimbAuthor", fetch = FetchType.LAZY)
-
 	private Set<Reimbursement> reimbursements = new HashSet<Reimbursement>();
 
 	@OneToMany(mappedBy = "author", fetch = FetchType.LAZY)
-
 	private Set<AdvancePayment> advancePayments = new HashSet<AdvancePayment>();
 
+	@JsonView(View.UserInfo.class)
 	private Double debt;
 
 	public Users() {
@@ -169,12 +172,12 @@ public class Users {
 		return true;
 	}
 
-	public int getUserid() {
+	public Integer getUserId() {
 		return userId;
 	}
 
-	public void setUserid(int userid) {
-		this.userId = userid;
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
 
 	public String getUsername() {
@@ -193,35 +196,35 @@ public class Users {
 		this.password = password;
 	}
 
-	public String getFirst_name() {
+	public String getFirstName() {
 		return firstName;
 	}
 
-	public void setFirst_name(String first_name) {
-		this.firstName = first_name;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
-	public String getLast_name() {
+	public String getLastName() {
 		return lastName;
 	}
 
-	public void setLast_name(String last_name) {
-		this.lastName = last_name;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
-	public String getUser_email() {
+	public String getUserEmail() {
 		return userEmail;
 	}
 
-	public void setUser_email(String user_email) {
-		this.userEmail = user_email;
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
 	}
 
-	public UserRole getUser_role() {
+	public UserRole getRole() {
 		return role;
 	}
 
-	public void setUser_role(String user_role) {
+	public void setRole(UserRole role) {
 		this.role = role;
 	}
 
@@ -231,30 +234,6 @@ public class Users {
 
 	public void setWage(Double wage) {
 		this.wage = wage;
-	}
-
-	public Users getEmployer_id() {
-		return employer;
-	}
-
-	public void setEmployer_id(Users employer_id) {
-		this.employer = employer_id;
-	}
-
-	public Double getDebt() {
-		return debt;
-	}
-
-	public void setDebt(Double debt) {
-		this.debt = debt;
-	}
-
-	public UserRole getRole() {
-		return role;
-	}
-
-	public void setRole(UserRole role) {
-		this.role = role;
 	}
 
 	public Users getEmployer() {
@@ -271,10 +250,6 @@ public class Users {
 
 	public void setSubordinates(Set<Users> subordinates) {
 		this.subordinates = subordinates;
-	}
-
-	public void setUserid(Integer userid) {
-		this.userId = userid;
 	}
 
 	public Set<Timesheet> getTimesheets() {
@@ -300,5 +275,15 @@ public class Users {
 	public void setAdvancePayments(Set<AdvancePayment> advancePayments) {
 		this.advancePayments = advancePayments;
 	}
+
+	public Double getDebt() {
+		return debt;
+	}
+
+	public void setDebt(Double debt) {
+		this.debt = debt;
+	}
+
+	
 
 }

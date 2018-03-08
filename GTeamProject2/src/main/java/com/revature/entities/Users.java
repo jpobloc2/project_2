@@ -29,9 +29,11 @@ public class Users {
 
 	private String username;
 	private String password;
+	@Column(name="FIRST_NAME")
 	@JsonView(View.Summary.class)
 	private String firstName;
 	@JsonView(View.Summary.class)
+	@Column(name="LAST_NAME")
 	private String lastName;
 	private String userEmail;
 
@@ -170,12 +172,12 @@ public class Users {
 		return true;
 	}
 
-	public int getUserid() {
+	public Integer getUserId() {
 		return userId;
 	}
 
-	public void setUserid(int userid) {
-		this.userId = userid;
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
 
 	public String getUsername() {
@@ -194,35 +196,35 @@ public class Users {
 		this.password = password;
 	}
 
-	public String getFirst_name() {
+	public String getFirstName() {
 		return firstName;
 	}
 
-	public void setFirst_name(String first_name) {
-		this.firstName = first_name;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
-	public String getLast_name() {
+	public String getLastName() {
 		return lastName;
 	}
 
-	public void setLast_name(String last_name) {
-		this.lastName = last_name;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
-	public String getUser_email() {
+	public String getUserEmail() {
 		return userEmail;
 	}
 
-	public void setUser_email(String user_email) {
-		this.userEmail = user_email;
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
 	}
 
-	public UserRole getUser_role() {
+	public UserRole getRole() {
 		return role;
 	}
 
-	public void setUser_role(String user_role) {
+	public void setRole(UserRole role) {
 		this.role = role;
 	}
 
@@ -232,30 +234,6 @@ public class Users {
 
 	public void setWage(Double wage) {
 		this.wage = wage;
-	}
-
-	public Users getEmployer_id() {
-		return employer;
-	}
-
-	public void setEmployer_id(Users employer_id) {
-		this.employer = employer_id;
-	}
-
-	public Double getDebt() {
-		return debt;
-	}
-
-	public void setDebt(Double debt) {
-		this.debt = debt;
-	}
-
-	public UserRole getRole() {
-		return role;
-	}
-
-	public void setRole(UserRole role) {
-		this.role = role;
 	}
 
 	public Users getEmployer() {
@@ -272,10 +250,6 @@ public class Users {
 
 	public void setSubordinates(Set<Users> subordinates) {
 		this.subordinates = subordinates;
-	}
-
-	public void setUserid(Integer userid) {
-		this.userId = userid;
 	}
 
 	public Set<Timesheet> getTimesheets() {
@@ -301,5 +275,15 @@ public class Users {
 	public void setAdvancePayments(Set<AdvancePayment> advancePayments) {
 		this.advancePayments = advancePayments;
 	}
+
+	public Double getDebt() {
+		return debt;
+	}
+
+	public void setDebt(Double debt) {
+		this.debt = debt;
+	}
+
+	
 
 }

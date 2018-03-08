@@ -17,7 +17,7 @@ public class UsersService implements UsersServiceInterface {
 		
 		// Service logic
 		UserRole role = new UserRole();
-		role.setUser_role_id(0);
+		role.set
 		u.setRole(role);
 		
 		return usersRepo.save(u);

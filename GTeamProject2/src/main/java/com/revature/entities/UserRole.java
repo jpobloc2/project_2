@@ -53,17 +53,18 @@ public class UserRole {
 			return false;
 		return true;
 	}
-	public int getUser_role_id() {
+	public Integer getUserRoleId() {
 		return userRoleId;
 	}
-	public void setUser_role_id(int user_role_id) {
-		this.userRoleId = user_role_id;
+	public void setUserRoleId(Integer userRoleId) {
+		this.userRoleId = userRoleId;
 	}
-	public String getUser_role() {
+	public String getUserRole() {
 		return userRole;
 	}
-	public void setUser_role(String user_role) {
-		this.userRole = user_role;
+	public void setUserRole(String userRole) {
+		this.userRole = userRole;
 	}
+
 
 }

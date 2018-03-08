@@ -28,7 +28,7 @@ public class AdvancePayment {
 	@JsonView(View.Summary.class)
 	private Integer advId;
 	
-	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL) // Remove Cascade
+	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.REMOVE) // Remove Cascade
 	@JoinColumn(name="AUTHOR_ID")
 	@JsonView(View.Summary.class)
 	private Users author;
@@ -36,7 +36,7 @@ public class AdvancePayment {
 	@JsonView(View.Summary.class)
 	private double amount;
 	
-	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL) // Remove Cascade
+	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.REMOVE) // Remove Cascade
 	@JoinColumn(name="STATUS")
 	@JsonView(View.Summary.class)
 	private Status status;
@@ -45,7 +45,7 @@ public class AdvancePayment {
 	@JsonView(View.Summary.class)
 	private Timestamp resolveDate;
 	
-	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL) // Remove Cascade
+	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.REMOVE) // Remove Cascade
 	@JoinColumn(name="RESOLVER_ID")
 	@JsonView(View.Summary.class)
 	private Users resolver;

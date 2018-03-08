@@ -36,13 +36,13 @@ public class Users {
 	private String lastName;
 	private String userEmail;
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
 	@JoinColumn(name = "USER_ROLE")
 	private UserRole role;
 
 	private Double wage;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
 	@JoinColumn(name = "EMPLOYER_ID")
 
 	private Users employer;

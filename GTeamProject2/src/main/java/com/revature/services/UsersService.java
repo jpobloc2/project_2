@@ -12,8 +12,15 @@ public class UsersService implements UsersServiceInterface {
 	private UsersRepo usersRepo;
 
 	@Override
-	public Users login(String username, String password) {
-		return usersRepo.findByUsername(username);
+	public Users createNew(Users u, int manager_id) {
+		
+		// Service logic
+		// Get manager by id provided
+		// 
+		Users manager = usersRepo.findById(manager_id).get();
+		System.out.println(u);
+		return null;
+//		return usersRepo.save(u);
 	}
 
 

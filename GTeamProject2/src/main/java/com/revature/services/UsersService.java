@@ -41,4 +41,16 @@ public class UsersService implements UsersServiceInterface {
 		else {return null;}
 	}
 
+	@Override
+	public boolean changePass(Users u) {
+		Users tmp = usersRepo.findById(u.getUserId()).get();
+		tmp.setPassword(u.getPassword());
+		Users success = usersRepo.save(tmp);
+		if(success != null) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 }

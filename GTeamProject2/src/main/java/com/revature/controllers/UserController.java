@@ -2,6 +2,8 @@ package com.revature.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +28,13 @@ public class UserController {
 	}
 
 	@PostMapping
+	@JsonView(View.UserInfo.class)
+	public ResponseEntity<Users> createNew(@RequestBody Users u) {
+		us.createNew(u);
+		return new ResponseEntity<>(HttpStatus.OK);
+  }
+	
+	@PostMapping 
 	@JsonView(View.UserInfo.class)
 	public Users login(@RequestBody LoginCredentials lc) {
 		System.out.println(lc.getUsername() + " " + lc.getPassword());

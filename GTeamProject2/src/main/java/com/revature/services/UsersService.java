@@ -29,7 +29,7 @@ public class UsersService implements UsersServiceInterface {
 		if (u.getPassword().equals(password)) {
 			return usersRepo.findByUsername(username);
 		}
-		else return null;
+		else {return null;}
 	}
 
 }

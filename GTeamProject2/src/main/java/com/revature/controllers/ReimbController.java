@@ -1,5 +1,6 @@
 package com.revature.controllers;
 
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Set;
 
@@ -38,6 +39,7 @@ public class ReimbController {
 	
 	@PostMapping(path="submit")
 	public Reimbursement submitReimbursement(@RequestBody Reimbursement r) {
+		r.setReimb_submitted(new Timestamp(System.currentTimeMillis()));
 		return rs.submitReimb(r);
 	}
 	

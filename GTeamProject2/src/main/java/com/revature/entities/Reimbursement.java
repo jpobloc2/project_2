@@ -34,17 +34,17 @@ public class Reimbursement {
 	@JsonView(View.Summary.class)
 	private String reimbDescription;
 	
-	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.REMOVE)
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="REIMB_AUTHOR")
 	@JsonView(View.Summary.class)
 	private Users reimbAuthor;
 	
-	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.REMOVE)
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="REIMB_RESOLVER")
 	@JsonView(View.Summary.class)
 	private Users reimbResolver;
 	
-	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.REMOVE)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="REIMB_STATUS")
 	@JsonView(View.Summary.class)
 	private Status reimbStatus;

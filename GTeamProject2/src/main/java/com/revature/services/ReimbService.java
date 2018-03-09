@@ -3,6 +3,8 @@ package com.revature.services;
 import java.util.List;
 import java.util.Set;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -31,6 +33,7 @@ public class ReimbService implements ReimbServiceInterface {
 	}
 
 	@Override
+	@Transactional
 	public Reimbursement submitReimb(Reimbursement r) {
 		return reimbRepo.save(r);
 	}

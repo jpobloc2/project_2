@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -35,8 +36,8 @@ public class ReimbController {
 		return rs.findByuserid(id);
 	}
 	
-	@PostMapping(path = "/submit")
-	public Reimbursement submitReimbursement(Reimbursement r) {
+	@PostMapping(path="submit")
+	public Reimbursement submitReimbursement(@RequestBody Reimbursement r) {
 		return rs.submitReimb(r);
 	}
 	

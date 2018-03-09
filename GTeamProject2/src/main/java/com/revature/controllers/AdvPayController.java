@@ -1,10 +1,12 @@
 package com.revature.controllers;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,11 +22,15 @@ public class AdvPayController {
 	@Autowired
 	private AdvPayServiceInterface aps;
 
-	
 	@JsonView(View.Summary.class)
-
 	@GetMapping("all")
 	public List<AdvancePayment> findAll() {
 		return aps.findAll();
+	}
+
+	@JsonView(View.Summary.class)
+	@GetMapping("{advId}")
+	public Set<AdvancePayment> findByuserid(@PathVariable int advId) {
+		return aps.findByuserid(advId);
 	}
 }

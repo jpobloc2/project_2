@@ -14,12 +14,12 @@
         <tbody>
 
             <tr *ngFor="let reimbursement of reimbs">
-                <ng-container *ngIf="reimbursement.reimbStatus.status == Pending">
-                    <td>{{reimbursement.reimbId}</td>
+                <ng-container *ngIf="reimbursement.reimbStatus.status === 'Pending'">
+                    <td>{{reimbursement.reimbId}}</td>
                     <td>{{reimbursement.reimbAmount | currency:'USD':'symbol':'1.2'}}</td>
                     <td>{{reimbursement.reimbSubmitted | date:'fullDate'}}</td>
                     <td>{{reimbursement.reimbDescription}}</td>
-                    <td>{{reimbursement.reimbAuthor.firstName}</td>
+                    <td>{{reimbursement.reimbAuthor.firstName}}</td>
                     <td>{{reimbursement.reimbType}}</td>
                     <td>
                         <form class="managerbutton" *ngIf="ck.roleId === 1 && ck.roleId != reimbursement.author_id">

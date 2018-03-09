@@ -11,8 +11,6 @@ import { CookieService } from 'angular2-cookie/services/cookies.service';
 })
 export class AllReimbsComponent implements OnInit {
 
-  // reimbs: Array<Reimbursement> = [];
-  // newReimb = new Reimbursement();
 
   reimbs: any = [];
   private ck;

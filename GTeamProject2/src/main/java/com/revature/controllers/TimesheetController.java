@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.revature.entities.ResolveCredentials;
 import com.revature.entities.Timesheet;
 import com.revature.services.TimesheetServiceInterface;
 import com.revature.views.View;
@@ -30,7 +31,8 @@ public class TimesheetController {
 	}
 	
 	@PutMapping
-	public Timesheet resolve(@RequestBody int tsid) {
-		return tss.resolve(tsid, 25);
+	public Timesheet resolve(@RequestBody ResolveCredentials rc) {
+		System.out.println(rc);
+		return tss.resolve(rc.getItemId(), rc.getResolution(), rc.getUserId(), rc.getRoleId());
 	}
 }

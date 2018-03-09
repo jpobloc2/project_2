@@ -8,6 +8,8 @@ public interface TimesheetServiceInterface {
 
 	List<Timesheet> findAll();
 
-	Timesheet resolve(int tsid, int i);
+	//Timesheet resolve(int tsid, int i);
+
+	Timesheet resolve(int tsid, String resolution, int userid, int roleid);
 
 }

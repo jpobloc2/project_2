@@ -22,14 +22,11 @@ public class UsersService implements UsersServiceInterface {
 		
 		return usersRepo.save(u);
 	}
-	
+
 	@Override
 	public Users login(String username, String password) {
+		Users u = usersRepo.findByUsername(username);
 		return usersRepo.findByUsername(username);
 	}
-	
-	
-
-
 
 }

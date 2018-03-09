@@ -69,6 +69,7 @@ public class Reimbursement {
 		this.reimbStatus = reimb_status;
 		this.reimbType = reimb_type;
 	}
+	
 	@Override
 	public String toString() {
 //		return "Reimbursement [reimbid=" + reimbid + ", reimb_amount=" + reimb_amount + ", reimb_submitted="

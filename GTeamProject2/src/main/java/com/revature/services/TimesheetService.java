@@ -17,4 +17,10 @@ public class TimesheetService implements TimesheetServiceInterface {
 	public List<Timesheet> findAll() {
 		return timesheetRepo.findAll();
 	}
+
+	@Override
+	public Timesheet submitTimesheet(Timesheet ts) {
+		return timesheetRepo.save(ts);
+	}
+	
 }

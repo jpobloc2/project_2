@@ -7,5 +7,7 @@ import com.revature.entities.Timesheet;
 public interface TimesheetServiceInterface {
 
 	List<Timesheet> findAll();
+	
+	Timesheet submitTimesheet(Timesheet ts);
 
 }

@@ -15,14 +15,14 @@
         <tbody>
 
             <tr *ngFor="let reimbursement of reimbs">
-                <ng-container *ngIf="reimbursement.reimbStatus.status === 'Approved'">
+                <ng-container *ngIf="reimbursement.reimbStatus.status === 'Accepted'">
                     <td>{{reimbursement.reimbId}}</td>
                     <td>{{reimbursement.reimbAmount | currency:'USD':'symbol':'1.2'}}</td>
                     <td>{{reimbursement.reimbSubmitted | date:'fullDate'}}</td>
                     <td>{{reimbursement.reimbResolved | date:'fullDate'}}</td>
                     <td>{{reimbursement.reimbDescription}}</td>
-                    <td>{{reimbursement.reimbAuthor.firstname}}</td>
-                    <td>{{reimbursement.reimbResolver.firstname}}</td>
+                    <td>{{reimbursement.reimbAuthor.firstName}}</td>
+                    <td>{{reimbursement.reimbResolver.firstName}}</td>
                     <td>{{reimbursement.reimbType}}</td>
                 </ng-container>
             </tr>

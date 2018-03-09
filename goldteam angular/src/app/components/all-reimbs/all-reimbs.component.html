@@ -24,7 +24,7 @@
                     <td>{{reimbursement.reimbDescription}}</td>
                     <td>{{reimbursement.reimbAuthor.firstName}}</td>
                     <!-- <td>{{reimbursement.resolver_id}}</td> -->
-                    <td *ngIf="reimbursement.resolver_id != 0 else b">{{reimbursement.reimbResolver.firstName}}</td>
+                    <td *ngIf="reimbursement.reimbResolver else b">{{reimbursement.reimbResolver.firstName}}</td>
                     <ng-template #b>
                         <td>N/A</td>
                     </ng-template>

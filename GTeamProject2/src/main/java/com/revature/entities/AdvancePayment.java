@@ -58,24 +58,24 @@ public class AdvancePayment {
 		// TODO Auto-generated constructor stub
 	}
 
-	public AdvancePayment(Integer advid, Users author, double amount, Status status, Timestamp submit_date,
-			Timestamp resolve_date, Users resolver, String adv_comment) {
+	public AdvancePayment(Integer advId, Users author, double amount, Status status, Timestamp submitDate,
+			Timestamp resolveDate, Users resolver, String advComment) {
 		super();
-		this.advId = advid;
+		this.advId = advId;
 		this.author = author;
 		this.amount = amount;
 		this.status = status;
-		this.submitDate = submit_date;
-		this.resolveDate = resolve_date;
+		this.submitDate = submitDate;
+		this.resolveDate = resolveDate;
 		this.resolver = resolver;
-		this.advComment = adv_comment;
+		this.advComment = advComment;
 	}
 
 	@Override
 	public String toString() {
-		return "AdvancePayment [advid=" + advId + ", author=" + author.getUsername() + ", amount=" + amount + ", status=" + status
-				+ ", submit_date=" + submitDate + ", resolve_date=" + resolveDate + ", resolver=" + resolver.getUsername()
-				+ ", adv_comment=" + advComment + "]";
+		return "AdvancePayment [advId=" + advId + ", author=" + author + ", amount=" + amount + ", status=" + status
+				+ ", submitDate=" + submitDate + ", resolveDate=" + resolveDate + ", resolver=" + resolver
+				+ ", advComment=" + advComment + "]";
 	}
 
 	@Override
@@ -144,12 +144,12 @@ public class AdvancePayment {
 		return true;
 	}
 
-	public Integer getAdvid() {
+	public Integer getAdvId() {
 		return advId;
 	}
 
-	public void setAdvid(Integer advid) {
-		this.advId = advid;
+	public void setAdvId(Integer advId) {
+		this.advId = advId;
 	}
 
 	public Users getAuthor() {
@@ -176,20 +176,20 @@ public class AdvancePayment {
 		this.status = status;
 	}
 
-	public Timestamp getSubmit_date() {
+	public Timestamp getSubmitDate() {
 		return submitDate;
 	}
 
-	public void setSubmit_date(Timestamp submit_date) {
-		this.submitDate = submit_date;
+	public void setSubmitDate(Timestamp submitDate) {
+		this.submitDate = submitDate;
 	}
 
-	public Timestamp getResolve_date() {
+	public Timestamp getResolveDate() {
 		return resolveDate;
 	}
 
-	public void setResolve_date(Timestamp resolve_date) {
-		this.resolveDate = resolve_date;
+	public void setResolveDate(Timestamp resolveDate) {
+		this.resolveDate = resolveDate;
 	}
 
 	public Users getResolver() {
@@ -200,15 +200,14 @@ public class AdvancePayment {
 		this.resolver = resolver;
 	}
 
-	public String getAdv_comment() {
+	public String getAdvComment() {
 		return advComment;
 	}
 
-	public void setAdv_comment(String adv_comment) {
-		this.advComment = adv_comment;
+	public void setAdvComment(String advComment) {
+		this.advComment = advComment;
 	}
 
-	
 
 	
 }

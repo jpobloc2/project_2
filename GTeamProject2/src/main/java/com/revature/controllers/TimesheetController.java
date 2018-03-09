@@ -32,6 +32,7 @@ public class TimesheetController {
 	}
 	
 	@PostMapping(path = "/submit")
+	@JsonView(View.Summary.class)
 	public Timesheet submitTimesheet(Timesheet ts) {
 		return tss.submitTimesheet(ts);
   }

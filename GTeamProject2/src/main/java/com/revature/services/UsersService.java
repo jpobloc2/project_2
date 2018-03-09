@@ -26,7 +26,10 @@ public class UsersService implements UsersServiceInterface {
 	@Override
 	public Users login(String username, String password) {
 		Users u = usersRepo.findByUsername(username);
-		return usersRepo.findByUsername(username);
+		if (u.getPassword().equals(password)) {
+			return usersRepo.findByUsername(username);
+		}
+		else return null;
 	}
 
 }

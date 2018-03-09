@@ -34,17 +34,17 @@ public class Reimbursement {
 	@JsonView(View.Summary.class)
 	private String reimbDescription;
 	
-	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.REMOVE)
 	@JoinColumn(name="REIMB_AUTHOR")
 	@JsonView(View.Summary.class)
 	private Users reimbAuthor;
 	
-	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.REMOVE)
 	@JoinColumn(name="REIMB_RESOLVER")
 	@JsonView(View.Summary.class)
 	private Users reimbResolver;
 	
-	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.REMOVE)
 	@JoinColumn(name="REIMB_STATUS")
 	@JsonView(View.Summary.class)
 	private Status reimbStatus;
@@ -69,6 +69,7 @@ public class Reimbursement {
 		this.reimbStatus = reimb_status;
 		this.reimbType = reimb_type;
 	}
+	
 	@Override
 	public String toString() {
 //		return "Reimbursement [reimbid=" + reimbid + ", reimb_amount=" + reimb_amount + ", reimb_submitted="

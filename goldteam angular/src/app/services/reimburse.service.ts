@@ -20,7 +20,7 @@ export class ReimburseService {
   constructor(private client: HttpClient) { }
 
   getReimbs(): any {
-    this.client.get('http://localhost:8080/Reimbursement-System/reimbursement/all', { withCredentials: true })
+    this.client.get('http://localhost:8080/reimb/all')
     .subscribe(
       (succ: Array<Reimbursement>) => {
         return this.reimbs = succ;

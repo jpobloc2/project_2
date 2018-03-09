@@ -39,7 +39,7 @@ public class Users {
 	@JsonView(View.UserInfo.class)
 	private String userEmail;
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
 	@JoinColumn(name = "USER_ROLE")
 	@JsonView(View.UserInfo.class)
 	private UserRole role;
@@ -47,7 +47,7 @@ public class Users {
 	@JsonView(View.UserInfo.class)
 	private Double wage;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
 	@JoinColumn(name = "EMPLOYER_ID")
 	private Users employer;
 

@@ -26,6 +26,11 @@ public class TimesheetService implements TimesheetServiceInterface {
 	}
 
 	@Override
+	public Timesheet submitTimesheet(Timesheet ts) {
+		return timesheetRepo.save(ts);
+	}
+  
+	
 	public Timesheet resolve(int tsid, String resolution, int userid, int roleid) {
 		Timesheet ret = null;
 		Users u = as.validateUser(userid);
@@ -38,4 +43,5 @@ public class TimesheetService implements TimesheetServiceInterface {
 		}
 		return null;
 	}
+  
 }

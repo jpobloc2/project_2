@@ -16,19 +16,15 @@
             <tbody>
     
                 <tr *ngFor="let reimbursement of reimbs">
-                    <ng-container *ngIf="reimbursement.reimb_status_id == 2">
-                        <td>{{reimbursement.r_id}}</td>
-                        <td>{{reimbursement.amount | currency:'USD':'symbol':'1.2'}}</td>
-                        <td>{{reimbursement.submitted | date:'fullDate'}}</td>
-                        <td>{{reimbursement.resolved | date:'fullDate'}}</td>
-                        <td>{{reimbursement.description}}</td>
-                        <td>{{reimbursement.author_id}}</td>
-                        <td>{{reimbursement.resolver_id}}</td>
-                        <!-- <td>{{reimbursement.reimb_type_id}}</td> -->
-                        <div *ngIf="reimbursement.reimb_type_id == 0"><td>Lodging</td></div>
-                        <div *ngIf="reimbursement.reimb_type_id == 1"><td>Travel</td></div>
-                        <div *ngIf="reimbursement.reimb_type_id == 2"><td>Food</td></div>
-                        <div *ngIf="reimbursement.reimb_type_id == 3"><td>Other</td></div>
+                    <ng-container *ngIf="reimbursement.reimbStatus.status === 'Declined'">
+                        <td>{{reimbursement.reimbId}}</td>
+                        <td>{{reimbursement.reimbAmount | currency:'USD':'symbol':'1.2'}}</td>
+                        <td>{{reimbursement.reimbSubmitted | date:'fullDate'}}</td>
+                        <td>{{reimbursement.reimbResolved | date:'fullDate'}}</td>
+                        <td>{{reimbursement.reimbDescription}}</td>
+                        <td>{{reimbursement.reimbAuthor.firstName}}</td>
+                        <td>{{reimbursement.reimbResolver.firstName}}</td>
+                        <td>{{reimbursement.reimbType}}</td>
                     </ng-container>
                 </tr>
     

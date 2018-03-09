@@ -8,13 +8,14 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.revature.views.View;
 
 @Entity
-@Table(name="USER_ROLES")
+@Table(name = "USER_ROLES")
 public class UserRole {
 	@Id
 	@JsonView(View.UserInfo.class)
 	private Integer userRoleId;
 	@JsonView(View.UserInfo.class)
 	private String userRole;
+
 	public UserRole() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -30,6 +31,7 @@ public class UserRole {
 	public String toString() {
 		return "UserRole [userRoleId=" + userRoleId + ", userRole=" + userRole + "]";
 	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -38,6 +40,7 @@ public class UserRole {
 		result = prime * result + userRoleId;
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -68,5 +71,6 @@ public class UserRole {
 	public void setUserRole(String userRole) {
 		this.userRole = userRole;
 	}
+
 
 }

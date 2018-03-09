@@ -41,7 +41,7 @@ public class AdvPayController {
 	@JsonView(View.Summary.class)
 	public AdvancePayment resolve(@RequestBody ResolveCredentials rc) {
 		System.out.println(rc);
-		return aps.resolve(rc.getItemId(), rc.getResolution(), rc.getUserId(), rc.getRoleId());
+		return aps.resolve(rc.getItemId(), rc.getResolution(), rc.getUserId());
 	}
 
 	@JsonView(View.Summary.class)

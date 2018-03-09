@@ -48,7 +48,7 @@ public class ReimbController {
 	@JsonView(View.Summary.class)
 	public Reimbursement resolve(@RequestBody ResolveCredentials rc) {
 		System.out.println(rc);
-		return rs.resolve(rc.getItemId(), rc.getResolution(), rc.getUserId(), rc.getRoleId());
+		return rs.resolve(rc.getItemId(), rc.getResolution(), rc.getUserId());
 	}
 	
 }

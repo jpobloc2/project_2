@@ -11,7 +11,7 @@ public interface AdvPayServiceInterface {
 	
 	AdvancePayment submitAdvPay(AdvancePayment ap);
 
-	AdvancePayment resolve(int tsid, String resolution, int userid, int roleid);
+	AdvancePayment resolve(int tsid, String resolution, int userid);
 
 	Set<AdvancePayment> findByuserid(int advId);
 

@@ -15,7 +15,6 @@ import com.revature.repo.StatusRepo;
 import com.revature.repo.UsersRepo;
 
 @Service
-@CrossOrigin(origins = "http://localhost:4200")
 public class AdvPayService implements AdvPayServiceInterface {
 	@Autowired
 	private AdvPayRepo advRepo;
@@ -39,10 +38,11 @@ public class AdvPayService implements AdvPayServiceInterface {
 	}
 
 	@Override
-	public AdvancePayment resolve(int tsid, String resolution, int userid, int roleid) {
+	public AdvancePayment resolve(int tsid, String resolution, int userid) {
 		AdvancePayment ret = null;
 		Users u = as.validateUser(userid);
-		if (as.validateManager(roleid)) {
+		boolean isCorrectManager = validateManagerDomain(tsid, u);
+		if(isCorrectManager) {
 			AdvancePayment ap = advRepo.findById(tsid).get();
 			ap.setResolver(u);
 			ap.setResolveDate(new Timestamp(System.currentTimeMillis()));
@@ -57,6 +57,11 @@ public class AdvPayService implements AdvPayServiceInterface {
 	public Set<AdvancePayment> findByuserid(int advId) {
 		Set<AdvancePayment> userPayments = usersRepo.findById(advId).get().getAdvancePayments();
 		return userPayments;
+  }
+	
+	public boolean validateManagerDomain(int tsid, Users u) {
+		Users user = advRepo.findById(tsid).get().getAuthor();
+		return u.getSubordinates().contains(user);
 
 	}
 }

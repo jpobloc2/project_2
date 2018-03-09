@@ -38,11 +38,12 @@ public class TimesheetService implements TimesheetServiceInterface {
 		return timesheetRepo.save(ts);
 	}
   
-	
-	public Timesheet resolve(int tsid, String resolution, int userid, int roleid) {
+	@Override
+	public Timesheet resolve(int tsid, String resolution, int userid) {
 		Timesheet ret = null;
 		Users u = as.validateUser(userid);
-		if(as.validateManager(roleid)) {
+		boolean isCorrectManager = validateManagerDomain(tsid, u);
+		if(isCorrectManager) {
 			Timesheet ts = timesheetRepo.findById(tsid).get();
 			ts.setResolver(u);
 			ts.setResolved_date(new Timestamp(System.currentTimeMillis()));
@@ -53,12 +54,16 @@ public class TimesheetService implements TimesheetServiceInterface {
 		return ret;
 	}
 
-
-
 	@Override
 	public Set<Timesheet> findByuserid(int id) {
 		Set<Timesheet> userSheets = usersRepo.findById(id).get().getTimesheets();
 		return userSheets;
 	}
 
+	
+	public boolean validateManagerDomain(int tsid, Users u) {
+		Users user = timesheetRepo.findById(tsid).get().getAuthor();
+		return u.getSubordinates().contains(user);
+	}
+  
 }

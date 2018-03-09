@@ -6,10 +6,8 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.CrossOrigin;
 
 import com.revature.entities.Reimbursement;
-import com.revature.entities.Timesheet;
 import com.revature.entities.Users;
 import com.revature.repo.ReimbRepo;
 import com.revature.repo.StatusRepo;
@@ -41,13 +39,13 @@ public class ReimbService implements ReimbServiceInterface {
 	public Reimbursement submitReimb(Reimbursement r) {
 		return reimbRepo.save(r);
 	}
-	
+
 	@Override
 	public Reimbursement resolve(int tsid, String resolution, int userid) {
 		Reimbursement ret = null;
 		Users u = as.validateUser(userid);
 		boolean isCorrectManager = validateManagerDomain(tsid, u);
-		if(isCorrectManager) {
+		if (isCorrectManager) {
 			Reimbursement rs = reimbRepo.findById(tsid).get();
 			rs.setReimbResolver(u);
 			rs.setReimbResolved(new Timestamp(System.currentTimeMillis()));
@@ -56,7 +54,7 @@ public class ReimbService implements ReimbServiceInterface {
 		}
 		return ret;
 	}
-	
+
 	public boolean validateManagerDomain(int tsid, Users u) {
 		Users user = reimbRepo.findById(tsid).get().getReimbAuthor();
 		return u.getSubordinates().contains(user);

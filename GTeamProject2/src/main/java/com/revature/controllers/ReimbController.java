@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.revature.entities.Reimbursement;
 import com.revature.entities.ResolveCredentials;
-import com.revature.entities.Timesheet;
 import com.revature.services.ReimbServiceInterface;
 import com.revature.views.View;
 
@@ -38,17 +37,18 @@ public class ReimbController {
 	public Set<Reimbursement> findByuserid(@PathVariable int id) {
 		return rs.findByuserid(id);
 	}
-	
+
 	@PostMapping(path = "/submit")
 	public Reimbursement submitReimbursement(Reimbursement r) {
 		return rs.submitReimb(r);
 	}
-	
+
 	@PutMapping
 	@JsonView(View.Summary.class)
 	public Reimbursement resolve(@RequestBody ResolveCredentials rc) {
+		System.out.println("Resolve started");
 		System.out.println(rc);
 		return rs.resolve(rc.getItemId(), rc.getResolution(), rc.getUserId());
 	}
-	
+
 }

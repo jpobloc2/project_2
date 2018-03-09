@@ -15,6 +15,13 @@ export class PendingReimbsComponent implements OnInit {
 
   ck;
 
+  updateReimb = {
+    itemId: 0,
+    resolution: '',
+    userId: 0
+
+  };
+
 
 
   constructor(private reimbService: ReimburseService, private client: HttpClient, private router: Router, private cookie: CookieService) { }
@@ -52,18 +59,19 @@ export class PendingReimbsComponent implements OnInit {
     }
   }
 
-  updateStatus(reimb: Reimbursement, statusId: number) {
-    console.log(reimb.r_id);
-    this.client.put(`http://localhost:8080/Reimbursement-System/reimbursement/${reimb.r_id}`, statusId, { withCredentials: true })
+  updateStatus(reimbId: number, reimbStatus: string) {
+    this.updateReimb.itemId = reimbId;
+    this.updateReimb.resolution = reimbStatus;
+    this.updateReimb.userId = this.ck.uId;
+    console.log(this.updateReimb);
+    this.client.put(`http://localhost:8080/reimb`, this.updateReimb)
       .subscribe(
         succ => {
-          if (statusId === 1) {
-            reimb.status = 1;
+          if (reimbStatus === 'Accepted') {
             alert('Reimbursement approved');
             this.router.navigateByUrl('reimbs');
           }
-          if (statusId === 2) {
-            reimb.status = 2;
+          if (reimbStatus === 'Declined') {
             alert('Reimbursement denied');
             this.router.navigateByUrl('reimbs');
           }

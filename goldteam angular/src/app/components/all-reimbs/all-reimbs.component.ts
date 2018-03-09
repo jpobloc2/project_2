@@ -20,9 +20,9 @@ export class AllReimbsComponent implements OnInit {
   constructor(private reimbService: ReimburseService, private client: HttpClient, private cookie: CookieService) { }
   ngOnInit() {
     this.ck = this.cookie.getObject('user');
-    console.log(this.ck.role.userRole);
-    if (this.ck.role.userRole === 'Employee') {
-      this.client.get(`http://localhost:8080/reimb/${this.ck.userId}`)
+    console.log(this.ck.roleId);
+    if (this.ck.roleId === 0  ) {
+      this.client.get(`http://localhost:8080/reimb/${this.ck.uId}`)
         .subscribe(
           (succ: Array<Reimbursement>) => {
             this.reimbs = succ;

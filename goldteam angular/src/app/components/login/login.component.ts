@@ -16,6 +16,14 @@ export class LoginComponent implements OnInit {
     password: ''
   };
 
+  user: any = [];
+
+  ck: any = {
+    uId: null,
+    firstName: null,
+    roleId: null
+  };
+
   constructor(private client: HttpClient, private cookie: CookieService, private router: Router) { }
 
   ngOnInit() {
@@ -27,9 +35,15 @@ export class LoginComponent implements OnInit {
       .subscribe(
         (succ: any) => {
           alert(this.credentials.username +  ` has logged in`);
-          this.cookie.putObject('user', succ);
+          this.user = succ;
+          this.ck.uId = succ.userId;
+          this.ck.firstName = succ.firstName;
+          this.ck.roleId = succ.role.userRoleId;
+          this.cookie.putObject('user', this.ck);
           this.router.navigateByUrl('home');
           console.log(succ);
+          console.log(this.ck);
+          console.log(this.cookie);
         },
         (err) => {
           alert('failed to log in');

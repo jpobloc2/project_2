@@ -11,6 +11,7 @@ import com.revature.views.View;
 @Table(name = "USER_ROLES")
 public class UserRole {
 	@Id
+	@JsonView(View.UserInfo.class)
 	private Integer userRoleId;
 	@JsonView(View.UserInfo.class)
 	private String userRole;

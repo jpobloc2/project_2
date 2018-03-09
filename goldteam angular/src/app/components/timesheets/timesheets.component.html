@@ -9,9 +9,11 @@
             <th>Timesheet ID</th>
             <th>Employee Name</th>
             <th>Start date</th>
-            <th>End Date</th>
+            <th>Date Submitted</th>
+            <th>Date Resolved</th>
             <th>Hours</th>
             <th>Status</th>
+            <th>Resolved By</th>
         </tr>
     </thead>
     <tfoot>
@@ -19,19 +21,27 @@
             <th>Timesheet ID</th>
             <th>Employee Name</th>
             <th>Start date</th>
-            <th>End Date</th>
+            <th>Date Submitted</th>
+            <th>Date Resolved</th>
             <th>Hours</th>
             <th>Status</th>
+            <th>Resolved By</th>
         </tr>
     </tfoot>
     <tbody>
-        <tr>
-            <td>1</td>
-            <td>Brandon Cross</td>
-            <td>3/5/2018</td>
-            <td>3/9/2018</td>
-            <td>40</td>
-            <td>Pending</td>
+        <tr *ngFor="let sheet of timesheets">
+            <td>{{sheet.timesheetId}}</td>
+            <td>{{sheet.author.firstName}}</td>
+            <td>{{sheet.startDate | date:'fullDate'}}</td>
+            <td>{{sheet.submittedDate | date:'fullDate'}}</td>
+            <td>{{sheet.resolvedDate | date:'fullDate'}}</td>
+            <td>{{sheet.hoursTotal}}</td>
+            <td>{{sheet.status.status}}</td>
+            <td *ngIf="sheet.resolver else b">{{sheet.resolver.firstName}}</td>
+            <ng-template #b>
+                <td>N/A</td>
+            </ng-template>
+            
         </tr>
     </tbody>
 </table>

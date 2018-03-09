@@ -12,4 +12,6 @@ public interface ReimbServiceInterface {
 	Set<Reimbursement> findByuserid(int author_id);
 	
 	Reimbursement submitReimb(Reimbursement r);
+
+	Reimbursement resolve(int tsid, String resolution, int userid);
 }

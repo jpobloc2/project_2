@@ -16,7 +16,7 @@ public class UsersService implements UsersServiceInterface {
 	private RoleRepo roleRepo;
 
 	@Override
-	public Users createNew(Users u) {
+	public void createNew(Users u) {
 		// Set role based on the string that was passed in
 		UserRole tmp = roleRepo.findByUserRole(u.getRole().getUserRole());
 		u.setRole(tmp);
@@ -24,9 +24,7 @@ public class UsersService implements UsersServiceInterface {
 		// Set userId to 0 so that it creates a new user rather than updating
 		u.setUserId(0);
 		
-		
-
-		return usersRepo.save(u);
+		usersRepo.save(u);
 	}
 
 	@Override

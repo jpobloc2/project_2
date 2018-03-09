@@ -34,16 +34,12 @@ public class ReimbService implements ReimbServiceInterface {
 
 	@Override
 	public Set<Reimbursement> findByuserid(int author_id) {
-		Set<Reimbursement> usersReimbs = new HashSet<Reimbursement>();
 		Users u = usersRepo.findById(author_id).get();
+		Set<Reimbursement> usersReimbs = u.getReimbursements();
 		if (u.getRole().getUserRole().equals("Manager")) {
 			Set<Users> suboordinates = u.getSubordinates();
-			Set<Reimbursement> temp = new HashSet<Reimbursement>();
 			for (Users sub: suboordinates) {
-				temp = sub.getReimbursements();
-				for(Reimbursement reimb: temp) {
-					usersReimbs.add(reimb);
-				}
+				usersReimbs.addAll(sub.getReimbursements());
 			}
 		} else {
 			usersReimbs = u.getReimbursements();

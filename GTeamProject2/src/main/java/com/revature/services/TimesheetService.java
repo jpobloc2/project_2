@@ -57,16 +57,13 @@ public class TimesheetService implements TimesheetServiceInterface {
 
 	@Override
 	public Set<Timesheet> findByuserid(int id) {
-		Set<Timesheet> usersTimesheets = new HashSet<Timesheet>();
 		Users u = usersRepo.findById(id).get();
+		Set<Timesheet> usersTimesheets = u.getTimesheets();
 		if (u.getRole().getUserRole().equals("Manager")) {
+			usersTimesheets.addAll(u.getTimesheets());
 			Set<Users> suboordinates = u.getSubordinates();
-			Set<Timesheet> temp = new HashSet<Timesheet>();
 			for (Users sub: suboordinates) {
-				temp = sub.getTimesheets();
-				for(Timesheet tim: temp) {
-					usersTimesheets.add(tim);
-				}
+				usersTimesheets.addAll(sub.getTimesheets());
 			}
 		} else {
 			usersTimesheets = u.getTimesheets();

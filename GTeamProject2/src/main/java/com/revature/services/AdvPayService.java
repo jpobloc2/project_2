@@ -55,16 +55,12 @@ public class AdvPayService implements AdvPayServiceInterface {
 
 	@Override
 	public Set<AdvancePayment> findByuserid(int advId) {
-		Set<AdvancePayment> usersAdvancePayments = new HashSet<AdvancePayment>();
 		Users u = usersRepo.findById(advId).get();
+		Set<AdvancePayment> usersAdvancePayments = u.getAdvancePayments();
 		if (u.getRole().getUserRole().equals("Manager")) {
 			Set<Users> suboordinates = u.getSubordinates();
-			Set<AdvancePayment> temp = new HashSet<AdvancePayment>();
 			for (Users sub: suboordinates) {
-				temp = sub.getAdvancePayments();
-				for(AdvancePayment adv: temp) {
-					usersAdvancePayments.add(adv);
-				}
+				usersAdvancePayments.addAll(sub.getAdvancePayments());
 			}
 		} else {
 			usersAdvancePayments = u.getAdvancePayments();

@@ -9,5 +9,7 @@ import com.revature.entities.Reimbursement;
 public interface ReimbRepo extends JpaRepository<Reimbursement, Integer> {
 
 	// Set<Reimbursement> findMyReimb(int id);
+	
+	<S extends Reimbursement> S save(S r);
 
 }

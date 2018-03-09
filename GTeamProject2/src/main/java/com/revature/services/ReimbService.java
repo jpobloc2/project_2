@@ -30,4 +30,9 @@ public class ReimbService implements ReimbServiceInterface {
 		return usersReimbs;
 	}
 
+	@Override
+	public Reimbursement submitReimb(Reimbursement r) {
+		return reimbRepo.save(r);
+	}
+
 }

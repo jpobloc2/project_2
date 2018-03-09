@@ -7,5 +7,7 @@ import com.revature.entities.AdvancePayment;
 public interface AdvPayServiceInterface {
 
 	List<AdvancePayment> findAll();
+	
+	AdvancePayment submitAdvPay(AdvancePayment ap);
 
 }

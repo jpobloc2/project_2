@@ -19,4 +19,9 @@ public class AdvPayService implements AdvPayServiceInterface {
 	public List<AdvancePayment> findAll() {
 		return advRepo.findAll();
 	}
+
+	@Override
+	public AdvancePayment submitAdvPay(AdvancePayment ap) {
+		return advRepo.save(ap);
+	}
 }

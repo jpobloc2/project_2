@@ -21,8 +21,13 @@ public class TimesheetService implements TimesheetServiceInterface {
 	}
 
 	@Override
+	public Timesheet submitTimesheet(Timesheet ts) {
+		return timesheetRepo.save(ts);
+	}
+	
 	public Timesheet resolve(int tsid, int i) {
 		// TODO Auto-generated method stub
 		return null;
 	}
+  
 }

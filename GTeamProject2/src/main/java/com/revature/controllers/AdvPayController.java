@@ -32,5 +32,6 @@ public class AdvPayController {
 	@GetMapping("{advId}")
 	public Set<AdvancePayment> findByuserid(@PathVariable int advId) {
 		return aps.findByuserid(advId);
+
 	}
 }

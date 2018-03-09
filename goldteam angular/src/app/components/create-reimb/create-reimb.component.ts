@@ -14,7 +14,7 @@ export class CreateReimbComponent implements OnInit {
   reimbursement = {
     amount: 0,
     description: '',
-    type: Number
+    type: Number,
   };
 
 

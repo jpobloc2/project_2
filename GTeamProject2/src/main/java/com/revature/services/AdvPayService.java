@@ -1,6 +1,7 @@
 package com.revature.services;
 
 import java.sql.Timestamp;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.revature.entities.AdvancePayment;
+import com.revature.entities.Reimbursement;
 import com.revature.entities.Users;
 import com.revature.repo.AdvPayRepo;
 import com.revature.repo.StatusRepo;
@@ -17,7 +19,6 @@ import com.revature.repo.UsersRepo;
 public class AdvPayService implements AdvPayServiceInterface {
 	@Autowired
 	private AdvPayRepo advRepo;
-
 	@Autowired
 	private AuthenticationService as;
 	@Autowired
@@ -54,8 +55,21 @@ public class AdvPayService implements AdvPayServiceInterface {
 
 	@Override
 	public Set<AdvancePayment> findByuserid(int advId) {
-		Set<AdvancePayment> userPayments = usersRepo.findById(advId).get().getAdvancePayments();
-		return userPayments;
+		Set<AdvancePayment> usersAdvancePayments = new HashSet<AdvancePayment>();
+		Users u = usersRepo.findById(advId).get();
+		if (u.getRole().getUserRole().equals("Manager")) {
+			Set<Users> suboordinates = u.getSubordinates();
+			Set<AdvancePayment> temp = new HashSet<AdvancePayment>();
+			for (Users sub: suboordinates) {
+				temp = sub.getAdvancePayments();
+				for(AdvancePayment adv: temp) {
+					usersAdvancePayments.add(adv);
+				}
+			}
+		} else {
+			usersAdvancePayments = u.getAdvancePayments();
+		}
+		return usersAdvancePayments;
 	}
 
 	public boolean validateManagerDomain(int tsid, Users u) {

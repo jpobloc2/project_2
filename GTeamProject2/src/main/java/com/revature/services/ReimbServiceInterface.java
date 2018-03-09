@@ -10,4 +10,8 @@ public interface ReimbServiceInterface {
 	List<Reimbursement> findAll();
 
 	Set<Reimbursement> findByuserid(int author_id);
+	
+	Reimbursement submitReimb(Reimbursement r);
+
+	Reimbursement resolve(int tsid, String resolution, int userid, int roleid);
 }

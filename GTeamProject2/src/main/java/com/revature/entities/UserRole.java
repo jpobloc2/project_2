@@ -21,15 +21,15 @@ public class UserRole {
 		// TODO Auto-generated constructor stub
 	}
 
-	public UserRole(int user_role_id, String user_role) {
+	public UserRole(Integer userRoleId, String userRole) {
 		super();
-		this.userRoleId = user_role_id;
-		this.userRole = user_role;
+		this.userRoleId = userRoleId;
+		this.userRole = userRole;
 	}
 
 	@Override
 	public String toString() {
-		return "UserRole [user_role_id=" + userRoleId + ", user_role=" + userRole + "]";
+		return "UserRole [userRoleId=" + userRoleId + ", userRole=" + userRole + "]";
 	}
 
 	@Override

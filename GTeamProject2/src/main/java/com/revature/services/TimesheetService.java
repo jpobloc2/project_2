@@ -38,10 +38,11 @@ public class TimesheetService implements TimesheetServiceInterface {
 			Timesheet ts = timesheetRepo.findById(tsid).get();
 			ts.setResolver(u);
 			ts.setResolved_date(new Timestamp(System.currentTimeMillis()));
+			System.out.println(statusRepo.findByStatus("Pending"));
 			ts.setStatus(statusRepo.findByStatus(resolution));
-			timesheetRepo.save(ts);
+			ret = timesheetRepo.save(ts);
 		}
-		return null;
+		return ret;
 	}
   
 }

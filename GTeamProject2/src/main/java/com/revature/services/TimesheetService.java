@@ -12,6 +12,8 @@ import com.revature.repo.TimesheetRepo;
 public class TimesheetService implements TimesheetServiceInterface {
 	@Autowired
 	private TimesheetRepo timesheetRepo;
+	@Autowired
+	private AuthenticationService asi;
 
 	@Override
 	public List<Timesheet> findAll() {
@@ -23,4 +25,9 @@ public class TimesheetService implements TimesheetServiceInterface {
 		return timesheetRepo.save(ts);
 	}
 	
+	public Timesheet resolve(int tsid, int i) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+  
 }

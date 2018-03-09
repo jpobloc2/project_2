@@ -14,6 +14,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.revature.views.View;
+
 @Entity
 @Table(name="ADV_PAYMENT")
 public class AdvancePayment {
@@ -22,24 +25,32 @@ public class AdvancePayment {
 	@Column(name="ADV_ID")
 	@SequenceGenerator(name="ADVID_SEQ", sequenceName="ADVID_SEQ")
 	@GeneratedValue(generator="ADVID_SEQ", strategy=GenerationType.AUTO)
+	@JsonView(View.Summary.class)
 	private Integer advId;
 	
-	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL) // Remove Cascade
+	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.REMOVE) // Remove Cascade
 	@JoinColumn(name="AUTHOR_ID")
+	@JsonView(View.Summary.class)
 	private Users author;
 	
+	@JsonView(View.Summary.class)
 	private double amount;
 	
-	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL) // Remove Cascade
+	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.REMOVE) // Remove Cascade
 	@JoinColumn(name="STATUS")
+	@JsonView(View.Summary.class)
 	private Status status;
+	@JsonView(View.Summary.class)
 	private Timestamp submitDate;
+	@JsonView(View.Summary.class)
 	private Timestamp resolveDate;
 	
-	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL) // Remove Cascade
+	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.REMOVE) // Remove Cascade
 	@JoinColumn(name="RESOLVER_ID")
+	@JsonView(View.Summary.class)
 	private Users resolver;
 	
+	@JsonView(View.Summary.class)
 	private String advComment;
 
 	public AdvancePayment() {

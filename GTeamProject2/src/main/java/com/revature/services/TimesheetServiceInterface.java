@@ -10,4 +10,6 @@ public interface TimesheetServiceInterface {
 	
 	Timesheet submitTimesheet(Timesheet ts);
 
+	Timesheet resolve(int tsid, int i);
+
 }

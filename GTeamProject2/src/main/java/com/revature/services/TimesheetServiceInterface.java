@@ -12,6 +12,6 @@ public interface TimesheetServiceInterface {
 
 	//Timesheet resolve(int tsid, int i);
 
-	Timesheet resolve(int tsid, String resolution, int userid, int roleid);
+	Timesheet resolve(int tsid, String resolution, int userid);
 
 }

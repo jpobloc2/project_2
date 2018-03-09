@@ -41,6 +41,6 @@ public class TimesheetController {
 	@JsonView(View.Summary.class)
 	public Timesheet resolve(@RequestBody ResolveCredentials rc) {
 		System.out.println(rc);
-		return tss.resolve(rc.getItemId(), rc.getResolution(), rc.getUserId(), rc.getRoleId());
+		return tss.resolve(rc.getItemId(), rc.getResolution(), rc.getUserId());
 	}
 }

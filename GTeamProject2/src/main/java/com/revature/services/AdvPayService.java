@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 import com.revature.entities.AdvancePayment;
-import com.revature.entities.Reimbursement;
 import com.revature.entities.Users;
 import com.revature.repo.AdvPayRepo;
 import com.revature.repo.StatusRepo;
@@ -34,10 +33,11 @@ public class AdvPayService implements AdvPayServiceInterface {
 	}
 	
 	@Override
-	public AdvancePayment resolve(int tsid, String resolution, int userid, int roleid) {
+	public AdvancePayment resolve(int tsid, String resolution, int userid) {
 		AdvancePayment ret = null;
 		Users u = as.validateUser(userid);
-		if(as.validateManager(roleid)) {
+		boolean isCorrectManager = validateManagerDomain(tsid, u);
+		if(isCorrectManager) {
 			AdvancePayment ap = advRepo.findById(tsid).get();
 			ap.setResolver(u);
 			ap.setResolveDate(new Timestamp(System.currentTimeMillis()));
@@ -45,5 +45,10 @@ public class AdvPayService implements AdvPayServiceInterface {
 			ret = advRepo.save(ap);
 		}
 		return ret;
+	}
+	
+	public boolean validateManagerDomain(int tsid, Users u) {
+		Users user = advRepo.findById(tsid).get().getAuthor();
+		return u.getSubordinates().contains(user);
 	}
 }

@@ -43,10 +43,11 @@ public class ReimbService implements ReimbServiceInterface {
 	}
 	
 	@Override
-	public Reimbursement resolve(int tsid, String resolution, int userid, int roleid) {
+	public Reimbursement resolve(int tsid, String resolution, int userid) {
 		Reimbursement ret = null;
 		Users u = as.validateUser(userid);
-		if(as.validateManager(roleid)) {
+		boolean isCorrectManager = validateManagerDomain(tsid, u);
+		if(isCorrectManager) {
 			Reimbursement rs = reimbRepo.findById(tsid).get();
 			rs.setReimbResolver(u);
 			rs.setReimbResolved(new Timestamp(System.currentTimeMillis()));
@@ -54,6 +55,11 @@ public class ReimbService implements ReimbServiceInterface {
 			ret = reimbRepo.save(rs);
 		}
 		return ret;
+	}
+	
+	public boolean validateManagerDomain(int tsid, Users u) {
+		Users user = reimbRepo.findById(tsid).get().getReimbAuthor();
+		return u.getSubordinates().contains(user);
 	}
 
 }

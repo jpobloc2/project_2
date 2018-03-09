@@ -16,15 +16,20 @@ public class UsersService implements UsersServiceInterface {
 	private RoleRepo roleRepo;
 
 	@Override
-	public void createNew(Users u) {
+	public boolean createNew(Users u) {
 		// Set role based on the string that was passed in
-		UserRole tmp = roleRepo.findByUserRole(u.getRole().getUserRole());
-		u.setRole(tmp);
+		UserRole ur = roleRepo.findByUserRole(u.getRole().getUserRole());
+		u.setRole(ur);
 		
 		// Set userId to 0 so that it creates a new user rather than updating
 		u.setUserId(0);
 		
-		usersRepo.save(u);
+		Users success = usersRepo.save(u);
+		if(success != null) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	@Override

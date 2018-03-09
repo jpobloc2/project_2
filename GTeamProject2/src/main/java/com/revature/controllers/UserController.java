@@ -23,8 +23,14 @@ public class UserController {
 	@PostMapping("newUser")
 	@JsonView(View.UserInfo.class)
 	public ResponseEntity<Users> createNew(@RequestBody Users u) {
-		us.createNew(u);
-		return new ResponseEntity<>(HttpStatus.OK);
+		boolean success = us.createNew(u);
+		
+		if(success == true) {
+			return new ResponseEntity<>(HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		
   }
 	
 	@PostMapping 

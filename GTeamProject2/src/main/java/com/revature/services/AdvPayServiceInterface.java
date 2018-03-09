@@ -1,6 +1,7 @@
 package com.revature.services;
 
 import java.util.List;
+import java.util.Set;
 
 import com.revature.entities.AdvancePayment;
 
@@ -11,5 +12,7 @@ public interface AdvPayServiceInterface {
 	AdvancePayment submitAdvPay(AdvancePayment ap);
 
 	AdvancePayment resolve(int tsid, String resolution, int userid);
+
+	Set<AdvancePayment> findByuserid(int advId);
 
 }

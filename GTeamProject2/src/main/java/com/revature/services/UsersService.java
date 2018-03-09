@@ -3,6 +3,7 @@ package com.revature.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.revature.entities.UserRole;
 import com.revature.entities.Users;
 import com.revature.repo.UsersRepo;
 
@@ -12,15 +13,14 @@ public class UsersService implements UsersServiceInterface {
 	private UsersRepo usersRepo;
 
 	@Override
-	public Users createNew(Users u, int manager_id) {
+	public Users createNew(Users u) {
 		
 		// Service logic
-		// Get manager by id provided
-		// 
-		Users manager = usersRepo.findById(manager_id).get();
-		System.out.println(u);
-		return null;
-//		return usersRepo.save(u);
+//		UserRole role = new UserRole();
+//		role.setUserRoleId(0);
+//		u.setRole(role);
+		
+		return usersRepo.save(u);
 	}
 	
 	@Override

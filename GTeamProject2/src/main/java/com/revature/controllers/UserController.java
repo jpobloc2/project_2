@@ -16,10 +16,14 @@ import com.revature.views.View;
 
 @RestController
 @RequestMapping("users")
-@CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
 	@Autowired
 	private UsersServiceInterface us;
+
+	@PostMapping("newUser")
+	public Users createNew(@RequestBody Users u) {
+		return us.createNew(u);
+  }
 	
 	@PostMapping 
 	@JsonView(View.UserInfo.class)
@@ -27,9 +31,5 @@ public class UserController {
 		System.out.println(lc.getUsername() + " " + lc.getPassword());
 		return us.login(lc.getUsername(), lc.getPassword());
 	}
-	@PostMapping("newUser/{manager_id}")
-	public Users createNew(@RequestBody Users u, @PathVariable int manager_id) {
-		return us.createNew(u, manager_id);
 
-	}
 }

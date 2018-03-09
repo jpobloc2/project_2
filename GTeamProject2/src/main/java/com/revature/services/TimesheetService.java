@@ -22,11 +22,10 @@ public class TimesheetService implements TimesheetServiceInterface {
 	private AuthenticationService as;
 	@Autowired
 	private StatusRepo statusRepo;
-
+	@Autowired
 	private UsersRepo usersRepo;
 	@Autowired
 	private AuthenticationService asi;
-
 
 	@Override
 	public List<Timesheet> findAll() {
@@ -37,13 +36,13 @@ public class TimesheetService implements TimesheetServiceInterface {
 	public Timesheet submitTimesheet(Timesheet ts) {
 		return timesheetRepo.save(ts);
 	}
-  
+
 	@Override
 	public Timesheet resolve(int tsid, String resolution, int userid) {
 		Timesheet ret = null;
 		Users u = as.validateUser(userid);
 		boolean isCorrectManager = validateManagerDomain(tsid, u);
-		if(isCorrectManager) {
+		if (isCorrectManager) {
 			Timesheet ts = timesheetRepo.findById(tsid).get();
 			ts.setResolver(u);
 			ts.setResolved_date(new Timestamp(System.currentTimeMillis()));
@@ -60,10 +59,9 @@ public class TimesheetService implements TimesheetServiceInterface {
 		return userSheets;
 	}
 
-	
 	public boolean validateManagerDomain(int tsid, Users u) {
 		Users user = timesheetRepo.findById(tsid).get().getAuthor();
 		return u.getSubordinates().contains(user);
 	}
-  
+
 }

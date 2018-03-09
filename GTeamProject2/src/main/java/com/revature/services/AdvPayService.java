@@ -6,7 +6,6 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.CrossOrigin;
 
 import com.revature.entities.AdvancePayment;
 import com.revature.entities.Users;
@@ -18,12 +17,12 @@ import com.revature.repo.UsersRepo;
 public class AdvPayService implements AdvPayServiceInterface {
 	@Autowired
 	private AdvPayRepo advRepo;
-	@Autowired
 
+	@Autowired
 	private AuthenticationService as;
 	@Autowired
 	private StatusRepo statusRepo;
-
+	@Autowired
 	private UsersRepo usersRepo;
 
 	@Override
@@ -42,7 +41,7 @@ public class AdvPayService implements AdvPayServiceInterface {
 		AdvancePayment ret = null;
 		Users u = as.validateUser(userid);
 		boolean isCorrectManager = validateManagerDomain(tsid, u);
-		if(isCorrectManager) {
+		if (isCorrectManager) {
 			AdvancePayment ap = advRepo.findById(tsid).get();
 			ap.setResolver(u);
 			ap.setResolveDate(new Timestamp(System.currentTimeMillis()));
@@ -57,8 +56,8 @@ public class AdvPayService implements AdvPayServiceInterface {
 	public Set<AdvancePayment> findByuserid(int advId) {
 		Set<AdvancePayment> userPayments = usersRepo.findById(advId).get().getAdvancePayments();
 		return userPayments;
-  }
-	
+	}
+
 	public boolean validateManagerDomain(int tsid, Users u) {
 		Users user = advRepo.findById(tsid).get().getAuthor();
 		return u.getSubordinates().contains(user);

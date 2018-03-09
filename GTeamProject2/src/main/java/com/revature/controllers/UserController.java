@@ -21,6 +21,7 @@ public class UserController {
 	private UsersServiceInterface us;
 
 	@PostMapping("newUser")
+	@JsonView(View.UserInfo.class)
 	public Users createNew(@RequestBody Users u) {
 		return us.createNew(u);
   }

@@ -38,6 +38,7 @@ public class ReimbController {
 		return rs.findByuserid(id);
 	}
 	
+	@JsonView(View.Summary.class)
 	@PostMapping(path="submit")
 	public Reimbursement submitReimbursement(@RequestBody Reimbursement r) {
 		r.setReimbSubmitted(new Timestamp(System.currentTimeMillis()));

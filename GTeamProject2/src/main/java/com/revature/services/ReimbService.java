@@ -3,10 +3,14 @@ package com.revature.services;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Set;
+
 import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.revature.entities.Reimbursement;
+import com.revature.entities.Status;
 import com.revature.entities.Users;
 import com.revature.repo.ReimbRepo;
 import com.revature.repo.StatusRepo;
@@ -37,6 +41,9 @@ public class ReimbService implements ReimbServiceInterface {
 	@Override
 	@Transactional
 	public Reimbursement submitReimb(Reimbursement r) {
+		Status s = statusRepo.findByStatus(r.getReimbStatus().getStatus());
+		r.setReimbId(0);
+		r.setReimbStatus(s);
 		return reimbRepo.save(r);
 	}
 	

@@ -43,7 +43,7 @@
 </div>
 <div class="container1"></div>
 
-<table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+<table class="table table-striped table-bordered" cellspacing="0" width="100%">
   <thead>
     <tr>
       <th>Payment ID</th>
@@ -72,9 +72,12 @@
       <td>{{advpay.author.firstName}}</td>
       <td>{{advpay.amount}}</td>
       <td>{{advpay.status.status}}</td>
-      <td>{{advpay.submitDate}}</td>
-      <td>{{advpay.resolveDate}}</td>
-      <td>{{advpay.resolver.firstName}}</td>
+      <td>{{advpay.submitDate | date:'fullDate'}}</td>
+      <td>{{advpay.resolveDate | date:'fullDate'}}</td>
+      <td *ngIf="advpay.resolver else b">{{advpay.resolver.firstName}}</td>
+      <ng-template #b>
+        <td>N/A</td>
+    </ng-template>
     </tr>
   </tbody>
 </table>

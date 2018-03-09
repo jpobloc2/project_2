@@ -2,6 +2,7 @@ package com.revature.services;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,7 +12,11 @@ import com.revature.entities.AdvancePayment;
 import com.revature.entities.Reimbursement;
 import com.revature.entities.Users;
 import com.revature.repo.AdvPayRepo;
+
 import com.revature.repo.StatusRepo;
+
+import com.revature.repo.UsersRepo;
+
 
 @Service
 @CrossOrigin(origins = "http://localhost:4200")
@@ -19,9 +24,13 @@ public class AdvPayService implements AdvPayServiceInterface {
 	@Autowired
 	private AdvPayRepo advRepo;
 	@Autowired
+
 	private AuthenticationService as;
 	@Autowired
 	private StatusRepo statusRepo;
+
+	private UsersRepo usersRepo;
+
 
 	@Override
 	public List<AdvancePayment> findAll() {
@@ -29,6 +38,7 @@ public class AdvPayService implements AdvPayServiceInterface {
 	}
 
 	@Override
+
 	public AdvancePayment submitAdvPay(AdvancePayment ap) {
 		return advRepo.save(ap);
 	}
@@ -45,5 +55,10 @@ public class AdvPayService implements AdvPayServiceInterface {
 			ret = advRepo.save(ap);
 		}
 		return ret;
+
+	public Set<AdvancePayment> findByuserid(int advId) {
+		Set<AdvancePayment> userPayments = usersRepo.findById(advId).get().getAdvancePayments();
+		return userPayments;
+
 	}
 }

@@ -29,8 +29,6 @@ export class AdvancepaymentComponent implements OnInit {
   private newPayment = {
 
     amount: 0,
-
-
     advComment: '',
     author: {
       userId: 0
@@ -50,7 +48,6 @@ export class AdvancepaymentComponent implements OnInit {
     userId: 0
 
   };
-  private ck;
 
   constructor(private client: HttpClient, private cookie: CookieService, private router: Router) { }
 
@@ -90,7 +87,7 @@ export class AdvancepaymentComponent implements OnInit {
   submitPayment() {
     this.newPayment.author.userId = this.ck.uId;
     console.log(this.newPayment);
-    this.client.post('http/localhost:8080/advpay/submit', this.newPayment)
+    this.client.post('http://localhost:8080/advpay/submit', this.newPayment)
     .subscribe(
       succ => {
         alert('advance payment submitted');

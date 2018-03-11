@@ -37,7 +37,7 @@
             <div class="form-group">
               <label class="col-md-3 control-label" for="amount">Amount</label>
               <div class="col-md-9">
-                  <input type="number" name="amount" [(ngModel)]="reimbursement.amount">
+                  <input type="number" name="amount" [(ngModel)]="reimbursement.reimbAmount">
               </div>
             </div>
     
@@ -45,11 +45,11 @@
             <div class="form-group">
               <label class="col-md-3 control-label" for="type">Type</label>
               <div class="col-md-9">
-                  <select name="type" [(ngModel)]="reimbursement.type">
-                      <option value=0>Lodging</option>
-                      <option value=1>Travel</option>
-                      <option value=2>Food</option>
-                      <option value=3>Other</option>
+                  <select name="type" [(ngModel)]="reimbursement.reimbType">
+                      <option value='Lodging'>Lodging</option>
+                      <option value='Travel'>Travel</option>
+                      <option value='Food'>Food</option>
+                      <option value='Other'>Other</option>
                     </select>
               </div>
             </div>
@@ -58,7 +58,7 @@
             <div class="form-group">
               <label class="col-md-3 control-label" for="description">Description</label>
               <div class="col-md-9">
-                  <textarea name="description" style="min-width:300px; min-height:100px;" [(ngModel)]="reimbursement.description"  placeholder="Provide a description"></textarea>
+                  <textarea name="description" style="min-width:300px; min-height:100px;" [(ngModel)]="reimbursement.reimbDescription"  placeholder="Provide a description"></textarea>
               </div>
             </div>
     

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-advancepayment',
@@ -12,6 +13,8 @@ export class AdvancepaymentComponent implements OnInit {
 
   payments: any = [];
 
+  string = '';
+
   private newPayment = {
 
     amount: 0,
@@ -19,9 +22,16 @@ export class AdvancepaymentComponent implements OnInit {
     authorId: 0
 
   };
+
+  updatePayment = {
+    itemId: 0,
+    resolution: '',
+    userId: 0
+
+  };
   private ck;
 
-  constructor(private client: HttpClient, private cookie: CookieService) { }
+  constructor(private client: HttpClient, private cookie: CookieService, private router: Router) { }
 
   ngOnInit() {
     this.ck = this.cookie.getObject('user');
@@ -54,8 +64,27 @@ export class AdvancepaymentComponent implements OnInit {
     );
   }
   }
-  submitPayment() {
+  updateStatus(payId: number, payStatus: string) {
+    this.updatePayment.itemId = payId;
+    this.updatePayment.resolution = payStatus;
+    this.updatePayment.userId = this.ck.uId;
     console.log(this.newPayment);
+    this.client.put(`http://localhost:8080/advpay`, this.updatePayment)
+    .subscribe(
+      succ => {
+        if (payStatus === 'Accepted') {
+          this.string = 'Advanced payment has been approved';
+          this.ngOnInit();
+        }
+        if (payStatus === 'Declined') {
+          this.string = 'Advanced payment has been denied';
+          this.ngOnInit();
+        }
+      },
+      err => {
+        alert('failed to update status');
+      }
+    );
   }
 
 }

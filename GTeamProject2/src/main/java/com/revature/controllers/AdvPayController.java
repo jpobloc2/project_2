@@ -32,7 +32,7 @@ public class AdvPayController {
 		return aps.findAll();
 	}
 
-	@PostMapping(path = "/submit")
+	@PostMapping(path = "submit")
 	public AdvancePayment submitReimbursement(AdvancePayment ap) {
 		return aps.submitAdvPay(ap);
 	}

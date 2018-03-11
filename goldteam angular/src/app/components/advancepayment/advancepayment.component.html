@@ -5,7 +5,7 @@
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
-
+<p>{{string}}</p>
 
 <div class="container">
   <div class="row">
@@ -78,6 +78,14 @@
       <ng-template #b>
         <td>N/A</td>
     </ng-template>
+    <td>
+      <form class="managerbutton" *ngIf="ck.roleId === 1 && ck.firstName != advpay.author.firstName && advpay.status.status === 'Pending'">
+          <div class="btn-group" role="group" aria-label="Basic example">
+              <button type="submit" (click)="updateStatus(advpay.advId, 'Accepted')" value='Accepted' name="approve" class="btn btn-secondary btn-sm">Approve</button>
+              <button type="submit" (click)="updateStatus(advpay.advId, 'Declined')" value='Declined' name="deny" class="btn btn-secondary btn-sm">Deny</button>
+          </div>
+      </form>
+  </td>
     </tr>
   </tbody>
 </table>

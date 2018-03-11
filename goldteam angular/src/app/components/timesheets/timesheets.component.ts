@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 export class TimesheetsComponent implements OnInit {
   timesheets: any = [];
 
-  string = 'hello';
+  string = '';
 
   updateSheet = {
     itemId: 0,

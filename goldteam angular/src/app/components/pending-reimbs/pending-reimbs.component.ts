@@ -13,6 +13,7 @@ import { CookieService } from 'angular2-cookie/services/cookies.service';
 export class PendingReimbsComponent implements OnInit {
   reimbs: any = [];
 
+  string = '';
   ck;
 
   updateReimb = {
@@ -68,12 +69,12 @@ export class PendingReimbsComponent implements OnInit {
       .subscribe(
         succ => {
           if (reimbStatus === 'Accepted') {
-            alert('Reimbursement approved');
-            this.router.navigateByUrl('reimbs');
+            this.string = 'Reimbursement accepted!';
+            this.ngOnInit();
           }
           if (reimbStatus === 'Declined') {
-            alert('Reimbursement denied');
-            this.router.navigateByUrl('reimbs');
+            this.string = 'Reimbursement denied!';
+            this.ngOnInit();
           }
         },
         err => {

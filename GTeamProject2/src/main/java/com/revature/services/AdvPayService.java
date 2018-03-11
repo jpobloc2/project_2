@@ -4,17 +4,17 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.Set;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 import com.revature.entities.AdvancePayment;
-import com.revature.entities.Reimbursement;
+import com.revature.entities.Status;
 import com.revature.entities.Users;
 import com.revature.repo.AdvPayRepo;
-
 import com.revature.repo.StatusRepo;
-
 import com.revature.repo.UsersRepo;
 
 
@@ -38,8 +38,11 @@ public class AdvPayService implements AdvPayServiceInterface {
 	}
 
 	@Override
-
+	@Transactional
 	public AdvancePayment submitAdvPay(AdvancePayment ap) {
+		Status s = statusRepo.findByStatus(ap.getStatus().getStatus());
+		ap.setAdvId(0);
+		ap.setStatus(s);
 		return advRepo.save(ap);
 	}
 	

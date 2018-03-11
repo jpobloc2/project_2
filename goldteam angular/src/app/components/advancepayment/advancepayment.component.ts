@@ -15,11 +15,24 @@ export class AdvancepaymentComponent implements OnInit {
 
   string = '';
 
+  // private newPayment = {
+
+  //   amount: 0,
+  //   comment: '',
+  //   authorId: 0
+
+  // };
+
   private newPayment = {
 
     amount: 0,
-    comment: '',
-    authorId: 0
+    advComment: '',
+    author: {
+      userId: 0
+    },
+    status: {
+      status: 'Pending'
+    }
 
   };
 
@@ -66,7 +79,18 @@ export class AdvancepaymentComponent implements OnInit {
   }
 
   submitPayment() {
-    // this.client.post('http://localhost:8080/advay/submit', this.newPayment)
+    this.newPayment.author.userId = this.ck.uId;
+    console.log(this.newPayment);
+    this.client.post('http/localhost:8080/advpay/submit', this.newPayment)
+    .subscribe(
+      succ => {
+        alert('advance payment submitted');
+        console.log(succ);
+      },
+      err => {
+        alert('advance payment failed');
+      }
+    );
   }
 
 
@@ -75,7 +99,7 @@ export class AdvancepaymentComponent implements OnInit {
     this.updatePayment.itemId = payId;
     this.updatePayment.resolution = payStatus;
     this.updatePayment.userId = this.ck.uId;
-    console.log(this.newPayment);
+    console.log(this.updatePayment);
     this.client.put(`http://localhost:8080/advpay`, this.updatePayment)
     .subscribe(
       succ => {

@@ -1,5 +1,7 @@
 package com.revature.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,12 +22,12 @@ public class UsersService implements UsersServiceInterface {
 		// Set role based on the string that was passed in
 		UserRole ur = roleRepo.findByUserRole(u.getRole().getUserRole());
 		u.setRole(ur);
-		
+
 		// Set userId to 0 so that it creates a new user rather than updating
 		u.setUserId(0);
-		
+
 		Users success = usersRepo.save(u);
-		if(success != null) {
+		if (success != null) {
 			return true;
 		} else {
 			return false;
@@ -37,8 +39,9 @@ public class UsersService implements UsersServiceInterface {
 		Users u = usersRepo.findByUsername(username);
 		if (u.getPassword().equals(password)) {
 			return usersRepo.findByUsername(username);
+		} else {
+			return null;
 		}
-		else {return null;}
 	}
 
 	@Override
@@ -46,11 +49,16 @@ public class UsersService implements UsersServiceInterface {
 		Users tmp = usersRepo.findById(u.getUserId()).get();
 		tmp.setPassword(u.getPassword());
 		Users success = usersRepo.save(tmp);
-		if(success != null) {
+		if (success != null) {
 			return true;
 		} else {
 			return false;
 		}
+	}
+
+	@Override
+	public List<Users> findAll() {
+		return usersRepo.findAll();
 	}
 
 }

@@ -2,8 +2,10 @@
 
 <Button class="btn btn-primary" routerLink="/new-timesheet">Submit new timesheet</Button>
 
+<p>{{string}}</p>
 
-<table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+
+<table id="example" class="table table-striped" cellspacing="0" width="100%">
     <thead>
         <tr>
             <th>Timesheet ID</th>
@@ -41,6 +43,17 @@
             <ng-template #b>
                 <td>N/A</td>
             </ng-template>
+
+            <td>
+                <form class="managerbutton" *ngIf="ck.roleId === 1 && ck.firstName != sheet.author.firstName && sheet.status.status === 'Pending'">
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <button type="submit" (click)="updateStatus(sheet.timesheetId, 'Accepted')" value='Accepted' name="approve" class="btn btn-secondary btn-sm">Approve</button>
+                        <button type="submit" (click)="updateStatus(sheet.timesheetId, 'Declined')" value='Declined' name="deny" class="btn btn-secondary btn-sm">Deny</button>
+                    </div>
+                </form>
+            </td>
+            
+
         </tr>
     </tbody>
 </table>

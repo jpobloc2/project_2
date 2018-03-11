@@ -1,15 +1,20 @@
 package com.revature.services;
 
 import java.sql.Timestamp;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+
 import javax.transaction.Transactional;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.revature.entities.Status;
+
+import com.revature.entities.AdvancePayment;
 import com.revature.entities.Timesheet;
 import com.revature.entities.Users;
 import com.revature.repo.StatusRepo;
@@ -25,6 +30,10 @@ public class TimesheetService implements TimesheetServiceInterface {
 	private AuthenticationService as;
 	@Autowired
 	private StatusRepo statusRepo;
+	@Autowired
+	private UsersRepo usersRepo;
+	@Autowired
+	private AuthenticationService asi;
 
 	private UsersRepo usersRepo;
 	@Autowired
@@ -44,28 +53,43 @@ public class TimesheetService implements TimesheetServiceInterface {
 		ts.setStatus(s);
 		return timesheetRepo.save(ts);
 	}
-  
-	
-	public Timesheet resolve(int tsid, String resolution, int userid, int roleid) {
+
+	@Override
+	public Timesheet resolve(int tsid, String resolution, int userid) {
 		Timesheet ret = null;
 		Users u = as.validateUser(userid);
-		if(as.validateManager(roleid)) {
+		boolean isCorrectManager = validateManagerDomain(tsid, u);
+		if (isCorrectManager) {
 			Timesheet ts = timesheetRepo.findById(tsid).get();
 			ts.setResolver(u);
 			ts.setResolved_date(new Timestamp(System.currentTimeMillis()));
 			System.out.println(statusRepo.findByStatus("Pending"));
 			ts.setStatus(statusRepo.findByStatus(resolution));
 			ret = timesheetRepo.save(ts);
+
 		}
 		return ret;
 	}
 
-
-
 	@Override
 	public Set<Timesheet> findByuserid(int id) {
-		Set<Timesheet> userSheets = usersRepo.findById(id).get().getTimesheets();
-		return userSheets;
+		Users u = usersRepo.findById(id).get();
+		Set<Timesheet> usersTimesheets = u.getTimesheets();
+		if (u.getRole().getUserRole().equals("Manager")) {
+			usersTimesheets.addAll(u.getTimesheets());
+			Set<Users> suboordinates = u.getSubordinates();
+			for (Users sub: suboordinates) {
+				usersTimesheets.addAll(sub.getTimesheets());
+			}
+		} else {
+			usersTimesheets = u.getTimesheets();
+		}
+		return usersTimesheets;
+	}
+
+	public boolean validateManagerDomain(int tsid, Users u) {
+		Users user = timesheetRepo.findById(tsid).get().getAuthor();
+		return u.getSubordinates().contains(user);
 	}
 
 }

@@ -37,10 +37,12 @@ public class TimesheetController {
 	}
 
 	
+
 	@PostMapping(path = "submit")
 	@JsonView(View.Summary.class)
 	public Timesheet submitTimesheet(@RequestBody Timesheet ts) {
 		ts.setSubmitted_date(new Timestamp(System.currentTimeMillis()));
+
 		return tss.submitTimesheet(ts);
   }
   
@@ -56,6 +58,6 @@ public class TimesheetController {
 	@JsonView(View.Summary.class)
 	public Timesheet resolve(@RequestBody ResolveCredentials rc) {
 		System.out.println(rc);
-		return tss.resolve(rc.getItemId(), rc.getResolution(), rc.getUserId(), rc.getRoleId());
+		return tss.resolve(rc.getItemId(), rc.getResolution(), rc.getUserId());
 	}
 }

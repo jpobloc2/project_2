@@ -1,10 +1,15 @@
 package com.revature.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,15 +35,39 @@ public class UserController {
 	@PostMapping
 	@JsonView(View.UserInfo.class)
 	public ResponseEntity<Users> createNew(@RequestBody Users u) {
-		us.createNew(u);
-		return new ResponseEntity<>(HttpStatus.OK);
-  }
-	
-	@PostMapping 
+		boolean success = us.createNew(u);
+
+		if (success == true) {
+			return new ResponseEntity<>(HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+	}
+
+	@PutMapping("changePass")
+	@JsonView(View.UserInfo.class)
+	public ResponseEntity<Users> changePass(@RequestBody Users u) {
+		boolean success = us.changePass(u);
+
+		if (success == true) {
+			return new ResponseEntity<>(HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+	}
+
+	@PostMapping
 	@JsonView(View.UserInfo.class)
 	public Users login(@RequestBody LoginCredentials lc) {
 		System.out.println(lc.getUsername() + " " + lc.getPassword());
 		return us.login(lc.getUsername(), lc.getPassword());
+	}
+
+	@GetMapping("all")
+	@JsonView(View.UserInfo.class)
+	public List<Users> findAll() {
+		return us.findAll();
+
 	}
 
 }

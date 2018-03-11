@@ -13,7 +13,9 @@ public interface TimesheetServiceInterface {
 
 	//Timesheet resolve(int tsid, int i);
 
-	Timesheet resolve(int tsid, String resolution, int userid, int roleid);
+	Timesheet resolve(int tsid, String resolution, int userid);
+
+	Set<Timesheet> findByuserid(int id);
 
 	Set<Timesheet> findByuserid(int id);
 

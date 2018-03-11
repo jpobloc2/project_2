@@ -13,5 +13,6 @@ public interface ReimbServiceInterface {
 	
 	Reimbursement submitReimb(Reimbursement r);
 
-	Reimbursement resolve(int tsid, String resolution, int userid, int roleid);
+
+	Reimbursement resolve(int tsid, String resolution, int userid);
 }

@@ -37,6 +37,7 @@ public class ReimbController {
 	public Set<Reimbursement> findByuserid(@PathVariable int id) {
 		return rs.findByuserid(id);
 	}
+
 	
 	@JsonView(View.Summary.class)
 	@PostMapping(path="submit")
@@ -45,11 +46,17 @@ public class ReimbController {
 		return rs.submitReimb(r);
 	}
 	
+
+
+
+
+
 	@PutMapping
 	@JsonView(View.Summary.class)
 	public Reimbursement resolve(@RequestBody ResolveCredentials rc) {
+		System.out.println("Resolve started");
 		System.out.println(rc);
-		return rs.resolve(rc.getItemId(), rc.getResolution(), rc.getUserId(), rc.getRoleId());
+		return rs.resolve(rc.getItemId(), rc.getResolution(), rc.getUserId());
 	}
-	
+
 }

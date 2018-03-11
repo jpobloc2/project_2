@@ -1,5 +1,6 @@
 package com.revature.controllers;
 
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Set;
 
@@ -36,9 +37,10 @@ public class TimesheetController {
 	}
 
 	
-	@PostMapping(path = "/submit")
+	@PostMapping(path = "submit")
 	@JsonView(View.Summary.class)
-	public Timesheet submitTimesheet(Timesheet ts) {
+	public Timesheet submitTimesheet(@RequestBody Timesheet ts) {
+		ts.setSubmitted_date(new Timestamp(System.currentTimeMillis()));
 		return tss.submitTimesheet(ts);
   }
   

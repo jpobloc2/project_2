@@ -1,5 +1,6 @@
 package com.revature.controllers;
 
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Set;
 
@@ -34,7 +35,9 @@ public class AdvPayController {
 
 	
 	@PostMapping(path = "submit")
-	public AdvancePayment submitAdvancePayment(AdvancePayment ap) {
+	@JsonView(View.Summary.class)
+	public AdvancePayment submitAdvancePayment(@RequestBody AdvancePayment ap) {
+		ap.setSubmitDate(new Timestamp(System.currentTimeMillis()));
 		return aps.submitAdvPay(ap);
 	}
 	

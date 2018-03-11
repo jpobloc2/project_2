@@ -4,9 +4,12 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.Set;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.revature.entities.Status;
 import com.revature.entities.Timesheet;
 import com.revature.entities.Users;
 import com.revature.repo.StatusRepo;
@@ -34,7 +37,11 @@ public class TimesheetService implements TimesheetServiceInterface {
 	}
 
 	@Override
+	@Transactional
 	public Timesheet submitTimesheet(Timesheet ts) {
+		Status s = statusRepo.findByStatus(ts.getStatus().getStatus());
+		ts.setTimesheetid(0);
+		ts.setStatus(s);
 		return timesheetRepo.save(ts);
 	}
   

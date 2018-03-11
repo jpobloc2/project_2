@@ -3,7 +3,6 @@ package com.revature.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -27,12 +26,7 @@ public class UserController {
 	@Autowired
 	private UsersServiceInterface us;
 
-	@PostMapping("newUser")
-	public Users createNew(@RequestBody Users u) {
-		return us.createNew(u);
-	}
-
-	@PostMapping
+	@PostMapping("new")
 	@JsonView(View.UserInfo.class)
 	public ResponseEntity<Users> createNew(@RequestBody Users u) {
 		boolean success = us.createNew(u);

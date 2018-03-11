@@ -1,20 +1,15 @@
 package com.revature.services;
 
 import java.sql.Timestamp;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-
 import javax.transaction.Transactional;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.revature.entities.Status;
-
-import com.revature.entities.AdvancePayment;
 import com.revature.entities.Timesheet;
 import com.revature.entities.Users;
 import com.revature.repo.StatusRepo;
@@ -34,11 +29,6 @@ public class TimesheetService implements TimesheetServiceInterface {
 	private UsersRepo usersRepo;
 	@Autowired
 	private AuthenticationService asi;
-
-	private UsersRepo usersRepo;
-	@Autowired
-	private AuthenticationService asi;
-
 
 	@Override
 	public List<Timesheet> findAll() {
@@ -78,7 +68,7 @@ public class TimesheetService implements TimesheetServiceInterface {
 		if (u.getRole().getUserRole().equals("Manager")) {
 			usersTimesheets.addAll(u.getTimesheets());
 			Set<Users> suboordinates = u.getSubordinates();
-			for (Users sub: suboordinates) {
+			for (Users sub : suboordinates) {
 				usersTimesheets.addAll(sub.getTimesheets());
 			}
 		} else {

@@ -1,6 +1,7 @@
 package com.revature.services;
 
 import java.sql.Timestamp;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -12,6 +13,8 @@ import com.revature.entities.Users;
 import com.revature.repo.ReimbRepo;
 import com.revature.repo.StatusRepo;
 import com.revature.repo.UsersRepo;
+
+import oracle.net.aso.i;
 
 @Service
 public class ReimbService implements ReimbServiceInterface {
@@ -31,7 +34,16 @@ public class ReimbService implements ReimbServiceInterface {
 
 	@Override
 	public Set<Reimbursement> findByuserid(int author_id) {
-		Set<Reimbursement> usersReimbs = usersRepo.findById(author_id).get().getReimbursements();
+		Users u = usersRepo.findById(author_id).get();
+		Set<Reimbursement> usersReimbs = u.getReimbursements();
+		if (u.getRole().getUserRole().equals("Manager")) {
+			Set<Users> suboordinates = u.getSubordinates();
+			for (Users sub: suboordinates) {
+				usersReimbs.addAll(sub.getReimbursements());
+			}
+		} else {
+			usersReimbs = u.getReimbursements();
+		}
 		return usersReimbs;
 	}
 
@@ -47,10 +59,13 @@ public class ReimbService implements ReimbServiceInterface {
 		boolean isCorrectManager = validateManagerDomain(tsid, u);
 		if (isCorrectManager) {
 			Reimbursement rs = reimbRepo.findById(tsid).get();
+			System.out.println(rs);
 			rs.setReimbResolver(u);
 			rs.setReimbResolved(new Timestamp(System.currentTimeMillis()));
 			rs.setReimbStatus(statusRepo.findByStatus(resolution));
+			System.out.println(rs);
 			ret = reimbRepo.save(rs);
+			System.out.println(ret);
 		}
 		return ret;
 	}

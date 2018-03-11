@@ -1,12 +1,14 @@
 package com.revature.services;
 
 import java.sql.Timestamp;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.revature.entities.AdvancePayment;
 import com.revature.entities.Timesheet;
 import com.revature.entities.Users;
 import com.revature.repo.StatusRepo;
@@ -55,8 +57,18 @@ public class TimesheetService implements TimesheetServiceInterface {
 
 	@Override
 	public Set<Timesheet> findByuserid(int id) {
-		Set<Timesheet> userSheets = usersRepo.findById(id).get().getTimesheets();
-		return userSheets;
+		Users u = usersRepo.findById(id).get();
+		Set<Timesheet> usersTimesheets = u.getTimesheets();
+		if (u.getRole().getUserRole().equals("Manager")) {
+			usersTimesheets.addAll(u.getTimesheets());
+			Set<Users> suboordinates = u.getSubordinates();
+			for (Users sub: suboordinates) {
+				usersTimesheets.addAll(sub.getTimesheets());
+			}
+		} else {
+			usersTimesheets = u.getTimesheets();
+		}
+		return usersTimesheets;
 	}
 
 	public boolean validateManagerDomain(int tsid, Users u) {

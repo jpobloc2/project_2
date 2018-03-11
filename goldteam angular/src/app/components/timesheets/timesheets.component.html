@@ -43,6 +43,7 @@
             <ng-template #b>
                 <td>N/A</td>
             </ng-template>
+
             <td>
                 <form class="managerbutton" *ngIf="ck.roleId === 1 && ck.firstName != sheet.author.firstName && sheet.status.status === 'Pending'">
                     <div class="btn-group" role="group" aria-label="Basic example">
@@ -52,6 +53,7 @@
                 </form>
             </td>
             
+
         </tr>
     </tbody>
 </table>

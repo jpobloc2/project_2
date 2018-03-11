@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
+
+
 import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-advancepayment',
@@ -26,6 +29,8 @@ export class AdvancepaymentComponent implements OnInit {
   private newPayment = {
 
     amount: 0,
+
+
     advComment: '',
     author: {
       userId: 0
@@ -35,6 +40,9 @@ export class AdvancepaymentComponent implements OnInit {
     }
 
   };
+  private ck;
+
+
 
   updatePayment = {
     itemId: 0,
@@ -45,6 +53,7 @@ export class AdvancepaymentComponent implements OnInit {
   private ck;
 
   constructor(private client: HttpClient, private cookie: CookieService, private router: Router) { }
+
 
   ngOnInit() {
     this.ck = this.cookie.getObject('user');

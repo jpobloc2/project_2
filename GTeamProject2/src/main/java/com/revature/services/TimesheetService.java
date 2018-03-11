@@ -5,8 +5,14 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+
+import javax.transaction.Transactional;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.revature.entities.Status;
 
 import com.revature.entities.AdvancePayment;
 import com.revature.entities.Timesheet;
@@ -29,13 +35,22 @@ public class TimesheetService implements TimesheetServiceInterface {
 	@Autowired
 	private AuthenticationService asi;
 
+	private UsersRepo usersRepo;
+	@Autowired
+	private AuthenticationService asi;
+
+
 	@Override
 	public List<Timesheet> findAll() {
 		return timesheetRepo.findAll();
 	}
 
 	@Override
+	@Transactional
 	public Timesheet submitTimesheet(Timesheet ts) {
+		Status s = statusRepo.findByStatus(ts.getStatus().getStatus());
+		ts.setTimesheetid(0);
+		ts.setStatus(s);
 		return timesheetRepo.save(ts);
 	}
 
@@ -51,6 +66,7 @@ public class TimesheetService implements TimesheetServiceInterface {
 			System.out.println(statusRepo.findByStatus("Pending"));
 			ts.setStatus(statusRepo.findByStatus(resolution));
 			ret = timesheetRepo.save(ts);
+
 		}
 		return ret;
 	}

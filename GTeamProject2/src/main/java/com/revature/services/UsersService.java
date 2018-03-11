@@ -39,6 +39,7 @@ public class UsersService implements UsersServiceInterface {
 		Users u = usersRepo.findByUsername(username);
 		if (u.getPassword().equals(password)) {
 			return usersRepo.findByUsername(username);
+
 		} else {
 			return null;
 		}
@@ -59,6 +60,7 @@ public class UsersService implements UsersServiceInterface {
 	@Override
 	public List<Users> findAll() {
 		return usersRepo.findAll();
+
 	}
 
 }

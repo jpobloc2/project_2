@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
+
 import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-timesheets',
@@ -10,6 +12,7 @@ import { Router } from '@angular/router';
 })
 export class TimesheetsComponent implements OnInit {
   timesheets: any = [];
+
 
   string = '';
 
@@ -47,6 +50,7 @@ export class TimesheetsComponent implements OnInit {
         this.timesheets = succ;
         console.log(succ);
         return this.timesheets;
+
 
       }, err => {
         alert('failed to retrieve all timesheets');

@@ -1,5 +1,6 @@
 package com.revature.controllers;
 
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Set;
 
@@ -12,7 +13,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.fasterxml.jackson.annotation.JsonView;
 import com.revature.entities.Reimbursement;
 import com.revature.entities.ResolveCredentials;
@@ -38,10 +38,18 @@ public class ReimbController {
 		return rs.findByuserid(id);
 	}
 
-	@PostMapping(path = "/submit")
-	public Reimbursement submitReimbursement(Reimbursement r) {
+	
+	@JsonView(View.Summary.class)
+	@PostMapping(path="submit")
+	public Reimbursement submitReimbursement(@RequestBody Reimbursement r) {
+		r.setReimbSubmitted(new Timestamp(System.currentTimeMillis()));
 		return rs.submitReimb(r);
 	}
+	
+
+
+
+
 
 	@PutMapping
 	@JsonView(View.Summary.class)

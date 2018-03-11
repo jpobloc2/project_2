@@ -1,25 +1,38 @@
 package com.revature.services;
 
 import java.sql.Timestamp;
+
+import java.util.List;
+import java.util.Set;
+
+import javax.transaction.Transactional;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.revature.entities.AdvancePayment;
+
+import com.revature.entities.Status;
+
 import com.revature.entities.Reimbursement;
+
 import com.revature.entities.Users;
 import com.revature.repo.AdvPayRepo;
 import com.revature.repo.StatusRepo;
 import com.revature.repo.UsersRepo;
+
 
 @Service
 public class AdvPayService implements AdvPayServiceInterface {
 	@Autowired
 	private AdvPayRepo advRepo;
 	@Autowired
+
 	private AuthenticationService as;
 	@Autowired
 	private StatusRepo statusRepo;
@@ -32,10 +45,15 @@ public class AdvPayService implements AdvPayServiceInterface {
 	}
 
 	@Override
+	@Transactional
 
 	public AdvancePayment submitAdvPay(AdvancePayment ap) {
+		Status s = statusRepo.findByStatus(ap.getStatus().getStatus());
+		ap.setAdvId(0);
+		ap.setStatus(s);
 		return advRepo.save(ap);
 	}
+
 
 	@Override
 	public AdvancePayment resolve(int tsid, String resolution, int userid) {
@@ -43,6 +61,7 @@ public class AdvPayService implements AdvPayServiceInterface {
 		Users u = as.validateUser(userid);
 		boolean isCorrectManager = validateManagerDomain(tsid, u);
 		if (isCorrectManager) {
+
 			AdvancePayment ap = advRepo.findById(tsid).get();
 			ap.setResolver(u);
 			ap.setResolveDate(new Timestamp(System.currentTimeMillis()));
@@ -52,6 +71,7 @@ public class AdvPayService implements AdvPayServiceInterface {
 		}
 		return ret;
 	}
+
 
 	@Override
 	public Set<AdvancePayment> findByuserid(int advId) {

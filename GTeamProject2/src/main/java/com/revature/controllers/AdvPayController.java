@@ -1,5 +1,6 @@
 package com.revature.controllers;
 
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Set;
 
@@ -32,15 +33,21 @@ public class AdvPayController {
 		return aps.findAll();
 	}
 
+
+	
 	@PostMapping(path = "submit")
-	public AdvancePayment submitReimbursement(AdvancePayment ap) {
+	@JsonView(View.Summary.class)
+	public AdvancePayment submitAdvancePayment(@RequestBody AdvancePayment ap) {
+		ap.setSubmitDate(new Timestamp(System.currentTimeMillis()));
 		return aps.submitAdvPay(ap);
 	}
+	
 
 	@PutMapping
 	@JsonView(View.Summary.class)
 	public AdvancePayment resolve(@RequestBody ResolveCredentials rc) {
 		System.out.println(rc);
+
 		return aps.resolve(rc.getItemId(), rc.getResolution(), rc.getUserId());
 	}
 

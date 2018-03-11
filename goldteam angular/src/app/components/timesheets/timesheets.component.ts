@@ -65,13 +65,13 @@ export class TimesheetsComponent implements OnInit {
       .subscribe(
         succ => {
           if (sheetStatus === 'Accepted') {
-            // alert('Timesheet approved');
+            alert('Timesheet approved');
             this.string = 'timesheet approved!';
             // this.router.navigateByUrl('timesheet');
             this.ngOnInit();
           }
           if (sheetStatus === 'Declined') {
-            // alert('Timesheet denied');
+            alert('Timesheet denied');
             this.string = 'timesheet declined!';
             // this.router.navigateByUrl('timesheet');
             this.ngOnInit();

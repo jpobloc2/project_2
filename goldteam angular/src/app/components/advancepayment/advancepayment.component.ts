@@ -64,6 +64,13 @@ export class AdvancepaymentComponent implements OnInit {
     );
   }
   }
+
+  submitPayment() {
+    // this.client.post('http://localhost:8080/advay/submit', this.newPayment)
+  }
+
+
+
   updateStatus(payId: number, payStatus: string) {
     this.updatePayment.itemId = payId;
     this.updatePayment.resolution = payStatus;

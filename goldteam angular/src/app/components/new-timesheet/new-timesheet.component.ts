@@ -26,14 +26,18 @@ export class NewTimesheetComponent implements OnInit {
   };
 
 
-  public model: any = { date: { year: 2018, month: 3, day: 1 } };
+  public model: any = { date: { year: 2018, month: 3, day: 3 } };
+  sDate = JSON.stringify(this.model.date);
+  sDate2 = new Date().toLocaleDateString;
+  sDate3;
 
 
 
   fullSheet = {
 
 
-    // startDate: this.model.dateFormat,
+    startDate : this.sDate3,
+    // startDate : `${this.model.date.year}-${this.model.date.month}-${this.model.date.day}`,
     // year: this.model.date.year,
     // month: this.model.date.month,
     // day: this.model.date.day,
@@ -67,6 +71,10 @@ export class NewTimesheetComponent implements OnInit {
 
     this.fullSheet.hoursTotal = this.fullSheet.monday + this.fullSheet.tuesday + this.fullSheet.wednesday + this.fullSheet.thursday + this.fullSheet.friday;
     this.fullSheet.author.userId = this.ck.uId;
+    this.sDate = JSON.stringify(this.model.date);
+    this.sDate2 = new Date().toLocaleDateString;
+    this.sDate3 = `${this.model.date.year}-0${this.model.date.month}-${this.model.date.day + 1}`;
+    this.fullSheet.startDate = this.sDate3;
    console.log(this.fullSheet);
 
    this.client.post('http://localhost:8080/timesheet/submit', this.fullSheet)

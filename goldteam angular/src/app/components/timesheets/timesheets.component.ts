@@ -16,6 +16,7 @@ export class TimesheetsComponent implements OnInit {
 
   string = '';
 
+
   updateSheet = {
     itemId: 0,
     resolution: '',
@@ -42,7 +43,6 @@ export class TimesheetsComponent implements OnInit {
       }
     );
 
-
     } else {
     this.client.get('http://localhost:8080/timesheet/all')
     .subscribe(
@@ -50,8 +50,6 @@ export class TimesheetsComponent implements OnInit {
         this.timesheets = succ;
         console.log(succ);
         return this.timesheets;
-
-
       }, err => {
         alert('failed to retrieve all timesheets');
       }
@@ -85,6 +83,7 @@ export class TimesheetsComponent implements OnInit {
           alert('failed to update sheet status');
         }
       );
+
 
 }
 }

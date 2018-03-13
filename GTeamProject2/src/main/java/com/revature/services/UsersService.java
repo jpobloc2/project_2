@@ -1,6 +1,7 @@
 package com.revature.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.revature.entities.UserRole;
@@ -14,6 +15,8 @@ public class UsersService implements UsersServiceInterface {
 	private UsersRepo usersRepo;
 	@Autowired
 	private RoleRepo roleRepo;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	@Override
 	public boolean createNew(Users u) {
@@ -23,6 +26,9 @@ public class UsersService implements UsersServiceInterface {
 		
 		// Set userId to 0 so that it creates a new user rather than updating
 		u.setUserId(0);
+		
+		// Password Encoding
+		u.setPassword(passwordEncoder.encode(u.getPassword()));
 		
 		Users success = usersRepo.save(u);
 		if(success != null) {

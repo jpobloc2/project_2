@@ -45,6 +45,8 @@ public class UsersService implements UsersServiceInterface {
 			return true;
 		} else {
 			return false;
+		}
+  }
   
 	@Override
 	public Users login(String username, String password) {

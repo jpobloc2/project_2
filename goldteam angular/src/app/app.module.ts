@@ -32,6 +32,7 @@ import { NewTimesheetComponent } from './components/new-timesheet/new-timesheet.
 import { AdvancepaymentComponent } from './components/advancepayment/advancepayment.component';
 import { ManagerComponent } from './components/manager/manager.component';
 import { ViewUserComponent } from './components/view-user/view-user.component';
+import { ForgotPassComponent } from './components/forgot-pass/forgot-pass.component';
 
 
 @NgModule({
@@ -63,7 +64,8 @@ import { ViewUserComponent } from './components/view-user/view-user.component';
     NewTimesheetComponent,
     AdvancepaymentComponent,
     ManagerComponent,
-    ViewUserComponent
+    ViewUserComponent,
+    ForgotPassComponent
   ],
   providers: [
     ReimburseService,

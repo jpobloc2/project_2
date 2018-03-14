@@ -15,6 +15,9 @@ public interface UsersServiceInterface {
 
 	Users login(String username, String password);
 
+
+	void forgotPass(String username);
+
 	boolean changePass(Users u);
 
 	List<Users> findAll();

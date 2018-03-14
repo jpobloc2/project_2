@@ -1,6 +1,9 @@
 package com.revature.services;
 
 
+import java.util.Random;
+
+
 import java.util.List;
 import javax.security.sasl.AuthenticationException;
 
@@ -12,6 +15,7 @@ import com.revature.entities.UserRole;
 import com.revature.entities.Users;
 import com.revature.repo.RoleRepo;
 import com.revature.repo.UsersRepo;
+import com.revature.util.EmailUtil;
 
 @Service
 public class UsersService implements UsersServiceInterface {
@@ -29,11 +33,11 @@ public class UsersService implements UsersServiceInterface {
 		as.validateManager(submitter);
 		UserRole tmp = roleRepo.findByUserRole("Employee");
 		u.setRole(tmp);
-		
+
 		// Set userId to 0 so that it creates a new user rather than updating
 		u.setUserId(0);
-		Users ret = usersRepo.save(u);
-		return ret;
+		usersRepo.save(u);
+
 	}
 
   @Override
@@ -61,7 +65,6 @@ public class UsersService implements UsersServiceInterface {
 	@Override
 	public List<Users> findAll() {
 		return usersRepo.findAll();
-
 	}
 
 	@Override
@@ -69,4 +72,30 @@ public class UsersService implements UsersServiceInterface {
 		return usersRepo.findByUserId(id);
 	}
 
+	@Override
+	// sendEmail (String to, String msg)
+	public void forgotPass(String username) {
+		String newPassword = getRandomPass();
+		String subject = "Your password has been reset.";
+		String message = "Your new temporary password is: " + newPassword 
+				+ ". Please change it immediately after signing in.";
+		Users u = usersRepo.findByUsername(username);
+		String to = u.getUserEmail();
+		u.setPassword(newPassword);
+		usersRepo.save(u);
+		new EmailUtil().sendMessage(to, subject, message);
+	}
+	
+	private String getRandomPass() {
+        String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+        StringBuilder sb = new StringBuilder();
+        Random rnd = new Random();
+        while (sb.length() < 18) { // length of the random string.
+            int index = rnd.nextInt(36);
+            sb.append(chars.charAt(index));
+        }
+        String newPass = sb.toString();
+        return newPass;
+    }
 }
+

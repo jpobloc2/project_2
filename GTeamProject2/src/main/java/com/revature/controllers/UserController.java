@@ -57,8 +57,16 @@ public class UserController {
 //    @Autowired
 //    private AuthenticationService as;
 
-
-
+    @GetMapping("forgotPass/{username}")
+    public ResponseEntity<String> forgotPass(@PathVariable String username) {
+    	try{
+    		us.forgotPass(username);
+    		return new ResponseEntity<>(HttpStatus.OK);
+    	} catch(Exception e) {
+    		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    	}
+        	
+    }
 
 	@PutMapping("changePass")
 	@JsonView(View.UserInfo.class)

@@ -58,7 +58,10 @@ public class ReimbService implements ReimbServiceInterface {
 		r.setReimbAuthor(u);
 		r.setReimbSubmitted(new Timestamp(System.currentTimeMillis()));
 		return reimbRepo.save(r);
+<<<<<<< HEAD
 
+=======
+>>>>>>> e8e898e9f170a6f829a57d87aac2ff92b22638bb
 	}
 
 	@Override

@@ -15,7 +15,7 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.revature.services.JwtAuthenticationEntryPoint;
-import com.revature.services.JwtUserDetailsService;
+//import com.revature.services.JwtUserDetailsService;
 import com.revature.util.JwtTokenUtil;
 
 @Configuration
@@ -29,8 +29,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
 
-    @Autowired
-    private JwtUserDetailsService jwtUserDetailsService;
+//    @Autowired
+//    private JwtUserDetailsService jwtUserDetailsService;
 
 //    @Value("${jwt.header}")
 //    private String tokenHeader;
@@ -38,17 +38,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //    @Value("${jwt.route.authentication.path}")
 //    private String authenticationPath;
 
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-            .userDetailsService(jwtUserDetailsService)
-            .passwordEncoder(passwordEncoderBean());
-    }
+//    @Autowired
+//    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+//        auth
+//            .userDetailsService(jwtUserDetailsService)
+//            .passwordEncoder(passwordEncoderBean());
+//    }
 
-    @Bean
-    public PasswordEncoder passwordEncoderBean() {
-        return NoOpPasswordEncoder.getInstance();
-    }
+//    @Bean
+//    public PasswordEncoder passwordEncoderBean() {
+//        return NoOpPasswordEncoder.getInstance();
+//    }
 
     @Bean
     @Override

@@ -14,4 +14,6 @@ public interface UsersServiceInterface {
 
 	List<Users> findAll();
 
+	Users findById(int id);
+
 }

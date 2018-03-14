@@ -33,7 +33,7 @@ export const appRoutes: Routes = [
     component: ManagerComponent
   },
   {
-    path: 'viewuser',
+    path: 'view-user',
     component: ViewUserComponent
   },
   {

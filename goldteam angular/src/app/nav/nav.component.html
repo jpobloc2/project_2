@@ -37,5 +37,8 @@
     <ul class="navbar-nav mr-auto" style="float:right!important; padding-top:10px;">
       <a class="nav-link logg" routerLink="/login">Log Out</a>
     </ul>
+    <ul class="navbar-nav mr-auto" *ngIf="ck.roleId === 1" style="float:right!important; padding-right:75px; padding-top:10px;">
+        <a class="nav-link logg" routerLink="/manager">Manager Console</a>
+      </ul>
   </div>
 </nav>

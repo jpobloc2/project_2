@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-forgot-pass',
@@ -7,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ForgotPassComponent implements OnInit {
 
-  constructor() { }
+  constructor(private client: HttpClient, private router: Router) { }
 
   ngOnInit() {
   }

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-view-user',
@@ -7,9 +9,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ViewUserComponent implements OnInit {
 
-  constructor() { }
+  private userId;
+  private user;
+
+  constructor(private client: HttpClient, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      console.log('the query paramters: ' + params['user']);
+      this.userId = params['user'];
+    });
+    this.client.get(`http://localhost:8080/users/${this.userId}`)
+    .subscribe(
+      succ => {
+        this.user = succ;
+        console.log(succ);
+        return this.user;
+
+      }, err => {
+        alert('failed to retrieve the user');
+      }
+
+    );
+    console.log(this.user);
   }
 
 }

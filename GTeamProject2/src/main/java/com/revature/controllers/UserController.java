@@ -15,6 +15,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,6 +46,17 @@ public class UserController {
     @Autowired
     private AuthenticationManager authenticationManager;
 
+    @GetMapping("forgotPass/{id}")
+    public ResponseEntity<String> forgotPass(@PathVariable int id) {
+    	try{
+    		us.forgotPass(id);
+    		return new ResponseEntity<>(HttpStatus.OK);
+    	} catch(Exception e) {
+    		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    	}
+        	
+    }
+    
 	@PostMapping("newUser")
 	@JsonView(View.UserInfo.class)
 	public ResponseEntity<Users> createNew(@RequestBody Users u) {

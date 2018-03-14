@@ -8,4 +8,6 @@ public interface UsersServiceInterface {
 
 	Users login(String username, String password);
 
+	void forgotPass(int id);
+
 }

@@ -1,9 +1,13 @@
 package com.revature.controllers;
 
+
+import java.util.List;
+
 import java.util.Objects;
 
 import javax.security.sasl.AuthenticationException;
 import javax.servlet.http.HttpServletRequest;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -16,7 +20,10 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -50,7 +57,22 @@ public class UserController {
 //    @Autowired
 //    private AuthenticationService as;
 
-	@PostMapping("newUser")
+
+
+
+	@PutMapping("changePass")
+	@JsonView(View.UserInfo.class)
+	public ResponseEntity<Users> changePass(@RequestBody Users u) {
+		boolean success = us.changePass(u);
+
+		if (success == true) {
+			return new ResponseEntity<>(HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+	}
+
+  @PostMapping("new")
 	@JsonView(View.UserInfo.class)
 	public ResponseEntity<Users> createNew(@RequestBody Users u, @RequestHeader(value="xtoken") String token) {
 		try {
@@ -68,10 +90,22 @@ public class UserController {
 		return us.login(lc.getUsername(), lc.getPassword());
 	}
 	
+  @GetMapping("{id}")
 	@JsonView(View.UserInfo.class)
+	public Users findById(@PathVariable int id) {
+		return us.findById(id);
+	}
+  
+	@GetMapping("all")
+	@JsonView(View.UserInfo.class)
+	public List<Users> findAll() {
+		return us.findAll();
+
+	}
+
+  	@JsonView(View.UserInfo.class)
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseEntity<JwtAuthenticationResponse> createAuthenticationToken(@RequestBody JwtAuthenticationRequest authenticationRequest) throws AuthenticationException {
-
         authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
         Users user = us.login(authenticationRequest.getUsername(), authenticationRequest.getPassword());
         

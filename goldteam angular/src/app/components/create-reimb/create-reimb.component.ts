@@ -11,31 +11,46 @@ import { Reimbursement } from '../../beans/reimbursement';
 })
 export class CreateReimbComponent implements OnInit {
 
+  // reimbursement = {
+  //   amount: 0,
+  //   description: '',
+  //   type: Number,
+  // };
+
   reimbursement = {
-    amount: 0,
-    description: '',
-    type: Number,
+      reimbAmount: 0,
+      reimbType: '',
+      reimbDescription: '',
+      reimbAuthor: {
+          userId: 0
+      },
+      reimbStatus: {
+          status: 'Pending'
+      }
   };
 
+  ck;
 
   constructor(private client: HttpClient, private cookie: CookieService, private router: Router) { }
 
   ngOnInit() {
+    this.ck = this.cookie.getObject('user');
   }
 
   submitReimbursement() {
-    if (this.reimbursement.amount < 0) {
+    if (this.reimbursement.reimbAmount < 0) {
       alert('Amount must be greater than zero');
-    } else if (this.reimbursement.description === '') {
+    } else if (this.reimbursement.reimbDescription === '') {
       alert('Description cannot be left empty!');
     } else {
 
-
-      this.client.post('http://localhost:8080/Reimbursement-System/reimbursement', this.reimbursement,
-        { withCredentials: true })
+      this.reimbursement.reimbAuthor.userId = this.ck.uId;
+      console.log(this.reimbursement);
+      this.client.post('http://localhost:8080/reimb/submit', this.reimbursement)
         .subscribe(
           (succ) => {
             alert('submit successful');
+            console.log(succ);
             this.router.navigateByUrl('reimbs/pending');
           },
           (err) => {

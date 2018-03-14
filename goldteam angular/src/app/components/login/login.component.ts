@@ -41,9 +41,6 @@ export class LoginComponent implements OnInit {
           this.ck.roleId = succ.role.userRoleId;
           this.cookie.putObject('user', this.ck);
           this.router.navigateByUrl('home');
-          console.log(succ);
-          console.log(this.ck);
-          console.log(this.cookie);
         },
         (err) => {
           alert('failed to log in');

@@ -1,6 +1,9 @@
 package com.revature.services;
 
+
+import java.util.List;
 import javax.security.sasl.AuthenticationException;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,20 +34,37 @@ public class UsersService implements UsersServiceInterface {
 		u.setUserId(0);
 		Users ret = usersRepo.save(u);
 		return ret;
+	}
+
+  @Override
+	public boolean changePass(Users u) {
+		Users tmp = usersRepo.findById(u.getUserId()).get();
+		tmp.setPassword(u.getPassword());
+		Users success = usersRepo.save(tmp);
+		if (success != null) {
+			return true;
+		} else {
+			return false;
+  
+	@Override
+	public Users login(String username, String password) {
+		Users u = usersRepo.findByUsername(username);
+		if (u.getPassword().equals(password)) {
+			return u;
+		} else {
+			return null;
+		}
+	}
+
+	@Override
+	public List<Users> findAll() {
+		return usersRepo.findAll();
 
 	}
 
 	@Override
-	public Users login(String username, String password) {
-		System.out.println("CREDS: " + username + " and " + password);
-		Users u = usersRepo.findByUsername(username);
-		System.out.println(u.getPassword());
-		if (u.getPassword().equals(password)) {
-			System.out.println("PASS: " + password);
-			return u;
-
-		}
-		else {return null;}
+	public Users findById(int id) {
+		return usersRepo.findByUserId(id);
 	}
 
 }

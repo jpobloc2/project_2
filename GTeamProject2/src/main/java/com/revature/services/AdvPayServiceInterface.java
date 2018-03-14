@@ -13,8 +13,10 @@ public interface AdvPayServiceInterface {
 	
 	AdvancePayment submitAdvPay(AdvancePayment ap, String token) throws AuthenticationException;
 
+
 	AdvancePayment resolve(int tsid, String resolution, String token) throws AuthenticationException, Exception;
 
 	Set<AdvancePayment> findByuserid(String token) throws AuthenticationException;
+
 
 }

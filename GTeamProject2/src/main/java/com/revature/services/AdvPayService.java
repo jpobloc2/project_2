@@ -1,25 +1,47 @@
 package com.revature.services;
 
 import java.sql.Timestamp;
+
+
+import java.util.List;
+import java.util.Set;
+
+import javax.transaction.Transactional;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+
 import java.util.List;
 import java.util.Set;
 
 import javax.security.sasl.AuthenticationException;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.revature.entities.AdvancePayment;
+
+
+import com.revature.entities.Status;
+
+import com.revature.entities.Reimbursement;
+
+
 import com.revature.entities.Users;
 import com.revature.repo.AdvPayRepo;
 import com.revature.repo.StatusRepo;
 import com.revature.repo.UsersRepo;
+
 
 @Service
 public class AdvPayService implements AdvPayServiceInterface {
 	@Autowired
 	private AdvPayRepo advRepo;
 	@Autowired
+
 	private AuthenticationService as;
 	@Autowired
 	private StatusRepo statusRepo;
@@ -32,10 +54,13 @@ public class AdvPayService implements AdvPayServiceInterface {
 	}
 
 	@Override
-
+	@Transactional
 	public AdvancePayment submitAdvPay(AdvancePayment ap, String token) throws AuthenticationException {
 		Users u = as.validateToken(token);
 		if(as.validateManager(u)) {
+      Status s = statusRepo.findByStatus(ap.getStatus().getStatus());
+      ap.setAdvId(0);
+      ap.setStatus(s);
 			ap.setAuthor(u);
 			ap.setSubmitDate(new Timestamp(System.currentTimeMillis()));
 			return advRepo.save(ap);
@@ -44,12 +69,14 @@ public class AdvPayService implements AdvPayServiceInterface {
 		}
 	}
 
+
 	@Override
 	public AdvancePayment resolve(int tsid, String resolution, String token) throws AuthenticationException, Exception {
 		AdvancePayment ret = null;
 		Users u = as.validateToken(token);
 		boolean isCorrectManager = validateManagerDomain(tsid, u);
 		if (isCorrectManager) {
+
 			AdvancePayment ap = advRepo.findById(tsid).get();
 			ap.setResolver(u);
 			ap.setResolveDate(new Timestamp(System.currentTimeMillis()));
@@ -60,6 +87,7 @@ public class AdvPayService implements AdvPayServiceInterface {
 		}
 		return ret;
 	}
+
 
 	@Override
 	public Set<AdvancePayment> findByuserid(String token) throws AuthenticationException {

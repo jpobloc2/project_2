@@ -13,7 +13,15 @@ import { CookieService } from 'angular2-cookie/services/cookies.service';
 export class PendingReimbsComponent implements OnInit {
   reimbs: any = [];
 
+  string = '';
   ck;
+
+  updateReimb = {
+    itemId: 0,
+    resolution: '',
+    userId: 0
+
+  };
 
 
 
@@ -52,20 +60,21 @@ export class PendingReimbsComponent implements OnInit {
     }
   }
 
-  updateStatus(reimb: Reimbursement, statusId: number) {
-    console.log(reimb.r_id);
-    this.client.put(`http://localhost:8080/Reimbursement-System/reimbursement/${reimb.r_id}`, statusId, { withCredentials: true })
+  updateStatus(reimbId: number, reimbStatus: string) {
+    this.updateReimb.itemId = reimbId;
+    this.updateReimb.resolution = reimbStatus;
+    this.updateReimb.userId = this.ck.uId;
+    console.log(this.updateReimb);
+    this.client.put(`http://localhost:8080/reimb`, this.updateReimb)
       .subscribe(
         succ => {
-          if (statusId === 1) {
-            reimb.status = 1;
-            alert('Reimbursement approved');
-            this.router.navigateByUrl('reimbs');
+          if (reimbStatus === 'Accepted') {
+            this.string = 'Reimbursement accepted!';
+            this.ngOnInit();
           }
-          if (statusId === 2) {
-            reimb.status = 2;
-            alert('Reimbursement denied');
-            this.router.navigateByUrl('reimbs');
+          if (reimbStatus === 'Declined') {
+            this.string = 'Reimbursement denied!';
+            this.ngOnInit();
           }
         },
         err => {

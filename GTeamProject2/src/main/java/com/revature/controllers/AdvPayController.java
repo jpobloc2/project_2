@@ -1,5 +1,6 @@
 package com.revature.controllers;
 
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Set;
 
@@ -36,6 +37,7 @@ public class AdvPayController {
 		return aps.findAll();
 	}
 
+  @JsonView(View.Summary.class)
 	@PostMapping(path = "/submit")
 	public ResponseEntity<AdvancePayment> submitReimbursement(@RequestBody AdvancePayment ap, @RequestHeader(value="xtoken") String token) {
 		try {
@@ -44,6 +46,7 @@ public class AdvPayController {
 			return new ResponseEntity<AdvancePayment>(HttpStatus.UNAUTHORIZED);
 		}
 	}
+	
 
 	@PutMapping
 	@JsonView(View.Summary.class)
@@ -55,7 +58,7 @@ public class AdvPayController {
 			return new ResponseEntity<AdvancePayment>(HttpStatus.UNAUTHORIZED); 
 		} catch (Exception e) {
 			return new ResponseEntity<AdvancePayment>(HttpStatus.UNAUTHORIZED);
-		}
+    }
 	}
 
 	@JsonView(View.Summary.class)

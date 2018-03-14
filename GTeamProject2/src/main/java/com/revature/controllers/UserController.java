@@ -46,10 +46,10 @@ public class UserController {
     @Autowired
     private AuthenticationManager authenticationManager;
 
-    @GetMapping("forgotPass/{id}")
-    public ResponseEntity<String> forgotPass(@PathVariable int id) {
+    @GetMapping("forgotPass/{username}")
+    public ResponseEntity<String> forgotPass(@PathVariable String username) {
     	try{
-    		us.forgotPass(id);
+    		us.forgotPass(username);
     		return new ResponseEntity<>(HttpStatus.OK);
     	} catch(Exception e) {
     		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

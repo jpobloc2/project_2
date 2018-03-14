@@ -3,13 +3,17 @@ package com.revature.controllers;
 import java.util.List;
 import java.util.Set;
 
+import javax.security.sasl.AuthenticationException;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -33,21 +37,34 @@ public class AdvPayController {
 	}
 
 	@PostMapping(path = "/submit")
-	public AdvancePayment submitReimbursement(AdvancePayment ap) {
-		return aps.submitAdvPay(ap);
+	public ResponseEntity<AdvancePayment> submitReimbursement(@RequestBody AdvancePayment ap, @RequestHeader(value="xtoken") String token) {
+		try {
+			return new ResponseEntity<AdvancePayment>(aps.submitAdvPay(ap, token), HttpStatus.OK);
+		} catch (AuthenticationException e) {
+			return new ResponseEntity<AdvancePayment>(HttpStatus.UNAUTHORIZED);
+		}
 	}
 
 	@PutMapping
 	@JsonView(View.Summary.class)
-	public AdvancePayment resolve(@RequestBody ResolveCredentials rc) {
+	public ResponseEntity<AdvancePayment> resolve(@RequestBody ResolveCredentials rc, @RequestHeader(value="xtoken") String token) {
 		System.out.println(rc);
-		return aps.resolve(rc.getItemId(), rc.getResolution(), rc.getUserId());
+		try {
+			return new ResponseEntity<AdvancePayment>(aps.resolve(rc.getItemId(), rc.getResolution(), token), HttpStatus.OK);
+		} catch (AuthenticationException e) {
+			return new ResponseEntity<AdvancePayment>(HttpStatus.UNAUTHORIZED); 
+		} catch (Exception e) {
+			return new ResponseEntity<AdvancePayment>(HttpStatus.UNAUTHORIZED);
+		}
 	}
 
 	@JsonView(View.Summary.class)
-	@GetMapping("{advId}")
-	public Set<AdvancePayment> findByuserid(@PathVariable int advId) {
-		return aps.findByuserid(advId);
-
+	@GetMapping
+	public ResponseEntity<Set<AdvancePayment>> findByuserid(@RequestHeader(value="xtoken") String token) {
+		try {
+			return new ResponseEntity<Set<AdvancePayment>>(aps.findByuserid(token), HttpStatus.OK);
+		} catch (AuthenticationException e) {
+			return new ResponseEntity<Set<AdvancePayment>>(HttpStatus.UNAUTHORIZED);
+		}
 	}
 }

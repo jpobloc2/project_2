@@ -1,15 +1,15 @@
 package com.revature.services;
 
 import java.sql.Timestamp;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import javax.security.sasl.AuthenticationException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.revature.entities.AdvancePayment;
-import com.revature.entities.Reimbursement;
 import com.revature.entities.Users;
 import com.revature.repo.AdvPayRepo;
 import com.revature.repo.StatusRepo;
@@ -33,14 +33,21 @@ public class AdvPayService implements AdvPayServiceInterface {
 
 	@Override
 
-	public AdvancePayment submitAdvPay(AdvancePayment ap) {
-		return advRepo.save(ap);
+	public AdvancePayment submitAdvPay(AdvancePayment ap, String token) throws AuthenticationException {
+		Users u = as.validateToken(token);
+		if(as.validateManager(u)) {
+			ap.setAuthor(u);
+			ap.setSubmitDate(new Timestamp(System.currentTimeMillis()));
+			return advRepo.save(ap);
+		} else {
+			return null;
+		}
 	}
 
 	@Override
-	public AdvancePayment resolve(int tsid, String resolution, int userid) {
+	public AdvancePayment resolve(int tsid, String resolution, String token) throws AuthenticationException, Exception {
 		AdvancePayment ret = null;
-		Users u = as.validateUser(userid);
+		Users u = as.validateToken(token);
 		boolean isCorrectManager = validateManagerDomain(tsid, u);
 		if (isCorrectManager) {
 			AdvancePayment ap = advRepo.findById(tsid).get();
@@ -48,14 +55,15 @@ public class AdvPayService implements AdvPayServiceInterface {
 			ap.setResolveDate(new Timestamp(System.currentTimeMillis()));
 			ap.setStatus(statusRepo.findByStatus(resolution));
 			ret = advRepo.save(ap);
-
+		} else {
+			throw new Exception();
 		}
 		return ret;
 	}
 
 	@Override
-	public Set<AdvancePayment> findByuserid(int advId) {
-		Users u = usersRepo.findById(advId).get();
+	public Set<AdvancePayment> findByuserid(String token) throws AuthenticationException {
+		Users u = as.validateToken(token);
 		Set<AdvancePayment> usersAdvancePayments = u.getAdvancePayments();
 		if (u.getRole().getUserRole().equals("Manager")) {
 			Set<Users> suboordinates = u.getSubordinates();

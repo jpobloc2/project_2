@@ -3,6 +3,7 @@ package com.revature.controllers;
 import java.util.Objects;
 
 import javax.security.sasl.AuthenticationException;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -17,15 +18,18 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.revature.entities.JwtUser;
 import com.revature.entities.LoginCredentials;
 import com.revature.entities.Users;
 import com.revature.rest.JwtAuthenticationRequest;
 import com.revature.rest.JwtAuthenticationResponse;
+import com.revature.services.AuthenticationService;
 import com.revature.services.UsersServiceInterface;
 import com.revature.util.JwtTokenUtil;
 import com.revature.views.View;
@@ -38,17 +42,22 @@ public class UserController {
 	private UsersServiceInterface us;
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
-    @Autowired
-    @Qualifier("jwtUserDetailsService")
-    private UserDetailsService userDetailsService;
+//    @Autowired
+//    @Qualifier("jwtUserDetailsService")
+//    private UserDetailsService userDetailsService;
     @Autowired
     private AuthenticationManager authenticationManager;
+//    @Autowired
+//    private AuthenticationService as;
 
 	@PostMapping("newUser")
 	@JsonView(View.UserInfo.class)
-	public ResponseEntity<Users> createNew(@RequestBody Users u) {
-		us.createNew(u);
-		return new ResponseEntity<>(HttpStatus.OK);
+	public ResponseEntity<Users> createNew(@RequestBody Users u, @RequestHeader(value="xtoken") String token) {
+		try {
+			return new ResponseEntity<Users>(us.createNew(u, token), HttpStatus.OK);
+		} catch (AuthenticationException e) {
+			return new ResponseEntity<Users>(HttpStatus.UNAUTHORIZED);
+		}
   }
 	
 
@@ -59,21 +68,23 @@ public class UserController {
 		return us.login(lc.getUsername(), lc.getPassword());
 	}
 	
-    @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
-    public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtAuthenticationRequest authenticationRequest) throws AuthenticationException {
+	@JsonView(View.UserInfo.class)
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public ResponseEntity<JwtAuthenticationResponse> createAuthenticationToken(@RequestBody JwtAuthenticationRequest authenticationRequest) throws AuthenticationException {
 
         authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
-
+        Users user = us.login(authenticationRequest.getUsername(), authenticationRequest.getPassword());
+        
         // Reload password post-security so we can generate the token
-        final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
-        final String token = jwtTokenUtil.generateToken(userDetails);
-
+        //final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
+        final String token = jwtTokenUtil.generateToken(user);
+        
         // Return the token
-        return ResponseEntity.ok(new JwtAuthenticationResponse(token));
+        return ResponseEntity.ok(new JwtAuthenticationResponse(user,token));
     }
     
     /**
-     * Authenticates the user. If something is wrong, an {@link AuthenticationException} will be thrown
+     * Authenticates the user. If something is wrong, an AuthenticationException will be thrown
      */
     private void authenticate(String username, String password) throws AuthenticationException {
         Objects.requireNonNull(username);
@@ -87,6 +98,19 @@ public class UserController {
             throw new AuthenticationException("Bad credentials!", e);
         }
     }
+    
+//    @RequestMapping(value = "/authenticate/getuser", method = RequestMethod.GET)
+//    public JwtUser getAuthenticatedUser(HttpServletRequest request) {
+//    		System.out.println("HI");
+//        String token = request.getHeader("xtoken");
+//    		//String token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJicmFkeSIsImV4cCI6MTUyMDk4NjA3MSwiaWF0IjoxNTIwOTg1MDcxfQ.ofjy5DzJAhzolTL_i7Z-DhaF-dnOtao6h6QsNIi8NWLZpZiIDL2HaKB_6QuBaWzUgZb2aScmiVGmUvUw50Ei4g";
+//        //System.out.println(request.getHeader("Authorization").substring(7));
+//        System.out.println(token);
+//        String username = jwtTokenUtil.getUsernameFromToken(token);
+//        System.out.println(username);
+//        JwtUser user = (JwtUser) userDetailsService.loadUserByUsername(username);
+//        return user;
+//    }
 }
 
 

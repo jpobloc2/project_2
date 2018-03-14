@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.security.sasl.AuthenticationException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,14 +37,22 @@ public class TimesheetService implements TimesheetServiceInterface {
 	}
 
 	@Override
-	public Timesheet submitTimesheet(Timesheet ts) {
-		return timesheetRepo.save(ts);
+	public Timesheet submitTimesheet(Timesheet ts, String token) throws AuthenticationException {
+		Users u = asi.validateToken(token);
+		if(asi.validateManager(u)) {
+			ts.setAuthor(u);
+			ts.setSubmitted_date(new Timestamp(System.currentTimeMillis()));
+			return timesheetRepo.save(ts);
+		} else {
+			return null;
+		}
 	}
 
 	@Override
-	public Timesheet resolve(int tsid, String resolution, int userid) {
+	public Timesheet resolve(int tsid, String resolution, String token) throws AuthenticationException, Exception {
 		Timesheet ret = null;
-		Users u = as.validateUser(userid);
+		Users u = as.validateToken(token);
+		System.out.println(u);
 		boolean isCorrectManager = validateManagerDomain(tsid, u);
 		if (isCorrectManager) {
 			Timesheet ts = timesheetRepo.findById(tsid).get();
@@ -50,14 +60,18 @@ public class TimesheetService implements TimesheetServiceInterface {
 			ts.setResolved_date(new Timestamp(System.currentTimeMillis()));
 			System.out.println(statusRepo.findByStatus("Pending"));
 			ts.setStatus(statusRepo.findByStatus(resolution));
+			System.out.println(ts);
 			ret = timesheetRepo.save(ts);
+		} else {
+			throw new Exception();
 		}
 		return ret;
+		
 	}
 
 	@Override
-	public Set<Timesheet> findByuserid(int id) {
-		Users u = usersRepo.findById(id).get();
+	public Set<Timesheet> findByuserid(String token) throws AuthenticationException {
+		Users u = asi.validateToken(token);
 		Set<Timesheet> usersTimesheets = u.getTimesheets();
 		if (u.getRole().getUserRole().equals("Manager")) {
 			usersTimesheets.addAll(u.getTimesheets());

@@ -1,20 +1,23 @@
 package com.revature.services;
 
 import java.sql.Timestamp;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+
+import javax.transaction.Transactional;
+import javax.security.sasl.AuthenticationException;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.revature.entities.Reimbursement;
+import com.revature.entities.Status;
 import com.revature.entities.Users;
 import com.revature.repo.ReimbRepo;
 import com.revature.repo.StatusRepo;
 import com.revature.repo.UsersRepo;
-
-import oracle.net.aso.i;
 
 @Service
 public class ReimbService implements ReimbServiceInterface {
@@ -33,12 +36,12 @@ public class ReimbService implements ReimbServiceInterface {
 	}
 
 	@Override
-	public Set<Reimbursement> findByuserid(int author_id) {
-		Users u = usersRepo.findById(author_id).get();
+	public Set<Reimbursement> findByuserid(String token) throws AuthenticationException {
+		Users u = as.validateToken(token);
 		Set<Reimbursement> usersReimbs = u.getReimbursements();
 		if (u.getRole().getUserRole().equals("Manager")) {
 			Set<Users> suboordinates = u.getSubordinates();
-			for (Users sub: suboordinates) {
+			for (Users sub : suboordinates) {
 				usersReimbs.addAll(sub.getReimbursements());
 			}
 		} else {
@@ -48,16 +51,28 @@ public class ReimbService implements ReimbServiceInterface {
 	}
 
 	@Override
-	public Reimbursement submitReimb(Reimbursement r) {
-		return reimbRepo.save(r);
+	@Transactional
+	public Reimbursement submitReimb(Reimbursement r, String token) throws AuthenticationException {
+		Users u = as.validateToken(token);
+		if(as.validateManager(u)) {
+      Status s = statusRepo.findByStatus(r.getReimbStatus().getStatus());
+		  r.setReimbId(0);
+		  r.setReimbStatus(s);
+			r.setReimbAuthor(u);
+			r.setReimbSubmitted(new Timestamp(System.currentTimeMillis()));
+			return reimbRepo.save(r);
+		} else {
+			return null;
+		}
+
 	}
-	
+
 	@Override
-	public Reimbursement resolve(int tsid, String resolution, int userid) {
+	public Reimbursement resolve(int tsid, String resolution, String token) throws Exception {
 		Reimbursement ret = null;
-		Users u = as.validateUser(userid);
+		Users u = as.validateToken(token);
 		boolean isCorrectManager = validateManagerDomain(tsid, u);
-		if(isCorrectManager) {
+		if (isCorrectManager) {
 			Reimbursement rs = reimbRepo.findById(tsid).get();
 			System.out.println(rs);
 			rs.setReimbResolver(u);
@@ -66,10 +81,12 @@ public class ReimbService implements ReimbServiceInterface {
 			System.out.println(rs);
 			ret = reimbRepo.save(rs);
 			System.out.println(ret);
+		} else {
+			throw new Exception();
 		}
 		return ret;
 	}
-	
+
 	public boolean validateManagerDomain(int tsid, Users u) {
 		Users user = reimbRepo.findById(tsid).get().getReimbAuthor();
 		return u.getSubordinates().contains(user);

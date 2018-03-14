@@ -30,6 +30,9 @@ import { TypePipePipe } from './pipes/type-pipe.pipe';
 import { TimesheetsComponent } from './components/timesheets/timesheets.component';
 import { NewTimesheetComponent } from './components/new-timesheet/new-timesheet.component';
 import { AdvancepaymentComponent } from './components/advancepayment/advancepayment.component';
+import { ManagerComponent } from './components/manager/manager.component';
+import { ViewUserComponent } from './components/view-user/view-user.component';
+import { ForgotPassComponent } from './components/forgot-pass/forgot-pass.component';
 
 
 @NgModule({
@@ -59,7 +62,10 @@ import { AdvancepaymentComponent } from './components/advancepayment/advancepaym
     TypePipePipe,
     TimesheetsComponent,
     NewTimesheetComponent,
-    AdvancepaymentComponent
+    AdvancepaymentComponent,
+    ManagerComponent,
+    ViewUserComponent,
+    ForgotPassComponent
   ],
   providers: [
     ReimburseService,

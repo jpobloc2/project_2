@@ -1,6 +1,5 @@
 package com.revature.controllers;
 
-import java.sql.Timestamp;
 import java.util.List;
 import java.util.Set;
 
@@ -17,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.fasterxml.jackson.annotation.JsonView;
 import com.revature.entities.Reimbursement;
 import com.revature.entities.ResolveCredentials;
@@ -38,38 +38,36 @@ public class ReimbController {
 
 	@JsonView(View.Summary.class)
 	@GetMapping
-	public ResponseEntity<Set<Reimbursement>> findByuserid(@RequestHeader(value="xtoken") String token) {
+	public ResponseEntity<Set<Reimbursement>> findByuserid(@RequestHeader(value = "xtoken") String token) {
 		try {
+			System.out.println(token);
 			return new ResponseEntity<Set<Reimbursement>>(rs.findByuserid(token), HttpStatus.OK);
 		} catch (AuthenticationException e) {
 			return new ResponseEntity<Set<Reimbursement>>(HttpStatus.UNAUTHORIZED);
 		}
 	}
 
-	
-  @JsonView(View.Summary.class)
+	@JsonView(View.Summary.class)
 	@PostMapping(path = "/submit")
-	public ResponseEntity<Reimbursement> submitReimbursement(@RequestBody Reimbursement r, @RequestHeader(value="xtoken") String token) {
+	public ResponseEntity<Reimbursement> submitReimbursement(@RequestBody Reimbursement r,
+			@RequestHeader(value = "xtoken") String token) {
 		try {
 			return new ResponseEntity<Reimbursement>(rs.submitReimb(r, token), HttpStatus.OK);
 		} catch (AuthenticationException e) {
 			return new ResponseEntity<Reimbursement>(HttpStatus.UNAUTHORIZED);
 		}
 	}
-	
-
-
-
-
 
 	@PutMapping
 	@JsonView(View.Summary.class)
-	public ResponseEntity<Reimbursement> resolve(@RequestBody ResolveCredentials rc, @RequestHeader(value="xtoken") String token) {
+	public ResponseEntity<Reimbursement> resolve(@RequestBody ResolveCredentials rc,
+			@RequestHeader(value = "xtoken") String token) {
 		System.out.println(rc);
 		try {
-			return new ResponseEntity<Reimbursement>(rs.resolve(rc.getItemId(), rc.getResolution(), token), HttpStatus.OK);
+			return new ResponseEntity<Reimbursement>(rs.resolve(rc.getItemId(), rc.getResolution(), token),
+					HttpStatus.OK);
 		} catch (AuthenticationException e) {
-			return new ResponseEntity<Reimbursement>(HttpStatus.UNAUTHORIZED); 
+			return new ResponseEntity<Reimbursement>(HttpStatus.UNAUTHORIZED);
 		} catch (Exception e) {
 			return new ResponseEntity<Reimbursement>(HttpStatus.UNAUTHORIZED);
 		}

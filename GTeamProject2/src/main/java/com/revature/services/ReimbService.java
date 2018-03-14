@@ -4,10 +4,8 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.Set;
 
-
-import javax.transaction.Transactional;
 import javax.security.sasl.AuthenticationException;
-
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -54,16 +52,12 @@ public class ReimbService implements ReimbServiceInterface {
 	@Transactional
 	public Reimbursement submitReimb(Reimbursement r, String token) throws AuthenticationException {
 		Users u = as.validateToken(token);
-		if(as.validateManager(u)) {
-      Status s = statusRepo.findByStatus(r.getReimbStatus().getStatus());
-		  r.setReimbId(0);
-		  r.setReimbStatus(s);
-			r.setReimbAuthor(u);
-			r.setReimbSubmitted(new Timestamp(System.currentTimeMillis()));
-			return reimbRepo.save(r);
-		} else {
-			return null;
-		}
+		Status s = statusRepo.findByStatus(r.getReimbStatus().getStatus());
+		r.setReimbId(0);
+		r.setReimbStatus(s);
+		r.setReimbAuthor(u);
+		r.setReimbSubmitted(new Timestamp(System.currentTimeMillis()));
+		return reimbRepo.save(r);
 
 	}
 

@@ -4,7 +4,10 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.Set;
 
+
 import javax.transaction.Transactional;
+import javax.security.sasl.AuthenticationException;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,8 +36,8 @@ public class ReimbService implements ReimbServiceInterface {
 	}
 
 	@Override
-	public Set<Reimbursement> findByuserid(int author_id) {
-		Users u = usersRepo.findById(author_id).get();
+	public Set<Reimbursement> findByuserid(String token) throws AuthenticationException {
+		Users u = as.validateToken(token);
 		Set<Reimbursement> usersReimbs = u.getReimbursements();
 		if (u.getRole().getUserRole().equals("Manager")) {
 			Set<Users> suboordinates = u.getSubordinates();
@@ -49,17 +52,25 @@ public class ReimbService implements ReimbServiceInterface {
 
 	@Override
 	@Transactional
-	public Reimbursement submitReimb(Reimbursement r) {
-		Status s = statusRepo.findByStatus(r.getReimbStatus().getStatus());
-		r.setReimbId(0);
-		r.setReimbStatus(s);
-		return reimbRepo.save(r);
+	public Reimbursement submitReimb(Reimbursement r, String token) throws AuthenticationException {
+		Users u = as.validateToken(token);
+		if(as.validateManager(u)) {
+      Status s = statusRepo.findByStatus(r.getReimbStatus().getStatus());
+		  r.setReimbId(0);
+		  r.setReimbStatus(s);
+			r.setReimbAuthor(u);
+			r.setReimbSubmitted(new Timestamp(System.currentTimeMillis()));
+			return reimbRepo.save(r);
+		} else {
+			return null;
+		}
+
 	}
 
 	@Override
-	public Reimbursement resolve(int tsid, String resolution, int userid) {
+	public Reimbursement resolve(int tsid, String resolution, String token) throws Exception {
 		Reimbursement ret = null;
-		Users u = as.validateUser(userid);
+		Users u = as.validateToken(token);
 		boolean isCorrectManager = validateManagerDomain(tsid, u);
 		if (isCorrectManager) {
 			Reimbursement rs = reimbRepo.findById(tsid).get();
@@ -70,6 +81,8 @@ public class ReimbService implements ReimbServiceInterface {
 			System.out.println(rs);
 			ret = reimbRepo.save(rs);
 			System.out.println(ret);
+		} else {
+			throw new Exception();
 		}
 		return ret;
 	}

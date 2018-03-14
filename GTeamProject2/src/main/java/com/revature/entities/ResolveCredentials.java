@@ -1,7 +1,6 @@
 package com.revature.entities;
 
 public class ResolveCredentials {
-	private int userId;
 	private int itemId;
 	private String resolution;
 	public ResolveCredentials() {
@@ -10,13 +9,12 @@ public class ResolveCredentials {
 	}
 	public ResolveCredentials(int userId, int itemId, String resolution) {
 		super();
-		this.userId = userId;
 		this.itemId = itemId;
 		this.resolution = resolution;
 	}
 	@Override
 	public String toString() {
-		return "ResolveCredentials [userId=" + userId + ", itemId=" + itemId + ", resolution=" + resolution + "]";
+		return "ResolveCredentials [itemId=" + itemId + ", resolution=" + resolution + "]";
 	}
 	@Override
 	public int hashCode() {
@@ -24,7 +22,6 @@ public class ResolveCredentials {
 		int result = 1;
 		result = prime * result + itemId;
 		result = prime * result + ((resolution == null) ? 0 : resolution.hashCode());
-		result = prime * result + userId;
 		return result;
 	}
 	@Override
@@ -43,15 +40,7 @@ public class ResolveCredentials {
 				return false;
 		} else if (!resolution.equals(other.resolution))
 			return false;
-		if (userId != other.userId)
-			return false;
 		return true;
-	}
-	public int getUserId() {
-		return userId;
-	}
-	public void setUserId(int userId) {
-		this.userId = userId;
 	}
 	public int getItemId() {
 		return itemId;
@@ -65,6 +54,5 @@ public class ResolveCredentials {
 	public void setResolution(String resolution) {
 		this.resolution = resolution;
 	}
-	
 	
 }

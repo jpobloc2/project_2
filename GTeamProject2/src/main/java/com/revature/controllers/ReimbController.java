@@ -4,13 +4,17 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.Set;
 
+import javax.security.sasl.AuthenticationException;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.annotation.JsonView;
@@ -33,17 +37,24 @@ public class ReimbController {
 	}
 
 	@JsonView(View.Summary.class)
-	@GetMapping("{id}")
-	public Set<Reimbursement> findByuserid(@PathVariable int id) {
-		return rs.findByuserid(id);
+	@GetMapping
+	public ResponseEntity<Set<Reimbursement>> findByuserid(@RequestHeader(value="xtoken") String token) {
+		try {
+			return new ResponseEntity<Set<Reimbursement>>(rs.findByuserid(token), HttpStatus.OK);
+		} catch (AuthenticationException e) {
+			return new ResponseEntity<Set<Reimbursement>>(HttpStatus.UNAUTHORIZED);
+		}
 	}
 
 	
-	@JsonView(View.Summary.class)
-	@PostMapping(path="submit")
-	public Reimbursement submitReimbursement(@RequestBody Reimbursement r) {
-		r.setReimbSubmitted(new Timestamp(System.currentTimeMillis()));
-		return rs.submitReimb(r);
+  @JsonView(View.Summary.class)
+	@PostMapping(path = "/submit")
+	public ResponseEntity<Reimbursement> submitReimbursement(@RequestBody Reimbursement r, @RequestHeader(value="xtoken") String token) {
+		try {
+			return new ResponseEntity<Reimbursement>(rs.submitReimb(r, token), HttpStatus.OK);
+		} catch (AuthenticationException e) {
+			return new ResponseEntity<Reimbursement>(HttpStatus.UNAUTHORIZED);
+		}
 	}
 	
 
@@ -53,10 +64,15 @@ public class ReimbController {
 
 	@PutMapping
 	@JsonView(View.Summary.class)
-	public Reimbursement resolve(@RequestBody ResolveCredentials rc) {
-		System.out.println("Resolve started");
+	public ResponseEntity<Reimbursement> resolve(@RequestBody ResolveCredentials rc, @RequestHeader(value="xtoken") String token) {
 		System.out.println(rc);
-		return rs.resolve(rc.getItemId(), rc.getResolution(), rc.getUserId());
+		try {
+			return new ResponseEntity<Reimbursement>(rs.resolve(rc.getItemId(), rc.getResolution(), token), HttpStatus.OK);
+		} catch (AuthenticationException e) {
+			return new ResponseEntity<Reimbursement>(HttpStatus.UNAUTHORIZED); 
+		} catch (Exception e) {
+			return new ResponseEntity<Reimbursement>(HttpStatus.UNAUTHORIZED);
+		}
 	}
 
 }

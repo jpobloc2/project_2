@@ -2,6 +2,7 @@ package com.revature.services;
 
 import java.sql.Timestamp;
 
+
 import java.util.List;
 import java.util.Set;
 
@@ -12,14 +13,22 @@ import java.util.List;
 import java.util.Set;
 
 
+import java.util.List;
+import java.util.Set;
+
+import javax.security.sasl.AuthenticationException;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.revature.entities.AdvancePayment;
 
+
 import com.revature.entities.Status;
 
 import com.revature.entities.Reimbursement;
+
 
 import com.revature.entities.Users;
 import com.revature.repo.AdvPayRepo;
@@ -46,19 +55,25 @@ public class AdvPayService implements AdvPayServiceInterface {
 
 	@Override
 	@Transactional
-
-	public AdvancePayment submitAdvPay(AdvancePayment ap) {
-		Status s = statusRepo.findByStatus(ap.getStatus().getStatus());
-		ap.setAdvId(0);
-		ap.setStatus(s);
-		return advRepo.save(ap);
+	public AdvancePayment submitAdvPay(AdvancePayment ap, String token) throws AuthenticationException {
+		Users u = as.validateToken(token);
+		if(as.validateManager(u)) {
+      Status s = statusRepo.findByStatus(ap.getStatus().getStatus());
+      ap.setAdvId(0);
+      ap.setStatus(s);
+			ap.setAuthor(u);
+			ap.setSubmitDate(new Timestamp(System.currentTimeMillis()));
+			return advRepo.save(ap);
+		} else {
+			return null;
+		}
 	}
 
 
 	@Override
-	public AdvancePayment resolve(int tsid, String resolution, int userid) {
+	public AdvancePayment resolve(int tsid, String resolution, String token) throws AuthenticationException, Exception {
 		AdvancePayment ret = null;
-		Users u = as.validateUser(userid);
+		Users u = as.validateToken(token);
 		boolean isCorrectManager = validateManagerDomain(tsid, u);
 		if (isCorrectManager) {
 
@@ -67,15 +82,16 @@ public class AdvPayService implements AdvPayServiceInterface {
 			ap.setResolveDate(new Timestamp(System.currentTimeMillis()));
 			ap.setStatus(statusRepo.findByStatus(resolution));
 			ret = advRepo.save(ap);
-
+		} else {
+			throw new Exception();
 		}
 		return ret;
 	}
 
 
 	@Override
-	public Set<AdvancePayment> findByuserid(int advId) {
-		Users u = usersRepo.findById(advId).get();
+	public Set<AdvancePayment> findByuserid(String token) throws AuthenticationException {
+		Users u = as.validateToken(token);
 		Set<AdvancePayment> usersAdvancePayments = u.getAdvancePayments();
 		if (u.getRole().getUserRole().equals("Manager")) {
 			Set<Users> suboordinates = u.getSubordinates();

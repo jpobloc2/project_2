@@ -1,6 +1,9 @@
 package com.revature.services;
 
+
 import java.util.List;
+import javax.security.sasl.AuthenticationException;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,36 +19,24 @@ public class UsersService implements UsersServiceInterface {
 	private UsersRepo usersRepo;
 	@Autowired
 	private RoleRepo roleRepo;
+	@Autowired
+	private AuthenticationService as;
 
 	@Override
-	public boolean createNew(Users u) {
+	public Users createNew(Users u, String token) throws AuthenticationException {
 		// Set role based on the string that was passed in
-		UserRole ur = roleRepo.findByUserRole(u.getRole().getUserRole());
-		u.setRole(ur);
-
+		Users submitter = as.validateToken(token);
+		as.validateManager(submitter);
+		UserRole tmp = roleRepo.findByUserRole("Employee");
+		u.setRole(tmp);
+		
 		// Set userId to 0 so that it creates a new user rather than updating
 		u.setUserId(0);
-
-		Users success = usersRepo.save(u);
-		if (success != null) {
-			return true;
-		} else {
-			return false;
-		}
+		Users ret = usersRepo.save(u);
+		return ret;
 	}
 
-	@Override
-	public Users login(String username, String password) {
-		Users u = usersRepo.findByUsername(username);
-		if (u.getPassword().equals(password)) {
-			return usersRepo.findByUsername(username);
-
-		} else {
-			return null;
-		}
-	}
-
-	@Override
+  @Override
 	public boolean changePass(Users u) {
 		Users tmp = usersRepo.findById(u.getUserId()).get();
 		tmp.setPassword(u.getPassword());
@@ -54,6 +45,14 @@ public class UsersService implements UsersServiceInterface {
 			return true;
 		} else {
 			return false;
+  
+	@Override
+	public Users login(String username, String password) {
+		Users u = usersRepo.findByUsername(username);
+		if (u.getPassword().equals(password)) {
+			return u;
+		} else {
+			return null;
 		}
 	}
 

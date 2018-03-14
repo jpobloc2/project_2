@@ -34,6 +34,7 @@ import com.revature.entities.Users;
 import com.revature.repo.AdvPayRepo;
 import com.revature.repo.StatusRepo;
 import com.revature.repo.UsersRepo;
+import com.revature.util.EmailUtil;
 
 
 @Service
@@ -63,6 +64,8 @@ public class AdvPayService implements AdvPayServiceInterface {
       ap.setStatus(s);
 			ap.setAuthor(u);
 			ap.setSubmitDate(new Timestamp(System.currentTimeMillis()));
+			String to = u.getUserEmail();
+			emailAPConfirm(to);
 			return advRepo.save(ap);
 		} else {
 			return null;
@@ -108,5 +111,15 @@ public class AdvPayService implements AdvPayServiceInterface {
 		Users user = advRepo.findById(tsid).get().getAuthor();
 		return u.getSubordinates().contains(user);
 
+	}
+
+	@Override
+	public void emailAPConfirm(String to) {
+		String subject = "Request Submitted";
+		String message = "Your request for a payment advance has been recieved. Please allow 3 to 5 "
+				+ "business days for your request to be processed. Have a great day!" + "\n"
+				+ "Revature" + "\n" + "'Code Like a Boss!'";
+		
+		new EmailUtil().sendMessage(to, subject, message);
 	}
 }

@@ -4,14 +4,12 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.Set;
 
-<<<<<<< HEAD
 import javax.security.sasl.AuthenticationException;
 import javax.transaction.Transactional;
-=======
+
 import javax.transaction.Transactional;
 
 import javax.security.sasl.AuthenticationException;
->>>>>>> e8e898e9f170a6f829a57d87aac2ff92b22638bb
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +20,7 @@ import com.revature.entities.Users;
 import com.revature.repo.StatusRepo;
 import com.revature.repo.TimesheetRepo;
 import com.revature.repo.UsersRepo;
+import com.revature.util.EmailUtil;
 
 @Service
 public class TimesheetService implements TimesheetServiceInterface {
@@ -46,16 +45,18 @@ public class TimesheetService implements TimesheetServiceInterface {
 	@Transactional
 	public Timesheet submitTimesheet(Timesheet ts, String token) throws AuthenticationException {
 		Users u = asi.validateToken(token);
-<<<<<<< HEAD
-
-=======
->>>>>>> e8e898e9f170a6f829a57d87aac2ff92b22638bb
-		Status s = statusRepo.findByStatus(ts.getStatus().getStatus());
-		ts.setTimesheetid(0);
-		ts.setStatus(s);
-		ts.setAuthor(u);
-		ts.setSubmitted_date(new Timestamp(System.currentTimeMillis()));
-		return timesheetRepo.save(ts);
+		if(asi.validateManager(u)) {
+      Status s = statusRepo.findByStatus(ts.getStatus().getStatus());
+		  ts.setTimesheetid(0);
+		  ts.setStatus(s);
+			ts.setAuthor(u);
+			ts.setSubmitted_date(new Timestamp(System.currentTimeMillis()));
+			String to = u.getUserEmail();
+			emailTSConfirm(to);
+			return timesheetRepo.save(ts);
+		} else {
+			return null;
+		}
 	}
 
 	@Override
@@ -99,6 +100,15 @@ public class TimesheetService implements TimesheetServiceInterface {
 	public boolean validateManagerDomain(int tsid, Users u) {
 		Users user = timesheetRepo.findById(tsid).get().getAuthor();
 		return u.getSubordinates().contains(user);
+	}
+
+	@Override
+	public void emailTSConfirm(String to) {
+		String subject = "Time Sheet Submitted";
+		String message = "Your time sheet has been recieved. Have a great day!" + "\n"
+				+ "Revature" + "\n" + "'Code Like a Boss!'";
+		
+		new EmailUtil().sendMessage(to, subject, message);
 	}
 
 }

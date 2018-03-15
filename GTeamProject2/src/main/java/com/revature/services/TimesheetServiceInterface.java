@@ -16,5 +16,7 @@ public interface TimesheetServiceInterface {
 	Timesheet resolve(int tsid, String resolution, String token) throws AuthenticationException, Exception;
 
 	Timesheet submitTimesheet(Timesheet ts, String token) throws AuthenticationException;
+	
+	void emailTSConfirm(String to);
 
 }

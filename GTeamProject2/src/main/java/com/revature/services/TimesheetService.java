@@ -4,11 +4,9 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.Set;
 
-
 import javax.transaction.Transactional;
 
 import javax.security.sasl.AuthenticationException;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,10 +41,10 @@ public class TimesheetService implements TimesheetServiceInterface {
 	@Transactional
 	public Timesheet submitTimesheet(Timesheet ts, String token) throws AuthenticationException {
 		Users u = asi.validateToken(token);
-		if(asi.validateManager(u)) {
-      Status s = statusRepo.findByStatus(ts.getStatus().getStatus());
-		  ts.setTimesheetid(0);
-		  ts.setStatus(s);
+		if (asi.validateManager(u)) {
+			Status s = statusRepo.findByStatus(ts.getStatus().getStatus());
+			ts.setTimesheetid(0);
+			ts.setStatus(s);
 			ts.setAuthor(u);
 			ts.setSubmitted_date(new Timestamp(System.currentTimeMillis()));
 			return timesheetRepo.save(ts);
@@ -71,10 +69,8 @@ public class TimesheetService implements TimesheetServiceInterface {
 			ret = timesheetRepo.save(ts);
 		} else {
 			throw new Exception();
-
 		}
 		return ret;
-		
 	}
 
 	@Override
@@ -97,5 +93,4 @@ public class TimesheetService implements TimesheetServiceInterface {
 		Users user = timesheetRepo.findById(tsid).get().getAuthor();
 		return u.getSubordinates().contains(user);
 	}
-
 }

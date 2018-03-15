@@ -31,6 +31,7 @@ public class AuthenticationService implements AuthenticationServiceInterface {
 		}
 		return b;
 	}
+
 	@Override
 	public Users validateToken(String token) throws AuthenticationException {
 		Users u = usersRepo.findByUsername(jwtTokenUtil.getUsernameFromToken(token));
@@ -40,7 +41,4 @@ public class AuthenticationService implements AuthenticationServiceInterface {
 			return u;
 		}
 	}
-	
-
-
 }

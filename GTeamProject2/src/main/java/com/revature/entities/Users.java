@@ -15,6 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.revature.views.View;
 
@@ -29,6 +30,7 @@ public class Users {
 
 	@JsonView(View.UserInfo.class)
 	private String username;
+	@JsonIgnore
 	private String password;
 	@Column(name="FIRST_NAME")
 	@JsonView(View.Summary.class)

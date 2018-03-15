@@ -35,7 +35,6 @@ import com.revature.repo.AdvPayRepo;
 import com.revature.repo.StatusRepo;
 import com.revature.repo.UsersRepo;
 
-
 @Service
 public class AdvPayService implements AdvPayServiceInterface {
 	@Autowired
@@ -69,7 +68,6 @@ public class AdvPayService implements AdvPayServiceInterface {
 		}
 	}
 
-
 	@Override
 	public AdvancePayment resolve(int tsid, String resolution, String token) throws AuthenticationException, Exception {
 		AdvancePayment ret = null;
@@ -87,7 +85,6 @@ public class AdvPayService implements AdvPayServiceInterface {
 		}
 		return ret;
 	}
-
 
 	@Override
 	public Set<AdvancePayment> findByuserid(String token) throws AuthenticationException {

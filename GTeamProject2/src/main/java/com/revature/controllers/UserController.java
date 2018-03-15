@@ -69,9 +69,9 @@ public class UserController {
     }
     
     @PutMapping("emailAdmin")
-    public ResponseEntity<String> emailAdmin(@RequestBody String to, String subject, String message) {
+    public ResponseEntity<String> emailAdmin(@RequestBody String from, String subject, String message) {
     		try{
-    			us.emailAdmin(to, subject, message);
+    			us.emailAdmin(from, subject, message);
     			return new ResponseEntity<>(HttpStatus.OK);
     		} catch(Exception e) {
     			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

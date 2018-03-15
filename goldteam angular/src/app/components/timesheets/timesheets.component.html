@@ -14,6 +14,7 @@
             <th>Date Submitted</th>
             <th>Date Resolved</th>
             <th>Hours</th>
+            <th>Comment</th>
             <th>Status</th>
             <th>Resolved By</th>
         </tr>
@@ -26,6 +27,7 @@
             <th>Date Submitted</th>
             <th>Date Resolved</th>
             <th>Hours</th>
+            <th>Comment</th>
             <th>Status</th>
             <th>Resolved By</th>
         </tr>
@@ -38,6 +40,7 @@
             <td>{{sheet.submittedDate | date:'fullDate'}}</td>
             <td>{{sheet.resolvedDate | date:'fullDate'}}</td>
             <td>{{sheet.hoursTotal}}</td>
+            <td>{{sheet.tsComment}}</td>
             <td>{{sheet.status.status}}</td>
             <td *ngIf="sheet.resolver else b">{{sheet.resolver.firstName}}</td>
             <ng-template #b>

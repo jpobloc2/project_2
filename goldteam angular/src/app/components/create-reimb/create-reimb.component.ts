@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
 import { Router } from '@angular/router';
 import { Reimbursement } from '../../beans/reimbursement';
@@ -11,11 +11,7 @@ import { Reimbursement } from '../../beans/reimbursement';
 })
 export class CreateReimbComponent implements OnInit {
 
-  // reimbursement = {
-  //   amount: 0,
-  //   description: '',
-  //   type: Number,
-  // };
+  header = new HttpHeaders({xtoken: `${localStorage.getItem('token')}`});
 
   reimbursement = {
       reimbAmount: 0,
@@ -46,7 +42,7 @@ export class CreateReimbComponent implements OnInit {
 
       this.reimbursement.reimbAuthor.userId = this.ck.uId;
       console.log(this.reimbursement);
-      this.client.post('http://localhost:8080/reimb/submit', this.reimbursement)
+      this.client.post('http://localhost:8080/reimb/submit', this.reimbursement, {headers: this.header})
         .subscribe(
           (succ) => {
             alert('submit successful');

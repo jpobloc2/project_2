@@ -99,7 +99,16 @@ public class UserController {
 			return new ResponseEntity<Users>(HttpStatus.UNAUTHORIZED);
 		}
   }
-	
+  
+//  @PostMapping("new")
+//	@JsonView(View.UserInfo.class)
+//	public ResponseEntity<Users> createNew(@RequestBody Users u, @RequestHeader(value="xtoken") String token) {
+//		try {
+//			return new ResponseEntity<Users>(us.createNew(u, token), HttpStatus.OK);
+//		} catch (AuthenticationException e) {
+//			return new ResponseEntity<Users>(HttpStatus.UNAUTHORIZED);
+//		}
+//  }
 
 	@PostMapping
 	@JsonView(View.UserInfo.class)

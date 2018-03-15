@@ -75,20 +75,21 @@ public class UserController {
 		}
 	}
 	
-//	@GetMapping("{id}")
-//	@JsonView(View.UserInfo.class)
-//	public Users findById(@PathVariable int id) {
-//		return us.findById(id);
-//	}
-	@JsonView(View.Summary.class)
 	@GetMapping("{id}")
-	public ResponseEntity<Users> getUserData(@PathVariable int id, @RequestHeader(value="xtoken") String token) {
+	@JsonView(View.UserInfo.class)
+	public Users findById(@PathVariable int id) {
+		return us.findById(id);
+	}
+	@JsonView(View.Summary.class)
+	@GetMapping()
+	public ResponseEntity<Users> getUserData(@RequestHeader(value="xtoken") String token) {
 		try {
-			return new ResponseEntity<Users>(us.getUserData(id, token), HttpStatus.OK);
+			return new ResponseEntity<Users>(us.getUserData(token), HttpStatus.OK);
 		} catch (AuthenticationException e) {
 			return new ResponseEntity<Users>(HttpStatus.UNAUTHORIZED);
 		}
 	}
+	
 	@JsonView(View.Summary.class)
 	@GetMapping("employeeData")
 	public ResponseEntity<Set<Users>> getEmployeeData(@RequestHeader(value="xtoken") String token) {
@@ -105,8 +106,6 @@ public class UserController {
 		System.out.println(lc.getUsername() + " " + lc.getPassword());
 		return us.login(lc.getUsername(), lc.getPassword());
 	}
-
-
 
 	@GetMapping("all")
 	@JsonView(View.UserInfo.class)

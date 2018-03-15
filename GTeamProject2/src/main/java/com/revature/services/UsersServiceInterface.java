@@ -19,9 +19,8 @@ public interface UsersServiceInterface {
 
 	Users findById(int id);
 
-	Users getUserData(int id, String token) throws AuthenticationException;
+	Users getUserData(String token) throws AuthenticationException;
 
 	Set<Users> getEmployeeData(String token) throws AuthenticationException;
-
 
 }

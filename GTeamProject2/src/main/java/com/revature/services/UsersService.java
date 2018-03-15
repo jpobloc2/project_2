@@ -67,21 +67,27 @@ public class UsersService implements UsersServiceInterface {
 	}
 
 	@Override
-	public Users getUserData(int id, String token) throws AuthenticationException {
+	public Users getUserData(String token) throws AuthenticationException {
 		Users u = as.validateToken(token);
-		if(u.getUserId() != id) {
-			throw new AuthenticationException();
-		}
-		// CHANGE THIS. Needs to check if the User they are trying to get matches the token OR
-		// They are their manager
-		
-		
 		return u;
 	}
 
 	@Override
 	public Set<Users> getEmployeeData(String token) throws AuthenticationException {
 		Users u = as.validateToken(token);
-		return u.getSubordinates();
+		if(validateManager(u) == true) {
+			return u.getSubordinates();
+		} else {
+			throw new AuthenticationException();
+		}
+		
+	}
+	
+	public boolean validateManager(Users u) throws AuthenticationException {
+		boolean b = (u.getRole().equals("Manager"));
+		if(!b) {
+			throw new AuthenticationException();
+		}
+		return b;
 	}
 }

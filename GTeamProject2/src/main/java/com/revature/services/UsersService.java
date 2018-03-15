@@ -126,8 +126,8 @@ public class UsersService implements UsersServiceInterface {
 	}
 
 	@Override
-	public void emailAdmin(String to, String subject, String message) {
-		new EmailUtil().sendMessage(to, subject, message);
+	public void emailAdmin(String from, String subject, String message) {
+		new EmailUtil().recieveMessage(from, subject, message);
 	}
 }
 

@@ -2,7 +2,6 @@ package com.revature.services;
 
 import java.sql.Timestamp;
 
-
 import java.util.List;
 import java.util.Set;
 
@@ -12,30 +11,28 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-
 import java.util.List;
 import java.util.Set;
 
 import javax.security.sasl.AuthenticationException;
-
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.revature.entities.AdvancePayment;
 
+import com.revature.entities.Status;
 
 import com.revature.entities.Status;
 
 import com.revature.entities.Reimbursement;
-
 
 import com.revature.entities.Users;
 import com.revature.repo.AdvPayRepo;
 import com.revature.repo.StatusRepo;
 import com.revature.repo.UsersRepo;
 import com.revature.util.EmailUtil;
-
 
 @Service
 public class AdvPayService implements AdvPayServiceInterface {
@@ -72,6 +69,7 @@ public class AdvPayService implements AdvPayServiceInterface {
 		}
 	}
 
+	}
 
 	@Override
 	public AdvancePayment resolve(int tsid, String resolution, String token) throws AuthenticationException, Exception {
@@ -91,14 +89,13 @@ public class AdvPayService implements AdvPayServiceInterface {
 		return ret;
 	}
 
-
 	@Override
 	public Set<AdvancePayment> findByuserid(String token) throws AuthenticationException {
 		Users u = as.validateToken(token);
 		Set<AdvancePayment> usersAdvancePayments = u.getAdvancePayments();
 		if (u.getRole().getUserRole().equals("Manager")) {
 			Set<Users> suboordinates = u.getSubordinates();
-			for (Users sub: suboordinates) {
+			for (Users sub : suboordinates) {
 				usersAdvancePayments.addAll(sub.getAdvancePayments());
 			}
 		} else {

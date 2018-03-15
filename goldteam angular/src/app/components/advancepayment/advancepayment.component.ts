@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
 
 
@@ -13,18 +13,13 @@ import { Router } from '@angular/router';
 })
 export class AdvancepaymentComponent implements OnInit {
 
+  header = new HttpHeaders({ xtoken: `${localStorage.getItem('token')}` });
+
 
   payments: any = [];
 
   string = '';
 
-  // private newPayment = {
-
-  //   amount: 0,
-  //   comment: '',
-  //   authorId: 0
-
-  // };
 
   private newPayment = {
 
@@ -55,48 +50,34 @@ export class AdvancepaymentComponent implements OnInit {
   ngOnInit() {
     this.ck = this.cookie.getObject('user');
     console.log(this.ck.roleId);
-    if (this.ck.roleId === 0) {
-    this.client.get(`http://localhost:8080/advpay/${this.ck.uId}`)
-    .subscribe(
-      succ => {
-        this.payments = succ;
-        console.log(this.payments);
-        return this.payments;
-      }, err => {
-        alert('failed to retrieve payments');
-      }
-    );
+    this.client.get(`http://localhost:8080/advpay/`, { headers: this.header })
+      .subscribe(
+        succ => {
+          this.payments = succ;
+          console.log(this.payments);
+          return this.payments;
+        }, err => {
+          alert('failed to retrieve payments');
+        }
+      );
 
 
-    } else {
-    this.client.get('http://localhost:8080/advpay/all')
-    .subscribe(
-      succ => {
-        this.payments = succ;
-        console.log(succ);
-        return this.payments;
-
-      }, err => {
-        alert('failed to retrieve payments');
-      }
-
-    );
-  }
   }
 
   submitPayment() {
     this.newPayment.author.userId = this.ck.uId;
     console.log(this.newPayment);
-    this.client.post('http://localhost:8080/advpay/submit', this.newPayment)
-    .subscribe(
-      succ => {
-        alert('advance payment submitted');
-        console.log(succ);
-      },
-      err => {
-        alert('advance payment failed');
-      }
-    );
+    this.client.post('http://localhost:8080/advpay/submit', this.newPayment, { headers: this.header })
+      .subscribe(
+        (succ: any) => {
+          alert('advance payment submitted');
+          console.log(succ);
+          this.ngOnInit();
+        },
+        err => {
+          alert('advance payment failed');
+        }
+      );
   }
 
 
@@ -106,22 +87,22 @@ export class AdvancepaymentComponent implements OnInit {
     this.updatePayment.resolution = payStatus;
     this.updatePayment.userId = this.ck.uId;
     console.log(this.updatePayment);
-    this.client.put(`http://localhost:8080/advpay`, this.updatePayment)
-    .subscribe(
-      succ => {
-        if (payStatus === 'Accepted') {
-          this.string = 'Advanced payment has been approved';
-          this.ngOnInit();
+    this.client.put(`http://localhost:8080/advpay`, this.updatePayment, { headers: this.header })
+      .subscribe(
+        succ => {
+          if (payStatus === 'Accepted') {
+            this.string = 'Advanced payment has been approved';
+            this.ngOnInit();
+          }
+          if (payStatus === 'Declined') {
+            this.string = 'Advanced payment has been denied';
+            this.ngOnInit();
+          }
+        },
+        err => {
+          alert('failed to update status');
         }
-        if (payStatus === 'Declined') {
-          this.string = 'Advanced payment has been denied';
-          this.ngOnInit();
-        }
-      },
-      err => {
-        alert('failed to update status');
-      }
-    );
+      );
   }
 
 }

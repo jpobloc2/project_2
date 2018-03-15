@@ -33,10 +33,9 @@ public class UsersService implements UsersServiceInterface {
 		as.validateManager(submitter);
 		UserRole tmp = roleRepo.findByUserRole("Employee");
 		u.setRole(tmp);
-
+		u.setEmployer(submitter);
 		// Set userId to 0 so that it creates a new user rather than updating
-		u.setUserId(0);
-		
+		u.setUserId(0);		
 		String to = u.getUserEmail();
 		emailNewUser(to);
 		return usersRepo.save(u);

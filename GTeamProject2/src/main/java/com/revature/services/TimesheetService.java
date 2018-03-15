@@ -4,11 +4,12 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.Set;
 
+import javax.security.sasl.AuthenticationException;
+import javax.transaction.Transactional;
 
 import javax.transaction.Transactional;
 
 import javax.security.sasl.AuthenticationException;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -77,7 +78,7 @@ public class TimesheetService implements TimesheetServiceInterface {
 
 		}
 		return ret;
-		
+
 	}
 
 	@Override

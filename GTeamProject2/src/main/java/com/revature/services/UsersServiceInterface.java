@@ -24,4 +24,6 @@ public interface UsersServiceInterface {
 
 	Users findById(int id);
 
+	Users changeUser(Users u, String token) throws AuthenticationException;
+
 }

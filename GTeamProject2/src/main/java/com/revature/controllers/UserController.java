@@ -2,23 +2,17 @@ package com.revature.controllers;
 
 
 import java.util.List;
-
 import java.util.Objects;
 
 import javax.security.sasl.AuthenticationException;
-import javax.servlet.http.HttpServletRequest;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,12 +25,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.revature.entities.JwtUser;
 import com.revature.entities.LoginCredentials;
 import com.revature.entities.Users;
 import com.revature.rest.JwtAuthenticationRequest;
 import com.revature.rest.JwtAuthenticationResponse;
-import com.revature.services.AuthenticationService;
 import com.revature.services.UsersServiceInterface;
 import com.revature.util.JwtTokenUtil;
 import com.revature.views.View;
@@ -90,15 +82,15 @@ public class UserController {
 		}
   }
   
-//  @PostMapping("new")
-//	@JsonView(View.UserInfo.class)
-//	public ResponseEntity<Users> createNew(@RequestBody Users u, @RequestHeader(value="xtoken") String token) {
-//		try {
-//			return new ResponseEntity<Users>(us.createNew(u, token), HttpStatus.OK);
-//		} catch (AuthenticationException e) {
-//			return new ResponseEntity<Users>(HttpStatus.UNAUTHORIZED);
-//		}
-//  }
+  @PostMapping("change")
+	@JsonView(View.UserInfo.class)
+	public ResponseEntity<Users> changeUser(@RequestBody Users u, @RequestHeader(value="xtoken") String token) {
+		try {
+			return new ResponseEntity<Users>(us.changeUser(u, token), HttpStatus.OK);
+		} catch (AuthenticationException e) {
+			return new ResponseEntity<Users>(HttpStatus.UNAUTHORIZED);
+		}
+  }
 
 	@PostMapping
 	@JsonView(View.UserInfo.class)

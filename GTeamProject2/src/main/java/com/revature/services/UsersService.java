@@ -1,14 +1,13 @@
 package com.revature.services;
 
 
+import java.util.List;
 import java.util.Random;
 
-
-import java.util.List;
 import javax.security.sasl.AuthenticationException;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.revature.entities.UserRole;
@@ -25,6 +24,8 @@ public class UsersService implements UsersServiceInterface {
 	private RoleRepo roleRepo;
 	@Autowired
 	private AuthenticationService as;
+	@Autowired
+	private PasswordEncoder pe;
 
 	@Override
 	public Users createNew(Users u, String token) throws AuthenticationException {
@@ -36,6 +37,7 @@ public class UsersService implements UsersServiceInterface {
 		u.setEmployer(submitter);
 		// Set userId to 0 so that it creates a new user rather than updating
 		u.setUserId(0);
+		u.setPassword(pe.encode(u.getPassword()));
 		return usersRepo.save(u);
 
 	}
@@ -55,7 +57,7 @@ public class UsersService implements UsersServiceInterface {
 	@Override
 	public Users login(String username, String password) {
 		Users u = usersRepo.findByUsername(username);
-		if (u.getPassword().equals(password)) {
+		if (pe.matches(password, u.getPassword())) {
 			return u;
 		} else {
 			return null;
@@ -97,5 +99,16 @@ public class UsersService implements UsersServiceInterface {
         String newPass = sb.toString();
         return newPass;
     }
+
+	@Override
+	public Users changeUser(Users u, String token) throws AuthenticationException {
+		Users submitter = as.validateToken(token);
+		submitter.setUserEmail(u.getUserEmail());
+		submitter.setFirstName(u.getFirstName());
+		submitter.setLastName(u.getLastName());
+		submitter.setUsername(u.getUsername());
+		submitter.setPassword(u.getPassword());
+		return usersRepo.save(submitter);
+	}
 }
 

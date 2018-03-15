@@ -51,13 +51,23 @@ public class UserController {
 
     @GetMapping("forgotPass/{username}")
     public ResponseEntity<String> forgotPass(@PathVariable String username) {
-    	try{
-    		us.forgotPass(username);
-    		return new ResponseEntity<>(HttpStatus.OK);
-    	} catch(Exception e) {
-    		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-    	}
+    		try{
+    			us.forgotPass(username);
+    			return new ResponseEntity<>(HttpStatus.OK);
+    		} catch(Exception e) {
+    			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    		}
         	
+    }
+    
+    @PutMapping("emailAdmin")
+    public ResponseEntity<String> emailAdmin(@RequestBody String to, String subject, String message) {
+    		try{
+    			us.emailAdmin(to, subject, message);
+    			return new ResponseEntity<>(HttpStatus.OK);
+    		} catch(Exception e) {
+    			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    		}
     }
 
 	@PutMapping("changePass")

@@ -17,6 +17,7 @@ public interface AdvPayServiceInterface {
 	AdvancePayment resolve(int tsid, String resolution, String token) throws AuthenticationException, Exception;
 
 	Set<AdvancePayment> findByuserid(String token) throws AuthenticationException;
-
+	
+	void emailAPConfirm(String to);
 
 }

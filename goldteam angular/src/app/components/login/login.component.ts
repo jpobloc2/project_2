@@ -4,6 +4,7 @@ import { Http } from '@angular/http';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -17,6 +18,7 @@ export class LoginComponent implements OnInit {
   };
 
   user: any = [];
+  token: any;
 
   ck: any = {
     uId: null,
@@ -30,16 +32,20 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.client.post('http://localhost:8080/users', this.credentials,
+    this.client.post('http://localhost:8080/users/login', this.credentials,
       )
       .subscribe(
         (succ: any) => {
           alert(this.credentials.username +  ` has logged in`);
-          this.user = succ;
-          this.ck.uId = succ.userId;
-          this.ck.firstName = succ.firstName;
-          this.ck.roleId = succ.role.userRoleId;
+          // console.log(succ);
+          // console.log(succ.token);
+          this.token = succ.token;
+          this.user = succ.user;
+          this.ck.uId = succ.user.userId;
+          this.ck.firstName = succ.user.firstName;
+          this.ck.roleId = succ.user.role.userRoleId;
           this.cookie.putObject('user', this.ck);
+          localStorage.setItem('token', this.token);
           this.router.navigateByUrl('home');
         },
         (err) => {

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Reimbursement } from '../../beans/reimbursement';
 import { ReimburseService } from '../../services/reimburse.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
 
 @Component({
@@ -10,6 +10,8 @@ import { CookieService } from 'angular2-cookie/services/cookies.service';
   styleUrls: ['./all-reimbs.component.css']
 })
 export class AllReimbsComponent implements OnInit {
+
+  header = new HttpHeaders({xtoken: `${localStorage.getItem('token')}`});
 
 
   reimbs: any = [];
@@ -20,7 +22,7 @@ export class AllReimbsComponent implements OnInit {
     this.ck = this.cookie.getObject('user');
     console.log(this.ck.roleId);
     if (this.ck.roleId === 0  ) {
-      this.client.get(`http://localhost:8080/reimb/${this.ck.uId}`)
+      this.client.get(`http://localhost:8080/reimb/`, {headers: this.header})
         .subscribe(
           (succ: Array<Reimbursement>) => {
             this.reimbs = succ;

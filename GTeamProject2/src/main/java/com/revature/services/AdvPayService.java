@@ -69,7 +69,6 @@ public class AdvPayService implements AdvPayServiceInterface {
 		}
 	}
 
-	}
 
 	@Override
 	public AdvancePayment resolve(int tsid, String resolution, String token) throws AuthenticationException, Exception {

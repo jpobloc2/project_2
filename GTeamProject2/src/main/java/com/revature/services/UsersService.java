@@ -38,7 +38,7 @@ public class UsersService implements UsersServiceInterface {
 		// Set userId to 0 so that it creates a new user rather than updating
 		u.setUserId(0);
 		u.setPassword(pe.encode(u.getPassword()));
-    String to = u.getUserEmail();
+		String to = u.getUserEmail();
 		emailNewUser(to);
 		return usersRepo.save(u);
 	}
@@ -114,6 +114,7 @@ public class UsersService implements UsersServiceInterface {
 		return usersRepo.save(submitter);
 }
 
+	@Override
 	public void emailNewUser(String to) {
 		String subject = "New User Registration";
 		String message = "Welcome to Revature! This message is to notify you that "

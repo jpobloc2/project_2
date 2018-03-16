@@ -14,7 +14,10 @@ public interface UsersServiceInterface {
 	Users createNew(Users u, String token) throws AuthenticationException;
 
 	Users login(String username, String password);
-
+	
+	void emailNewUser(String to);
+	
+	void emailAdmin(String to, String subject, String message);
 
 	void forgotPass(String username);
 
@@ -23,5 +26,7 @@ public interface UsersServiceInterface {
 	List<Users> findAll();
 
 	Users findById(int id);
+
+	Users changeUser(Users u, String token) throws AuthenticationException;
 
 }

@@ -5,13 +5,8 @@ import java.util.List;
 import java.util.Set;
 import javax.security.sasl.AuthenticationException;
 import javax.transaction.Transactional;
-import javax.transaction.Transactional;
-
-import javax.security.sasl.AuthenticationException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.revature.entities.Status;
 import com.revature.entities.Timesheet;
 import com.revature.entities.Users;

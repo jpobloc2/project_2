@@ -27,18 +27,25 @@
         <a class="nav-link dropdown-toggle" id="dropdownBasic1" ngbDropdownToggle>Reimbursement Tickets</a>
         <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
           <button class="dropdown-item" routerLink="/reimbs">View Reimbursements</button>
-          <button class="dropdown-item" routerLink="/new-reimbursement" >Create Reimbursement Ticket</button>
+          <button class="dropdown-item" routerLink="/new-reimbursement">Create Reimbursement Ticket</button>
         </div>
       </li>
       <li class="nav-item mr-sm-2">
-        
+
+        <ul class="navbar-nav mr-auto" style="float:right!important; padding-top:10px;">
+          <ul class="navbar-nav mr-auto" *ngIf="ck.roleId === 1">
+            <a class="nav-link logg" routerLink="/manager">Manager Console</a>
+          </ul>
+          <ul class="navbar-nav mr-auto" >
+              <a class="nav-link logg" routerLink="/account-info">Account Settings</a>
+            </ul>
+          <ul class="navbar-nav mr-auto">
+            <a class="nav-link logg" routerLink="/login">Log Out</a>
+          </ul>
+
+        </ul>
       </li>
     </ul>
-    <ul class="navbar-nav mr-auto" style="float:right!important; padding-top:10px;">
-      <a class="nav-link logg" routerLink="/login">Log Out</a>
-    </ul>
-    <ul class="navbar-nav mr-auto" *ngIf="ck.roleId === 1" style="float:right!important; padding-right:75px; padding-top:10px;">
-        <a class="nav-link logg" routerLink="/manager">Manager Console</a>
-      </ul>
+
   </div>
 </nav>

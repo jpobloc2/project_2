@@ -15,6 +15,7 @@ import { NewTimesheetComponent } from './components/new-timesheet/new-timesheet.
 import { AdvancepaymentComponent } from './components/advancepayment/advancepayment.component';
 import { ManagerComponent } from './components/manager/manager.component';
 import { ViewUserComponent } from './components/view-user/view-user.component';
+import { ViewMeComponent } from './components/view-me/view-me.component';
 
 export const appRoutes: Routes = [
   {
@@ -35,6 +36,10 @@ export const appRoutes: Routes = [
   {
     path: 'view-user',
     component: ViewUserComponent
+  },
+  {
+    path: 'account-info',
+    component: ViewMeComponent
   },
   {
     path: 'timesheet',

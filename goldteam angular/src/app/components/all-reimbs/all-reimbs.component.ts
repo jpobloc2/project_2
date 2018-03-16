@@ -11,44 +11,32 @@ import { CookieService } from 'angular2-cookie/services/cookies.service';
 })
 export class AllReimbsComponent implements OnInit {
 
-  header = new HttpHeaders({xtoken: `${localStorage.getItem('token')}`});
+  // header = new HttpHeaders({ xtoken: `${localStorage.getItem('token')}` });
 
 
   reimbs: any = [];
-  private ck;
 
-  constructor(private reimbService: ReimburseService, private client: HttpClient, private cookie: CookieService) { }
+  constructor(private reimbService: ReimburseService) { }
   ngOnInit() {
-    this.ck = this.cookie.getObject('user');
-    console.log(this.ck.roleId);
-    if (this.ck.roleId === 0  ) {
-      this.client.get(`http://localhost:8080/reimb/`, {headers: this.header})
-        .subscribe(
-          (succ: Array<Reimbursement>) => {
-            this.reimbs = succ;
-            console.log(succ);
-            return this.reimbs;
-          },
-          err => {
-            alert('failed to retrieve reimbursements');
-          }
-
-        );
-    } else {
-      this.client.get('http://localhost:8080/reimb/all')
-        .subscribe(
-          (succ: Array<Reimbursement>) => {
-            this.reimbs = succ;
-            console.log(succ);
-            return this.reimbs;
-          },
-          err => {
-            alert('failed to retrieve reimbursements');
-          }
-
-        );
-
+    this.reimbs = this.reimbService.reimbs;
     }
   }
 
-}
+
+    // this.client.get(`http://localhost:8080/reimb/`, { headers: this.header })
+    //   .subscribe(
+    //     (succ: Array<Reimbursement>) => {
+    //       this.reimbs = succ;
+    //       console.log(succ);
+    //       return this.reimbs;
+    //     },
+    //     err => {
+    //       alert('failed to retrieve reimbursements');
+    //     }
+
+    //   );
+
+
+
+
+

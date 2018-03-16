@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
 
 import { Router } from '@angular/router';
+import { TimesheetService } from '../../services/timesheet.service';
 
 
 @Component({
@@ -10,9 +11,9 @@ import { Router } from '@angular/router';
   templateUrl: './timesheets.component.html',
   styleUrls: ['./timesheets.component.css']
 })
-export class TimesheetsComponent implements OnInit {
+export class TimesheetsComponent implements OnInit, OnDestroy {
   header = new HttpHeaders({xtoken: `${localStorage.getItem('token')}`});
-  timesheets: any = [];
+   timesheets = [];
 
 
   string = '';
@@ -27,22 +28,19 @@ export class TimesheetsComponent implements OnInit {
 
   private ck;
 
-  constructor(private client: HttpClient, private cookie: CookieService, private router: Router) { }
+  constructor(private client: HttpClient, private cookie: CookieService, private router: Router, private sheetService: TimesheetService) { }
+
+
 
   ngOnInit() {
+    this.sheetService.obv.subscribe((data => {
+      this.timesheets = data;
+    }));
     this.ck = this.cookie.getObject('user');
-    console.log(this.ck.roleId);
-    this.client.get('http://localhost:8080/timesheet/', {headers: this.header})
-    .subscribe(
-      succ => {
-        this.timesheets = succ;
-        console.log(succ);
-        return this.timesheets;
-      }, err => {
-        alert('failed to retrieve all timesheets');
-      }
+    this.sheetService.getSheets();
+  }
 
-    );
+  ngOnDestroy() {
   }
 
   updateStatus(sheetId: number, sheetStatus: string) {

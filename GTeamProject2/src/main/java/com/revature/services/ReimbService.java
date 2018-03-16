@@ -4,10 +4,8 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.Set;
 
-
-import javax.transaction.Transactional;
 import javax.security.sasl.AuthenticationException;
-
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +16,7 @@ import com.revature.entities.Users;
 import com.revature.repo.ReimbRepo;
 import com.revature.repo.StatusRepo;
 import com.revature.repo.UsersRepo;
+import com.revature.util.EmailUtil;
 
 @Service
 public class ReimbService implements ReimbServiceInterface {
@@ -60,11 +59,12 @@ public class ReimbService implements ReimbServiceInterface {
 			r.setReimbStatus(s);
 			r.setReimbAuthor(u);
 			r.setReimbSubmitted(new Timestamp(System.currentTimeMillis()));
+			String to = u.getUserEmail();
+			emailReimbConfirm(to);
 			return reimbRepo.save(r);
 		} else {
 			return null;
 		}
-
 	}
 
 	@Override
@@ -90,6 +90,16 @@ public class ReimbService implements ReimbServiceInterface {
 	public boolean validateManagerDomain(int tsid, Users u) {
 		Users user = reimbRepo.findById(tsid).get().getReimbAuthor();
 		return u.getSubordinates().contains(user);
+	}
+
+	@Override
+	public void emailReimbConfirm(String to) {
+		String subject = "Request Submitted";
+		String message = "Your request for an expense reimbursement has been recieved. Please allow 7 to 10 "
+				+ "business days for your request to be processed. Have a great day!" + "\n"
+				+ "Revature" + "\n" + "'Code Like a Boss!'";
+		
+		new EmailUtil().sendMessage(to, subject, message);
 	}
 
 }

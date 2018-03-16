@@ -17,4 +17,6 @@ public interface AdvPayServiceInterface {
 
 	Set<AdvancePayment> findByuserid(String token) throws AuthenticationException;
 
+	void emailAPConfirm(String to);
+
 }

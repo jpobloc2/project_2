@@ -14,7 +14,6 @@ export class NavComponent implements OnInit {
 
   ngOnInit() {
     this.ck = this.cookie.getObject('user');
-    console.log(this.ck);
   }
 
 }

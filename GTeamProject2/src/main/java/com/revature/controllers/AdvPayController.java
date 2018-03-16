@@ -1,6 +1,5 @@
 package com.revature.controllers;
 
-import java.sql.Timestamp;
 import java.util.List;
 import java.util.Set;
 
@@ -39,31 +38,33 @@ public class AdvPayController {
 
 	@JsonView(View.Summary.class)
 	@PostMapping(path = "/submit")
-	public ResponseEntity<AdvancePayment> submitReimbursement(@RequestBody AdvancePayment ap, @RequestHeader(value="xtoken") String token) {
+	public ResponseEntity<AdvancePayment> submitReimbursement(@RequestBody AdvancePayment ap,
+			@RequestHeader(value = "xtoken") String token) {
 		try {
 			return new ResponseEntity<AdvancePayment>(aps.submitAdvPay(ap, token), HttpStatus.OK);
 		} catch (AuthenticationException e) {
 			return new ResponseEntity<AdvancePayment>(HttpStatus.UNAUTHORIZED);
 		}
 	}
-	
 
 	@PutMapping
 	@JsonView(View.Summary.class)
-	public ResponseEntity<AdvancePayment> resolve(@RequestBody ResolveCredentials rc, @RequestHeader(value="xtoken") String token) {
+	public ResponseEntity<AdvancePayment> resolve(@RequestBody ResolveCredentials rc,
+			@RequestHeader(value = "xtoken") String token) {
 		System.out.println(rc);
 		try {
-			return new ResponseEntity<AdvancePayment>(aps.resolve(rc.getItemId(), rc.getResolution(), token), HttpStatus.OK);
+			return new ResponseEntity<AdvancePayment>(aps.resolve(rc.getItemId(), rc.getResolution(), token),
+					HttpStatus.OK);
 		} catch (AuthenticationException e) {
-			return new ResponseEntity<AdvancePayment>(HttpStatus.UNAUTHORIZED); 
+			return new ResponseEntity<AdvancePayment>(HttpStatus.UNAUTHORIZED);
 		} catch (Exception e) {
 			return new ResponseEntity<AdvancePayment>(HttpStatus.UNAUTHORIZED);
-    }
+		}
 	}
 
 	@JsonView(View.Summary.class)
 	@GetMapping
-	public ResponseEntity<Set<AdvancePayment>> findByuserid(@RequestHeader(value="xtoken") String token) {
+	public ResponseEntity<Set<AdvancePayment>> findByuserid(@RequestHeader(value = "xtoken") String token) {
 		try {
 			return new ResponseEntity<Set<AdvancePayment>>(aps.findByuserid(token), HttpStatus.OK);
 		} catch (AuthenticationException e) {

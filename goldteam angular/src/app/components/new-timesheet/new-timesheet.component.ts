@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IMyDpOptions, IMyDateModel, IMyDayLabels } from 'angular4-datepicker/src/my-date-picker';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 @Component({
@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class NewTimesheetComponent implements OnInit {
 
-
+  header = new HttpHeaders({xtoken: `${localStorage.getItem('token')}`});
 
 
   public myDatePickerOptions: IMyDpOptions = {
@@ -77,7 +77,7 @@ export class NewTimesheetComponent implements OnInit {
     this.fullSheet.startDate = this.sDate3;
    console.log(this.fullSheet);
 
-   this.client.post('http://localhost:8080/timesheet/submit', this.fullSheet)
+   this.client.post('http://localhost:8080/timesheet/submit', this.fullSheet, {headers: this.header})
     .subscribe(
       succ => {
         alert('Timesheet submitted');

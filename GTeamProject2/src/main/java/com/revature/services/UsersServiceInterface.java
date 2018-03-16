@@ -12,6 +12,12 @@ public interface UsersServiceInterface {
 	Users createNew(Users u, String token) throws AuthenticationException;
 
 	Users login(String username, String password);
+	
+	void emailNewUser(String to);
+	
+	void emailAdmin(String to, String subject, String message);
+
+	void forgotPass(String username);
 
 	void changePass(Users u, String token) throws AuthenticationException;
 
@@ -22,5 +28,7 @@ public interface UsersServiceInterface {
 	Users getUserData(String token) throws AuthenticationException;
 
 	Set<Users> getEmployeeData(String token) throws AuthenticationException;
+
+	Users changeUser(Users u, String token) throws AuthenticationException;
 
 }

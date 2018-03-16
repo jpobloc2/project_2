@@ -16,5 +16,7 @@ public interface ReimbServiceInterface {
 	Reimbursement submitReimb(Reimbursement r, String token) throws AuthenticationException;
 
 	Reimbursement resolve(int tsid, String resolution, String token) throws AuthenticationException, Exception;
+	
+	void emailReimbConfirm(String to);
 
 }

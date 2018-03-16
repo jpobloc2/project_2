@@ -27,22 +27,9 @@ export class PendingReimbsComponent implements OnInit {
 
 
   constructor(private reimbService: ReimburseService, private client: HttpClient, private router: Router, private cookie: CookieService) { }
-
   ngOnInit() {
     this.ck = this.cookie.getObject('user');
-    console.log(this.ck.roleId);
-      this.client.get(`http://localhost:8080/reimb/`, {headers: this.header})
-        .subscribe(
-          (succ: Array<Reimbursement>) => {
-            this.reimbs = succ;
-            console.log(succ);
-            return this.reimbs;
-          },
-          err => {
-            alert('failed to retrieve reimbursements');
-          }
-
-        );
+    this.reimbs = this.reimbService.reimbs;
 
     }
 

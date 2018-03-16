@@ -33,6 +33,9 @@ import { AdvancepaymentComponent } from './components/advancepayment/advancepaym
 import { ManagerComponent } from './components/manager/manager.component';
 import { ViewUserComponent } from './components/view-user/view-user.component';
 import { ForgotPassComponent } from './components/forgot-pass/forgot-pass.component';
+import { TimesheetService } from './services/timesheet.service';
+import { AdvpaymentService } from './services/advpayment.service';
+import { ViewMeComponent } from './components/view-me/view-me.component';
 
 
 @NgModule({
@@ -65,11 +68,14 @@ import { ForgotPassComponent } from './components/forgot-pass/forgot-pass.compon
     AdvancepaymentComponent,
     ManagerComponent,
     ViewUserComponent,
-    ForgotPassComponent
+    ForgotPassComponent,
+    ViewMeComponent
   ],
   providers: [
     ReimburseService,
     CookieService,
+    TimesheetService,
+    AdvpaymentService,
   LoggedInGuard],
   bootstrap: [AppComponent,
   NewTimesheetComponent]

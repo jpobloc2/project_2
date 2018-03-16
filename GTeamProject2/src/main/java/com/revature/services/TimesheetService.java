@@ -4,14 +4,8 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.Set;
 
-<<<<<<< HEAD
 import javax.security.sasl.AuthenticationException;
 import javax.transaction.Transactional;
-=======
-import javax.transaction.Transactional;
-
-import javax.security.sasl.AuthenticationException;
->>>>>>> e8e898e9f170a6f829a57d87aac2ff92b22638bb
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,10 +40,6 @@ public class TimesheetService implements TimesheetServiceInterface {
 	@Transactional
 	public Timesheet submitTimesheet(Timesheet ts, String token) throws AuthenticationException {
 		Users u = asi.validateToken(token);
-<<<<<<< HEAD
-
-=======
->>>>>>> e8e898e9f170a6f829a57d87aac2ff92b22638bb
 		Status s = statusRepo.findByStatus(ts.getStatus().getStatus());
 		ts.setTimesheetid(0);
 		ts.setStatus(s);

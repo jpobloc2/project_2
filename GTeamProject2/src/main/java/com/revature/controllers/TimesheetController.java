@@ -40,8 +40,6 @@ public class TimesheetController {
 		return tss.findAll();
 	}
 
-	
-
 	@PostMapping(path = "submit")
 	@JsonView(View.Summary.class)
 	public ResponseEntity<Timesheet> submitTimesheet(@RequestBody Timesheet ts, @RequestHeader(value="xtoken") String token) {
@@ -50,10 +48,8 @@ public class TimesheetController {
 		} catch (AuthenticationException e) {
 			return new ResponseEntity<Timesheet>(HttpStatus.UNAUTHORIZED);
 		}
-  }
+	}
   
-
-
 	@JsonView(View.Summary.class)
 	@GetMapping
 	public ResponseEntity<Set<Timesheet>> findByuserid(@RequestHeader(value="xtoken") String token) {

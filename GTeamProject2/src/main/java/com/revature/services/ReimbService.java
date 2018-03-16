@@ -55,8 +55,8 @@ public class ReimbService implements ReimbServiceInterface {
 		Users u = as.validateToken(token);
 		if(as.validateManager(u)) {
       Status s = statusRepo.findByStatus(r.getReimbStatus().getStatus());
-		  r.setReimbId(0);
-		  r.setReimbStatus(s);
+			r.setReimbId(0);
+			r.setReimbStatus(s);
 			r.setReimbAuthor(u);
 			r.setReimbSubmitted(new Timestamp(System.currentTimeMillis()));
 			String to = u.getUserEmail();

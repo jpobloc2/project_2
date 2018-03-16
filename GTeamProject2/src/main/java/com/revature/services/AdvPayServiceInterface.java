@@ -10,14 +10,13 @@ import com.revature.entities.AdvancePayment;
 public interface AdvPayServiceInterface {
 
 	List<AdvancePayment> findAll();
-	
-	AdvancePayment submitAdvPay(AdvancePayment ap, String token) throws AuthenticationException;
 
+	AdvancePayment submitAdvPay(AdvancePayment ap, String token) throws AuthenticationException;
 
 	AdvancePayment resolve(int tsid, String resolution, String token) throws AuthenticationException, Exception;
 
 	Set<AdvancePayment> findByuserid(String token) throws AuthenticationException;
-	
+
 	void emailAPConfirm(String to);
 
 }

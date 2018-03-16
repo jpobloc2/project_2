@@ -1,7 +1,8 @@
 package com.revature.services;
 
-
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.Random;
 
 import javax.security.sasl.AuthenticationException;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.revature.entities.Timesheet;
 import com.revature.entities.UserRole;
 import com.revature.entities.Users;
 import com.revature.repo.RoleRepo;
@@ -43,18 +45,13 @@ public class UsersService implements UsersServiceInterface {
 		return usersRepo.save(u);
 	}
 
-  @Override
-	public boolean changePass(Users u) {
-		Users tmp = usersRepo.findById(u.getUserId()).get();
+	@Override
+	public void changePass(Users u, String token) throws AuthenticationException {
+		Users tmp = as.validateToken(token);
 		tmp.setPassword(u.getPassword());
-		Users success = usersRepo.save(tmp);
-		if (success != null) {
-			return true;
-		} else {
-			return false;
-		}
-  }
-  
+		usersRepo.save(tmp);
+	}
+
 	@Override
 	public Users login(String username, String password) {
 		Users u = usersRepo.findByUsername(username);
@@ -126,6 +123,30 @@ public class UsersService implements UsersServiceInterface {
 	}
 
 	@Override
+	public Users getUserData(String token) throws AuthenticationException {
+		Users u = as.validateToken(token);
+		return u;
+	}
+
+	@Override
+	public Set<Users> getEmployeeData(String token) throws AuthenticationException {
+		Users u = as.validateToken(token);
+		if(validateManager(u) == true) {
+			return u.getSubordinates();
+		} else {
+			throw new AuthenticationException();
+		}
+	}
+	
+	public boolean validateManager(Users u) throws AuthenticationException {
+		boolean b = (u.getRole().equals("Manager"));
+		if(!b) {
+			throw new AuthenticationException();
+		}
+		return b;
+  }
+  
+  @Override
 	public void emailAdmin(String from, String subject, String message) {
 		new EmailUtil().recieveMessage(from, subject, message);
 	}

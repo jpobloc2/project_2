@@ -81,7 +81,7 @@ public class UsersService implements UsersServiceInterface {
 				+ ". Please change it immediately after signing in.";
 		Users u = usersRepo.findByUsername(username);
 		String to = u.getUserEmail();
-		u.setPassword(newPassword);
+		u.setPassword(pe.encode(newPassword));
 		usersRepo.save(u);
 		new EmailUtil().sendMessage(to, subject, message);
 	}

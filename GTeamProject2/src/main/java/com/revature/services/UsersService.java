@@ -105,7 +105,6 @@ public class UsersService implements UsersServiceInterface {
 		submitter.setFirstName(u.getFirstName());
 		submitter.setLastName(u.getLastName());
 		submitter.setUsername(u.getUsername());
-		submitter.setPassword(pe.encode(u.getPassword()));
 		submitter.setWage(u.getWage());
 		return usersRepo.save(submitter);
 	}

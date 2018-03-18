@@ -37,7 +37,7 @@ export class ViewUserComponent implements OnInit {
 
   update(user: any) {
     console.log('updating user');
-     this.userService.updateUser(this.user);
+     this.userService.updateSub(this.user);
   }
 
 }

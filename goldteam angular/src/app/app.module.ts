@@ -38,6 +38,7 @@ import { AdvpaymentService } from './services/advpayment.service';
 import { ViewMeComponent } from './components/view-me/view-me.component';
 import { UserServiceService } from './services/user-service.service';
 import { PassResetComponent } from './components/pass-reset/pass-reset.component';
+import { ManagerGuard } from './guard/manager.guard';
 
 
 @NgModule({
@@ -80,7 +81,8 @@ import { PassResetComponent } from './components/pass-reset/pass-reset.component
     TimesheetService,
     AdvpaymentService,
     UserServiceService,
-  LoggedInGuard],
+  LoggedInGuard,
+ManagerGuard],
   bootstrap: [AppComponent,
   NewTimesheetComponent]
 })

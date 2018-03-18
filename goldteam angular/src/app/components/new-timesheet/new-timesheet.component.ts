@@ -97,6 +97,7 @@ export class NewTimesheetComponent implements OnInit {
         succ => {
           alert('Timesheet submitted');
           console.log(succ);
+          this.router.navigateByUrl('/timesheet');
         },
         err => {
           alert('Submission failed');

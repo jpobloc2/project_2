@@ -103,7 +103,7 @@ public class UsersService implements UsersServiceInterface {
 		submitter.setFirstName(u.getFirstName());
 		submitter.setLastName(u.getLastName());
 		submitter.setUsername(u.getUsername());
-		submitter.setPassword(u.getPassword());
+		submitter.setPassword(pe.encode(u.getPassword()));
 		submitter.setWage(u.getWage());
 		return usersRepo.save(submitter);
 	}
@@ -145,6 +145,6 @@ public class UsersService implements UsersServiceInterface {
 
 	@Override
 	public void emailAdmin(String from, String subject, String message) {
-		new EmailUtil().recieveMessage(from, subject, message);
+		new EmailUtil().sendMessage(from, subject, message);
 	}
 }

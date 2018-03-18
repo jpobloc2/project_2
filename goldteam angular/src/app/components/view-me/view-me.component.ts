@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
+import { UserServiceService } from '../../services/user-service.service';
 
 @Component({
   selector: 'app-view-me',
@@ -9,11 +10,15 @@ import { CookieService } from 'angular2-cookie/services/cookies.service';
 })
 export class ViewMeComponent implements OnInit {
 
-  ck;
+  private user = UserServiceService.obv;
 
-  constructor(private client: HttpClient, private cookie: CookieService) { }
+  constructor(private userService: UserServiceService, private cookie: CookieService) { }
 
   ngOnInit() {
+    this.userService.getMyInfo();
+    this.userService.obv.subscribe((data => {
+      this.user = data;
+    }));
   }
 
 }

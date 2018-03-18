@@ -36,6 +36,7 @@ import { ForgotPassComponent } from './components/forgot-pass/forgot-pass.compon
 import { TimesheetService } from './services/timesheet.service';
 import { AdvpaymentService } from './services/advpayment.service';
 import { ViewMeComponent } from './components/view-me/view-me.component';
+import { UserServiceService } from './services/user-service.service';
 
 
 @NgModule({
@@ -76,6 +77,7 @@ import { ViewMeComponent } from './components/view-me/view-me.component';
     CookieService,
     TimesheetService,
     AdvpaymentService,
+    UserServiceService,
   LoggedInGuard],
   bootstrap: [AppComponent,
   NewTimesheetComponent]

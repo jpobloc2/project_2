@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Reimbursement } from '../beans/reimbursement';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { CookieService } from 'angular2-cookie/services/cookies.service';
 @Injectable()
 export class ReimburseService {
 
@@ -8,8 +10,15 @@ export class ReimburseService {
 
   reimbs: any = [];
 
+  updateReimb = {
+    itemId: 0,
+    resolution: '',
+    userId: 0
 
-  constructor(private client: HttpClient) { }
+  };
+  ck;
+
+  constructor(private client: HttpClient, private router: Router, private cookie: CookieService) { }
 
   getReimbs(): any {
     this.header = new HttpHeaders({xtoken: `${localStorage.getItem('token')}`});
@@ -27,48 +36,37 @@ export class ReimburseService {
 
     );
 }
-// getPending(): any {
-//   this.client.get('http://localhost:8080/Reimbursement-System/reimbursement/pending', { withCredentials: true })
-//   .subscribe(
-//     (succ: Array<Reimbursement>) => {
-//       this.reimbs = succ;
-//       console.log(succ);
-//       return this.reimbs;
-//     },
-//     err => {
-//       alert('failed to retrieve pending reimbursements');
-//     }
+  submitReimb(reimbursement: any) {
+    console.log('submitting reimbursement from service, which is ');
+    console.log(reimbursement);
+    this.header = new HttpHeaders({xtoken: `${localStorage.getItem('token')}`});
+    this.client.post('http://localhost:8080/reimb/submit', reimbursement, {headers: this.header})
+    .subscribe(
+      (succ) => {
+        alert('submit successful');
+        console.log(succ);
+        this.router.navigateByUrl('reimbs');
+      },
+      (err) => {
+        alert('failed to submit reimbursement');
+      }
 
-//   );
-// }
 
-// getApproved(): any {
-//   this.client.get('http://localhost:8080/Reimbursement-System/reimbursement/approved', { withCredentials: true })
-//   .subscribe(
-//     (succ: Array<Reimbursement>) => {
-//       this.reimbs = succ;
-//       console.log(succ);
-//       return this.reimbs;
-//     },
-//     err => {
-//       alert('failed to retrieve approved reimbursements');
-//     }
+    );
+  }
 
-//   );
-// }
+  /* updateReimbursement(reimbursement: any) {
+    console.log('updating reimbursement from service');
+    this.header = new HttpHeaders({xtoken: `${localStorage.getItem('token')}`});
+    this.client.put(`http://localhost:8080/reimb`, this.updateReimb, {headers: this.header})
+    .subscribe(
+      succ => {
+        alert('update successful');
+      },
+      err => {
+        alert('failed to update status');
+      }
+    );
+  } */
 
-// getDenied(): any {
-//   this.client.get('http://localhost:8080/Reimbursement-System/reimbursement/denied', { withCredentials: true })
-//   .subscribe(
-//     (succ: Array<Reimbursement>) => {
-//       this.reimbs = succ;
-//       console.log(succ);
-//       return this.reimbs;
-//     },
-//     err => {
-//       alert('failed to retrieve denied reimbursements');
-//     }
-
-//   );
-// }
 }

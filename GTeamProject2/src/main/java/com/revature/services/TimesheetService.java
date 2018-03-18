@@ -3,10 +3,13 @@ package com.revature.services;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Set;
+
 import javax.security.sasl.AuthenticationException;
 import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.revature.entities.Status;
 import com.revature.entities.Timesheet;
 import com.revature.entities.Users;
@@ -38,18 +41,15 @@ public class TimesheetService implements TimesheetServiceInterface {
 	@Transactional
 	public Timesheet submitTimesheet(Timesheet ts, String token) throws AuthenticationException {
 		Users u = asi.validateToken(token);
-		if (asi.validateManager(u)) {
-			Status s = statusRepo.findByStatus(ts.getStatus().getStatus());
-			ts.setTimesheetid(0);
-			ts.setStatus(s);
-			ts.setAuthor(u);
-			ts.setSubmitted_date(new Timestamp(System.currentTimeMillis()));
-			String to = u.getUserEmail();
-			emailTSConfirm(to);
-			return timesheetRepo.save(ts);
-		} else {
-			return null;
-		}
+		Status s = statusRepo.findByStatus(ts.getStatus().getStatus());
+		ts.setTimesheetid(0);
+		ts.setStatus(s);
+		ts.setAuthor(u);
+		ts.setSubmitted_date(new Timestamp(System.currentTimeMillis()));
+		String to = u.getUserEmail();
+		emailTSConfirm(to);
+		return timesheetRepo.save(ts);
+
 	}
 
 	@Override
@@ -96,9 +96,9 @@ public class TimesheetService implements TimesheetServiceInterface {
 	@Override
 	public void emailTSConfirm(String to) {
 		String subject = "Time Sheet Submitted";
-		String message = "Your time sheet has been recieved. Have a great day!" + "\n"
-				+ "Revature" + "\n" + "'Code Like a Boss!'";
-		
+		String message = "Your time sheet has been recieved. Have a great day!" + "\n" + "Revature" + "\n"
+				+ "'Code Like a Boss!'";
+
 		new EmailUtil().sendMessage(to, subject, message);
 	}
 }

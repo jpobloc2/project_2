@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
+import { UserServiceService } from '../../services/user-service.service';
 
 @Component({
   selector: 'app-view-user',
@@ -12,7 +13,7 @@ export class ViewUserComponent implements OnInit {
   private userId;
   private user;
 
-  constructor(private client: HttpClient, private route: ActivatedRoute) { }
+  constructor(private client: HttpClient, private route: ActivatedRoute, private userService: UserServiceService) { }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
@@ -32,6 +33,11 @@ export class ViewUserComponent implements OnInit {
 
     );
     console.log(this.user);
+  }
+
+  update(user: any) {
+    console.log('updating user');
+     this.userService.updateUser(this.user);
   }
 
 }

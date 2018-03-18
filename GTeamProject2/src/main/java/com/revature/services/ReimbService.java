@@ -53,18 +53,14 @@ public class ReimbService implements ReimbServiceInterface {
 	@Transactional
 	public Reimbursement submitReimb(Reimbursement r, String token) throws AuthenticationException {
 		Users u = as.validateToken(token);
-		if(as.validateManager(u)) {
-      Status s = statusRepo.findByStatus(r.getReimbStatus().getStatus());
-			r.setReimbId(0);
-			r.setReimbStatus(s);
-			r.setReimbAuthor(u);
-			r.setReimbSubmitted(new Timestamp(System.currentTimeMillis()));
-			String to = u.getUserEmail();
-			emailReimbConfirm(to);
-			return reimbRepo.save(r);
-		} else {
-			return null;
-		}
+		Status s = statusRepo.findByStatus(r.getReimbStatus().getStatus());
+		r.setReimbId(0);
+		r.setReimbStatus(s);
+		r.setReimbAuthor(u);
+		r.setReimbSubmitted(new Timestamp(System.currentTimeMillis()));
+		String to = u.getUserEmail();
+		emailReimbConfirm(to);
+		return reimbRepo.save(r);
 	}
 
 	@Override
@@ -81,9 +77,11 @@ public class ReimbService implements ReimbServiceInterface {
 			System.out.println(rs);
 			ret = reimbRepo.save(rs);
 			System.out.println(ret);
+
 		} else {
 			throw new Exception();
 		}
+
 		return ret;
 	}
 
@@ -96,9 +94,9 @@ public class ReimbService implements ReimbServiceInterface {
 	public void emailReimbConfirm(String to) {
 		String subject = "Request Submitted";
 		String message = "Your request for an expense reimbursement has been recieved. Please allow 7 to 10 "
-				+ "business days for your request to be processed. Have a great day!" + "\n"
-				+ "Revature" + "\n" + "'Code Like a Boss!'";
-		
+				+ "business days for your request to be processed. Have a great day!" + "\n" + "Revature" + "\n"
+				+ "'Code Like a Boss!'";
+
 		new EmailUtil().sendMessage(to, subject, message);
 	}
 

@@ -37,6 +37,7 @@ import { TimesheetService } from './services/timesheet.service';
 import { AdvpaymentService } from './services/advpayment.service';
 import { ViewMeComponent } from './components/view-me/view-me.component';
 import { UserServiceService } from './services/user-service.service';
+import { PassResetComponent } from './components/pass-reset/pass-reset.component';
 
 
 @NgModule({
@@ -70,7 +71,8 @@ import { UserServiceService } from './services/user-service.service';
     ManagerComponent,
     ViewUserComponent,
     ForgotPassComponent,
-    ViewMeComponent
+    ViewMeComponent,
+    PassResetComponent
   ],
   providers: [
     ReimburseService,

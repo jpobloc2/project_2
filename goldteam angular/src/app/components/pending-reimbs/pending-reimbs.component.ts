@@ -42,11 +42,15 @@ export class PendingReimbsComponent implements OnInit {
       .subscribe(
         succ => {
           if (reimbStatus === 'Accepted') {
-            this.string = 'Reimbursement accepted!';
+            this.string = 'Reimbursement ' + this.updateReimb.itemId + ' accepted!';
+            this.reimbService.getReimbs();
+            this.reimbs = this.reimbService.reimbs;
             this.ngOnInit();
           }
           if (reimbStatus === 'Declined') {
-            this.string = 'Reimbursement denied!';
+            this.string = 'Reimbursement ' + this.updateReimb.itemId + ' denied!';
+            this.reimbService.getReimbs();
+            this.reimbs = this.reimbService.reimbs;
             this.ngOnInit();
           }
         },
@@ -54,7 +58,7 @@ export class PendingReimbsComponent implements OnInit {
           alert('failed to update status');
         }
       );
-
+      /*     this.reimbService.updateReimbursement(this.updateReimb); */
   }
 
 

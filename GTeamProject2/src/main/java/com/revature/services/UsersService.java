@@ -1,9 +1,8 @@
 package com.revature.services;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.Random;
+import java.util.Set;
 
 import javax.security.sasl.AuthenticationException;
 
@@ -72,15 +71,13 @@ public class UsersService implements UsersServiceInterface {
 	public Users findById(int id) {
 		return usersRepo.findByUserId(id);
 	}
-	
-	
 
 	@Override
 	// sendEmail (String to, String msg)
 	public void forgotPass(String username) {
 		String newPassword = getRandomPass();
 		String subject = "Your password has been reset.";
-		String message = "Your new temporary password is: " + newPassword 
+		String message = "Your new temporary password is: " + newPassword
 				+ ". Please change it immediately after signing in.";
 		Users u = usersRepo.findByUsername(username);
 		String to = u.getUserEmail();
@@ -88,18 +85,18 @@ public class UsersService implements UsersServiceInterface {
 		usersRepo.save(u);
 		new EmailUtil().sendMessage(to, subject, message);
 	}
-	
+
 	private String getRandomPass() {
-        String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
-        StringBuilder sb = new StringBuilder();
-        Random rnd = new Random();
-        while (sb.length() < 18) { // length of the random string.
-            int index = rnd.nextInt(36);
-            sb.append(chars.charAt(index));
-        }
-        String newPass = sb.toString();
-        return newPass;
-    }
+		String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+		StringBuilder sb = new StringBuilder();
+		Random rnd = new Random();
+		while (sb.length() < 18) { // length of the random string.
+			int index = rnd.nextInt(36);
+			sb.append(chars.charAt(index));
+		}
+		String newPass = sb.toString();
+		return newPass;
+	}
 
 	@Override
 	public Users changeUser(Users u, String token) throws AuthenticationException {
@@ -109,8 +106,9 @@ public class UsersService implements UsersServiceInterface {
 		submitter.setLastName(u.getLastName());
 		submitter.setUsername(u.getUsername());
 		submitter.setPassword(u.getPassword());
+		submitter.setWage(u.getWage());
 		return usersRepo.save(submitter);
-}
+	}
 
 	@Override
 	public void emailNewUser(String to) {
@@ -119,7 +117,7 @@ public class UsersService implements UsersServiceInterface {
 				+ "a new user account has been created on your behalf in Revature's timesheet portal. You may access your"
 				+ "account, make changes, submit timesheets, submit reimbersement request, or submit advance pay requests"
 				+ " at http://localhost:4200.";
-		
+
 		new EmailUtil().sendMessage(to, subject, message);
 	}
 
@@ -132,22 +130,22 @@ public class UsersService implements UsersServiceInterface {
 	@Override
 	public Set<Users> getEmployeeData(String token) throws AuthenticationException {
 		Users u = as.validateToken(token);
-		if(validateManager(u) == true) {
+		if (validateManager(u) == true) {
 			return u.getSubordinates();
 		} else {
 			throw new AuthenticationException();
 		}
 	}
-	
+
 	public boolean validateManager(Users u) throws AuthenticationException {
 		boolean b = (u.getRole().equals("Manager"));
-		if(!b) {
+		if (!b) {
 			throw new AuthenticationException();
 		}
 		return b;
-  }
-  
-  @Override
+	}
+
+	@Override
 	public void emailAdmin(String from, String subject, String message) {
 		new EmailUtil().recieveMessage(from, subject, message);
 	}
@@ -164,4 +162,3 @@ public class UsersService implements UsersServiceInterface {
 		eUtil.sendMessage(complaint.getComplainantAddr(), "New Complaint Registered", body);		
 	}
 }
-

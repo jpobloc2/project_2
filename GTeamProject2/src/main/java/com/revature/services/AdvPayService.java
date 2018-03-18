@@ -39,18 +39,14 @@ public class AdvPayService implements AdvPayServiceInterface {
 	@Transactional
 	public AdvancePayment submitAdvPay(AdvancePayment ap, String token) throws AuthenticationException {
 		Users u = as.validateToken(token);
-		if (as.validateManager(u)) {
-			Status s = statusRepo.findByStatus(ap.getStatus().getStatus());
-			ap.setAdvId(0);
-			ap.setStatus(s);
-			ap.setAuthor(u);
-			ap.setSubmitDate(new Timestamp(System.currentTimeMillis()));
-			String to = u.getUserEmail();
-			emailAPConfirm(to);
-			return advRepo.save(ap);
-		} else {
-			return null;
-		}
+		Status s = statusRepo.findByStatus(ap.getStatus().getStatus());
+		ap.setAdvId(0);
+		ap.setStatus(s);
+		ap.setAuthor(u);
+		ap.setSubmitDate(new Timestamp(System.currentTimeMillis()));
+		String to = u.getUserEmail();
+		emailAPConfirm(to);
+		return advRepo.save(ap);
 	}
 
 	@Override

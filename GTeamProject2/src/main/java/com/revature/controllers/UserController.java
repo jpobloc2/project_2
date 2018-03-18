@@ -40,35 +40,35 @@ import com.revature.views.View;
 public class UserController {
 	@Autowired
 	private UsersServiceInterface us;
-  @Autowired
-  private JwtTokenUtil jwtTokenUtil;
-//    @Autowired
-//    @Qualifier("jwtUserDetailsService")
-//    private UserDetailsService userDetailsService;
-  @Autowired
-  private AuthenticationManager authenticationManager;
-//    @Autowired
-//    private AuthenticationService as;
+	@Autowired
+	private JwtTokenUtil jwtTokenUtil;
+	// @Autowired
+	// @Qualifier("jwtUserDetailsService")
+	// private UserDetailsService userDetailsService;
+	@Autowired
+	private AuthenticationManager authenticationManager;
+	// @Autowired
+	// private AuthenticationService as;
 
-  @GetMapping("forgotPass/{username}")
-  public ResponseEntity<String> forgotPass(@PathVariable String username) {
-    try{
-      us.forgotPass(username);
-    	return new ResponseEntity<>(HttpStatus.OK);
-    } catch(Exception e) {
-      return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-    }    	
-  }
-    
-  @PutMapping("emailAdmin")
-  public ResponseEntity<String> emailAdmin(@RequestBody String from, String subject, String message) {
-  	try{
-  	  us.emailAdmin(from, subject, message);
-    	return new ResponseEntity<>(HttpStatus.OK);
-    } catch(Exception e) {
-      return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-    }
-  }
+	@GetMapping("forgotPass/{username}")
+	public ResponseEntity<String> forgotPass(@PathVariable String username) {
+		try {
+			us.forgotPass(username);
+			return new ResponseEntity<>(HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+	}
+
+	@PutMapping("emailAdmin")
+	public ResponseEntity<String> emailAdmin(@RequestBody String from, String subject, String message) {
+		try {
+			us.emailAdmin(from, subject, message);
+			return new ResponseEntity<>(HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+	}
 
 	@PutMapping("changePass")
 	@JsonView(View.UserInfo.class)
@@ -77,7 +77,7 @@ public class UserController {
 			return new ResponseEntity<Users>(us.createNew(u, token), HttpStatus.OK);
 		} catch (AuthenticationException e) {
 			return new ResponseEntity<Users>(HttpStatus.UNAUTHORIZED);
-		}	
+		}
 	}
 
 	@PostMapping("new")
@@ -89,41 +89,42 @@ public class UserController {
 			return new ResponseEntity<Users>(HttpStatus.UNAUTHORIZED);
 		}
 	}
-	
+
 	@GetMapping("{id}")
 	@JsonView(View.UserInfo.class)
 	public Users findById(@PathVariable int id) {
 		return us.findById(id);
 	}
+
 	@JsonView(View.Summary.class)
 	@GetMapping()
-	public ResponseEntity<Users> getUserData(@RequestHeader(value="xtoken") String token) {
+	public ResponseEntity<Users> getUserData(@RequestHeader(value = "xtoken") String token) {
 		try {
 			return new ResponseEntity<Users>(us.getUserData(token), HttpStatus.OK);
 		} catch (AuthenticationException e) {
 			return new ResponseEntity<Users>(HttpStatus.UNAUTHORIZED);
 		}
 	}
-	
+
 	@JsonView(View.Summary.class)
 	@GetMapping("employeeData")
-	public ResponseEntity<Set<Users>> getEmployeeData(@RequestHeader(value="xtoken") String token) {
+	public ResponseEntity<Set<Users>> getEmployeeData(@RequestHeader(value = "xtoken") String token) {
 		try {
 			return new ResponseEntity<Set<Users>>(us.getEmployeeData(token), HttpStatus.OK);
 		} catch (AuthenticationException e) {
 			return new ResponseEntity<Set<Users>>(HttpStatus.UNAUTHORIZED);
 		}
 	}
-  
+
 	@PostMapping("change")
 	@JsonView(View.UserInfo.class)
-	public ResponseEntity<Users> changeUser(@RequestBody Users u, @RequestHeader(value="xtoken") String token) {
+	public ResponseEntity<Users> changeUser(@RequestBody Users u, @RequestHeader(value = "xtoken") String token) {
 		try {
 			return new ResponseEntity<Users>(us.changeUser(u, token), HttpStatus.OK);
 		} catch (AuthenticationException e) {
 			return new ResponseEntity<Users>(HttpStatus.UNAUTHORIZED);
 		}
-  }
+	}
 
 	@PostMapping
 	@JsonView(View.UserInfo.class)

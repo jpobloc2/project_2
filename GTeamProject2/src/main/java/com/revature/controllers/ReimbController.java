@@ -48,7 +48,7 @@ public class ReimbController {
 	}
 
 	@JsonView(View.Summary.class)
-	@PostMapping(path = "/submit")
+	@PostMapping(path = "submit")
 	public ResponseEntity<Reimbursement> submitReimbursement(@RequestBody Reimbursement r,
 			@RequestHeader(value = "xtoken") String token) {
 		try {

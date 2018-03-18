@@ -11,17 +11,18 @@ import { Router } from '@angular/router';
 })
 export class NewTimesheetComponent implements OnInit {
 
-  header = new HttpHeaders({xtoken: `${localStorage.getItem('token')}`});
+  header = new HttpHeaders({ xtoken: `${localStorage.getItem('token')}` });
 
 
   public myDatePickerOptions: IMyDpOptions = {
     firstDayOfWeek: 'mon',
-    dayLabels: {su: 'Sun', mo: 'Mon', tu: 'Tue', we: 'Wed', th: 'Thu', fr: 'Fri', sa: 'Sat'},
+    dayLabels: { su: 'Sun', mo: 'Mon', tu: 'Tue', we: 'Wed', th: 'Thu', fr: 'Fri', sa: 'Sat' },
     markCurrentDay: true,
     editableDateField: false,
     sunHighlight: true,
     inline: false,
     disableWeekends: true,
+    disableWeekdays: ['tu', 'we', 'th', 'fr'],
     dateFormat: 'mm.dd.yyyy',
   };
 
@@ -36,7 +37,7 @@ export class NewTimesheetComponent implements OnInit {
   fullSheet = {
 
 
-    startDate : this.sDate3,
+    startDate: this.sDate3,
     // startDate : `${this.model.date.year}-${this.model.date.month}-${this.model.date.day}`,
     // year: this.model.date.year,
     // month: this.model.date.month,
@@ -50,11 +51,11 @@ export class NewTimesheetComponent implements OnInit {
 
     author: {
       userId: 0
-  },
-  status: {
+    },
+    status: {
       status: 'Pending'
-  },
-  tsComment: ''
+    },
+    tsComment: ''
 
   };
 
@@ -73,20 +74,34 @@ export class NewTimesheetComponent implements OnInit {
     this.fullSheet.author.userId = this.ck.uId;
     this.sDate = JSON.stringify(this.model.date);
     this.sDate2 = new Date().toLocaleDateString;
-    this.sDate3 = `${this.model.date.year}-0${this.model.date.month}-${this.model.date.day + 1}`;
-    this.fullSheet.startDate = this.sDate3;
-   console.log(this.fullSheet);
-
-   this.client.post('http://localhost:8080/timesheet/submit', this.fullSheet, {headers: this.header})
-    .subscribe(
-      succ => {
-        alert('Timesheet submitted');
-        console.log(succ);
-      },
-      err => {
-        alert('Submission failed');
+    if (this.model.date.month < 10) {
+      if (this.model.date.day < 10) {
+        this.sDate3 = `${this.model.date.year}-0${this.model.date.month}-0${this.model.date.day + 1}`;
+      } else {
+        this.sDate3 = `${this.model.date.year}-0${this.model.date.month}-${this.model.date.day + 1}`;
       }
-    );
+    } else {
+      if (this.model.date.day < 10) {
+        this.sDate3 = `${this.model.date.year}-${this.model.date.month}-0${this.model.date.day + 1}`;
+      } else {
+        this.sDate3 = `${this.model.date.year}-${this.model.date.month}-${this.model.date.day + 1}`;
+      }
+
+    }
+
+    this.fullSheet.startDate = this.sDate3;
+    console.log(this.fullSheet);
+
+    this.client.post('http://localhost:8080/timesheet/submit', this.fullSheet, { headers: this.header })
+      .subscribe(
+        succ => {
+          alert('Timesheet submitted');
+          console.log(succ);
+        },
+        err => {
+          alert('Submission failed');
+        }
+      );
 
   }
 

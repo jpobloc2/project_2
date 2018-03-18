@@ -9,3 +9,7 @@
 .calendar{
     max-width:250px;
 }
+
+.weekday{
+    max-width:75px;
+}

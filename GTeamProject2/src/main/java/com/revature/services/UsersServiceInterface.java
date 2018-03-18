@@ -20,7 +20,7 @@ public interface UsersServiceInterface {
 
 	void forgotPass(String username);
 
-	void changePass(Users u, String token) throws AuthenticationException;
+	//void changePass(Users u, String token) throws AuthenticationException;
 
 	List<Users> findAll();
 
@@ -33,5 +33,7 @@ public interface UsersServiceInterface {
 	Users changeUser(Users u, String token) throws AuthenticationException;
 
 	void submitComplaint(Complaint complaint, String token) throws AuthenticationException;
+
+	Users changePass(String newPass, String token) throws AuthenticationException;
 
 }

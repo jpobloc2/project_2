@@ -60,10 +60,10 @@ export class UserServiceService {
       );
   }
 
-  changePassword(user: any) {
+  changePassword(pass: string) {
     console.log('user service attempting to change password');
     this.header = new HttpHeaders({ xtoken: `${localStorage.getItem('token')}` });
-    this.client.put('http://localhost:8080/users/changePass', user, { headers: this.header })
+    this.client.put('http://localhost:8080/users/changePass', pass, { headers: this.header })
     .subscribe(
       succ => {
         alert('Password successfully changed!');

@@ -26,7 +26,7 @@ user;
     } else {
       this.user.password = this.password1;
       console.log(this.user);
-      this.userService.changePassword(this.user);
+      this.userService.changePassword(this.password1);
 
     }
   }

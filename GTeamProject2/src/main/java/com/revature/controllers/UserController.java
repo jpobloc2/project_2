@@ -74,9 +74,9 @@ public class UserController {
 
 	@PutMapping("changePass")
 	@JsonView(View.UserInfo.class)
-	public ResponseEntity<Users> changePass(@RequestBody Users u, @RequestHeader(value = "xtoken") String token) {
+	public ResponseEntity<Users> changePass(@RequestBody String newPass, @RequestHeader(value = "xtoken") String token) {
 		try {
-			return new ResponseEntity<Users>(us.createNew(u, token), HttpStatus.OK);
+			return new ResponseEntity<Users>(us.changePass(newPass, token), HttpStatus.OK);
 		} catch (AuthenticationException e) {
 			return new ResponseEntity<Users>(HttpStatus.UNAUTHORIZED);
 		}

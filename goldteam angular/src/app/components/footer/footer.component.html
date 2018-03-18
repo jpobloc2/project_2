@@ -14,25 +14,25 @@
 			</div>
 			<div class="contact-section">
 			<div class="container">
-				<form action="mailto:brandoncross@live.com">
+				<form (ngSubmit)="submitIssue()">
 					<div class="col-md-6 form-line">
 			  			<div class="form-group">
 			  				<label for="exampleInputUsername">Employee Name</label>
-					    	<input type="text" class="form-control" id="" placeholder=" Enter Name">
+					    	<input name="empName" type="text" class="form-control" id="" placeholder=" Enter Name" [(ngModel)]="complaintEmail.complainant">
 				  		</div>
 				  		<div class="form-group">
 					    	<label for="exampleInputEmail">Email Address</label>
-					    	<input type="email" class="form-control" id="exampleInputEmail" placeholder=" Enter Email id">
+					    	<input name="empEmail" type="email" class="form-control" id="exampleInputEmail" placeholder=" Enter Email id" [(ngModel)]="complaintEmail.complainantAddr">
 					  	</div>
 			  		</div>
 			  		<div class="col-md-6">
 			  			<div class="form-group">
 			  				<label for ="description"> Message</label>
-			  			 	<textarea  class="form-control" id="description" placeholder="Enter Your Message"></textarea>
+			  			 	<textarea name="empMsg" class="form-control" id="description" placeholder="Enter Your Message" [(ngModel)]="complaintEmail.complainantMsg"></textarea>
 			  			</div>
 			  			<div>
 
-			  				<button type="button" class="btn btn-default submit"><i class="fa fa-paper-plane" aria-hidden="true"></i>  Send Message</button>
+			  				<button type="Submit" class="btn btn-default submit"><i class="fa fa-paper-plane" aria-hidden="true"></i>  Send Message</button>
 			  			</div>
 			  			
 					</div>

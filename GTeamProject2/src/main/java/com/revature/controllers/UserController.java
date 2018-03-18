@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.revature.entities.Complaint;
 import com.revature.entities.LoginCredentials;
 import com.revature.entities.Users;
 import com.revature.rest.JwtAuthenticationRequest;
@@ -154,6 +155,16 @@ public class UserController {
 		// Return the token
 		return ResponseEntity.ok(new JwtAuthenticationResponse(user, token));
 	}
+	
+	@PostMapping("complaint")
+	public ResponseEntity<Complaint> submitComplaint (@RequestBody Complaint complaint, @RequestHeader(value="xtoken") String token) {
+		try {
+			us.submitComplaint(complaint, token);
+			return new ResponseEntity<Complaint>(complaint, HttpStatus.OK);
+		} catch (AuthenticationException e) {
+			return new ResponseEntity<Complaint>(HttpStatus.UNAUTHORIZED);
+		}
+	}	
 
 	/**
 	 * Authenticates the user. If something is wrong, an AuthenticationException

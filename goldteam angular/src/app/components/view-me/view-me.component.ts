@@ -10,7 +10,7 @@ import { UserServiceService } from '../../services/user-service.service';
 })
 export class ViewMeComponent implements OnInit {
 
-  private user = UserServiceService.obv;
+  private user;
 
   constructor(private userService: UserServiceService, private cookie: CookieService) { }
 

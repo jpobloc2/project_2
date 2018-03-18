@@ -5,16 +5,18 @@ import { Subject } from 'rxjs/Subject';
 @Injectable()
 export class UserServiceService {
 
-  header;
-  obv: Subject<any> = new Subject;
+
 
   constructor(private client: HttpClient) { }
+  header;
+  obv: Subject<any> = new Subject;
 
   getMyInfo() {
     this.header = new HttpHeaders({xtoken: `${localStorage.getItem('token')}`});
     this.client.get('http://localhost:8080/users/', {headers: this.header})
     .subscribe(
       succ => {
+        console.log('User service returned ' + succ);
         console.log(succ);
         this.obv.next(succ);
       }, err => {

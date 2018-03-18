@@ -1,5 +1,7 @@
 package com.revature.controllers;
 
+import static org.assertj.core.api.Assertions.useRepresentation;
+
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -96,10 +98,11 @@ public class UserController {
 		return us.findById(id);
 	}
 
-	@JsonView(View.Summary.class)
+	@JsonView(View.UserInfo.class)
 	@GetMapping()
 	public ResponseEntity<Users> getUserData(@RequestHeader(value = "xtoken") String token) {
 		try {
+			System.out.println(us.getUserData(token).toString());
 			return new ResponseEntity<Users>(us.getUserData(token), HttpStatus.OK);
 		} catch (AuthenticationException e) {
 			return new ResponseEntity<Users>(HttpStatus.UNAUTHORIZED);

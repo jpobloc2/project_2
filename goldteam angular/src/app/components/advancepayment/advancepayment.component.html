@@ -1,17 +1,14 @@
+
 <app-nav></app-nav>
 
 
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-
-
+<p>{{string}}</p>
 
 <div class="container">
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
       <div class="well well-sm">
-        <form class="form-horizontal" (ngSubmit)="submitPayment()">
+        <form class="form-horizontal" >
           <fieldset>
             <legend class="text-center">Advanced Payment</legend>
 
@@ -26,13 +23,13 @@
             <div class="form-group">
               <label class="col-md-3 control-label" for="comment">Comment</label>
               <div class="col-md-9">
-                <textarea name="comment" style="min-width:300px; min-height:100px;" [(ngModel)]="newPayment.comment" placeholder="Provide a description"></textarea>
+                <textarea name="comment" style="min-width:300px; min-height:100px;" [(ngModel)]="newPayment.advComment" placeholder="Provide a description"></textarea>
               </div>
             </div>
 
             <div class="form-group">
               <div class="col-md-12 text-right">
-                <button class="btn btn-primary" type="submit">Submit Advance Payment Request</button>
+                <button class="btn btn-primary" (click)="submitPayment()" >Submit Advance Payment Request</button>
               </div>
             </div>
           </fieldset>
@@ -51,6 +48,7 @@
       <th>Amount</th>
       <th>Status</th>
       <th>Submitted date</th>
+      <th>Description</th>
       <th>Resolved date</th>
       <th>Resolver Name</th>
     </tr>
@@ -62,6 +60,7 @@
       <th>Amount</th>
       <th>Status</th>
       <th>Submitted date</th>
+      <th>Description</th>
       <th>Resolved date</th>
       <th>Resolver Name</th>
     </tr>
@@ -73,11 +72,21 @@
       <td>{{advpay.amount}}</td>
       <td>{{advpay.status.status}}</td>
       <td>{{advpay.submitDate | date:'fullDate'}}</td>
+      <td>{{advpay.advComment}}</td>
       <td>{{advpay.resolveDate | date:'fullDate'}}</td>
       <td *ngIf="advpay.resolver else b">{{advpay.resolver.firstName}}</td>
       <ng-template #b>
         <td>N/A</td>
     </ng-template>
+
+    <td>
+      <form class="managerbutton" *ngIf="ck.roleId === 1 && ck.firstName != advpay.author.firstName && advpay.status.status === 'Pending'">
+          <div class="btn-group" role="group" aria-label="Basic example">
+              <button type="submit" (click)="updateStatus(advpay.advId, 'Accepted')" value='Accepted' name="approve" class="btn btn-secondary btn-sm">Approve</button>
+              <button type="submit" (click)="updateStatus(advpay.advId, 'Declined')" value='Declined' name="deny" class="btn btn-secondary btn-sm">Deny</button>
+          </div>
+      </form>
+  </td>
     </tr>
   </tbody>
 </table>

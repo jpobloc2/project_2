@@ -13,6 +13,11 @@ import { LoggedInGuard } from './guard/logged-in.guard';
 import { TimesheetsComponent } from './components/timesheets/timesheets.component';
 import { NewTimesheetComponent } from './components/new-timesheet/new-timesheet.component';
 import { AdvancepaymentComponent } from './components/advancepayment/advancepayment.component';
+import { ManagerComponent } from './components/manager/manager.component';
+import { ViewUserComponent } from './components/view-user/view-user.component';
+import { ViewMeComponent } from './components/view-me/view-me.component';
+import { ForgotPassComponent } from './components/forgot-pass/forgot-pass.component';
+import { PassResetComponent } from './components/pass-reset/pass-reset.component';
 
 export const appRoutes: Routes = [
   {
@@ -25,6 +30,26 @@ export const appRoutes: Routes = [
   {
     path: 'login',
     component: LoginComponent
+  },
+  {
+    path: 'forgot',
+    component: ForgotPassComponent
+  },
+  {
+    path: 'manager',
+    component: ManagerComponent
+  },
+  {
+    path: 'view-user',
+    component: ViewUserComponent
+  },
+  {
+    path: 'account-info',
+    component: ViewMeComponent
+  },
+  {
+    path: 'changePass',
+    component: PassResetComponent
   },
   {
     path: 'timesheet',

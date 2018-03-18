@@ -6,6 +6,5 @@ import com.revature.entities.UserRole;
 public interface RoleRepo extends JpaRepository<UserRole, Integer> {
 
 	UserRole findByUserRole(String userRole);
-	
 
 }

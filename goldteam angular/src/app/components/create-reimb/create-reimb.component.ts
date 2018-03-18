@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
 import { Router } from '@angular/router';
 import { Reimbursement } from '../../beans/reimbursement';
+import { ReimburseService } from '../../services/reimburse.service';
 
 @Component({
   selector: 'app-create-reimb',
@@ -11,39 +12,51 @@ import { Reimbursement } from '../../beans/reimbursement';
 })
 export class CreateReimbComponent implements OnInit {
 
+  header = new HttpHeaders({ xtoken: `${localStorage.getItem('token')}` });
+
   reimbursement = {
-    amount: 0,
-    description: '',
-    type: Number
+    reimbAmount: 0,
+    reimbType: '',
+    reimbDescription: '',
+    reimbAuthor: {
+      userId: 0
+    },
+    reimbStatus: {
+      status: 'Pending'
+    }
   };
 
+  ck;
 
-  constructor(private client: HttpClient, private cookie: CookieService, private router: Router) { }
+  constructor(private client: HttpClient, private cookie: CookieService, private router: Router, private reimbService: ReimburseService
+  ) { }
 
   ngOnInit() {
+    this.ck = this.cookie.getObject('user');
   }
 
   submitReimbursement() {
-    if (this.reimbursement.amount < 0) {
+    if (this.reimbursement.reimbAmount < 0) {
       alert('Amount must be greater than zero');
-    } else if (this.reimbursement.description === '') {
+    } else if (this.reimbursement.reimbDescription === '') {
       alert('Description cannot be left empty!');
     } else {
 
+      this.reimbursement.reimbAuthor.userId = this.ck.uId;
+      console.log(this.reimbursement);
+      this.reimbService.submitReimb(this.reimbursement);
+      /*       this.client.post('http://localhost:8080/reimb/submit', this.reimbursement, {headers: this.header})
+              .subscribe(
+                (succ) => {
+                  alert('submit successful');
+                  console.log(succ);
+                  this.router.navigateByUrl('reimbs/pending');
+                },
+                (err) => {
+                  alert('failed to submit reimbursement');
+                }
 
-      this.client.post('http://localhost:8080/Reimbursement-System/reimbursement', this.reimbursement,
-        { withCredentials: true })
-        .subscribe(
-          (succ) => {
-            alert('submit successful');
-            this.router.navigateByUrl('reimbs/pending');
-          },
-          (err) => {
-            alert('failed to submit reimbursement');
-          }
-
-
-        );
+              ); */
 
     }
   }

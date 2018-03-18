@@ -7,7 +7,5 @@ import com.revature.entities.Reimbursement;
 
 @CrossOrigin(origins = "http://localhost:4200")
 public interface ReimbRepo extends JpaRepository<Reimbursement, Integer> {
-
-	// Set<Reimbursement> findMyReimb(int id);
 	
 }

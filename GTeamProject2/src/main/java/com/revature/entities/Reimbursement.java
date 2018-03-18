@@ -71,8 +71,10 @@ public class Reimbursement {
 	public String toString() {
 		return "Reimbursement [reimbId=" + reimbId + ", reimbAmount=" + reimbAmount + ", reimbSubmitted="
 				+ reimbSubmitted + ", reimbResolved=" + reimbResolved + ", reimbDescription=" + reimbDescription
+
 				+ ", reimbAuthor=" + reimbAuthor + ", reimbResolver=" + reimbResolver + ", reimbStatus=" + reimbStatus
 				+ ", reimbType=" + reimbType + "]";
+
 	}
 	@Override
 	public int hashCode() {

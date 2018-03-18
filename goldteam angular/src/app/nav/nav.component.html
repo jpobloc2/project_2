@@ -1,3 +1,8 @@
+
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04"
     aria-expanded="false" aria-label="Toggle navigation">
@@ -27,15 +32,25 @@
         <a class="nav-link dropdown-toggle" id="dropdownBasic1" ngbDropdownToggle>Reimbursement Tickets</a>
         <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
           <button class="dropdown-item" routerLink="/reimbs">View Reimbursements</button>
-          <button class="dropdown-item" routerLink="/new-reimbursement" >Create Reimbursement Ticket</button>
+          <button class="dropdown-item" routerLink="/new-reimbursement">Create Reimbursement Ticket</button>
         </div>
       </li>
       <li class="nav-item mr-sm-2">
-        
+
+        <ul class="navbar-nav mr-auto" style="float:right!important; padding-top:10px;">
+          <ul class="navbar-nav mr-auto" *ngIf="ck.roleId === 1">
+            <a class="nav-link logg" routerLink="/manager">Manager Console</a>
+          </ul>
+          <ul class="navbar-nav mr-auto" >
+              <a class="nav-link logg" routerLink="/account-info">Account Settings</a>
+            </ul>
+          <ul class="navbar-nav mr-auto">
+            <a class="nav-link logg" routerLink="/login">Log Out</a>
+          </ul>
+
+        </ul>
       </li>
     </ul>
-    <ul class="navbar-nav mr-auto" style="float:right!important; padding-top:10px;">
-      <a class="nav-link logg" routerLink="/login">Log Out</a>
-    </ul>
+
   </div>
 </nav>

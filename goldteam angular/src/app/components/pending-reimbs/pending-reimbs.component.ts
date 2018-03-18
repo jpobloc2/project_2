@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Reimbursement } from '../../beans/reimbursement';
 import { ReimburseService } from '../../services/reimburse.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
 
@@ -11,68 +11,54 @@ import { CookieService } from 'angular2-cookie/services/cookies.service';
   styleUrls: ['./pending-reimbs.component.css']
 })
 export class PendingReimbsComponent implements OnInit {
+  header = new HttpHeaders({xtoken: `${localStorage.getItem('token')}`});
   reimbs: any = [];
 
+  string = '';
   ck;
+
+  updateReimb = {
+    itemId: 0,
+    resolution: '',
+    userId: 0
+
+  };
 
 
 
   constructor(private reimbService: ReimburseService, private client: HttpClient, private router: Router, private cookie: CookieService) { }
-
   ngOnInit() {
     this.ck = this.cookie.getObject('user');
-    console.log(this.ck.roleId);
-    if (this.ck.roleId === 0  ) {
-      this.client.get(`http://localhost:8080/reimb/${this.ck.uId}`)
-        .subscribe(
-          (succ: Array<Reimbursement>) => {
-            this.reimbs = succ;
-            console.log(succ);
-            return this.reimbs;
-          },
-          err => {
-            alert('failed to retrieve reimbursements');
-          }
-
-        );
-    } else {
-      this.client.get('http://localhost:8080/reimb/all')
-        .subscribe(
-          (succ: Array<Reimbursement>) => {
-            this.reimbs = succ;
-            console.log(succ);
-            return this.reimbs;
-          },
-          err => {
-            alert('failed to retrieve reimbursements');
-          }
-
-        );
+    this.reimbs = this.reimbService.reimbs;
 
     }
-  }
 
-  updateStatus(reimb: Reimbursement, statusId: number) {
-    console.log(reimb.r_id);
-    this.client.put(`http://localhost:8080/Reimbursement-System/reimbursement/${reimb.r_id}`, statusId, { withCredentials: true })
+  updateStatus(reimbId: number, reimbStatus: string) {
+    this.updateReimb.itemId = reimbId;
+    this.updateReimb.resolution = reimbStatus;
+    this.updateReimb.userId = this.ck.uId;
+    console.log(this.updateReimb);
+    this.client.put(`http://localhost:8080/reimb`, this.updateReimb, {headers: this.header})
       .subscribe(
         succ => {
-          if (statusId === 1) {
-            reimb.status = 1;
-            alert('Reimbursement approved');
-            this.router.navigateByUrl('reimbs');
+          if (reimbStatus === 'Accepted') {
+            this.string = 'Reimbursement ' + this.updateReimb.itemId + ' accepted!';
+            this.reimbService.getReimbs();
+            this.reimbs = this.reimbService.reimbs;
+            this.ngOnInit();
           }
-          if (statusId === 2) {
-            reimb.status = 2;
-            alert('Reimbursement denied');
-            this.router.navigateByUrl('reimbs');
+          if (reimbStatus === 'Declined') {
+            this.string = 'Reimbursement ' + this.updateReimb.itemId + ' denied!';
+            this.reimbService.getReimbs();
+            this.reimbs = this.reimbService.reimbs;
+            this.ngOnInit();
           }
         },
         err => {
           alert('failed to update status');
         }
       );
-
+      /*     this.reimbService.updateReimbursement(this.updateReimb); */
   }
 
 

@@ -1,3 +1,4 @@
+{{string}}
 <div class="container">
     <table class="table table-striped">
         <thead class="thead-light">
@@ -24,8 +25,8 @@
                     <td>
                         <form class="managerbutton" *ngIf="ck.roleId === 1 && ck.firstName != reimbursement.reimbAuthor.firstName">
                             <div class="btn-group" role="group" aria-label="Basic example">
-                                <button type="submit" (click)="updateStatus(reimbursement, 1)" value=1 name="approve" class="btn btn-secondary btn-sm">Approve</button>
-                                <button type="submit" (click)="updateStatus(reimbursement, 2)" value=2 name="deny" class="btn btn-secondary btn-sm">Deny</button>
+                                <button type="submit" (click)="updateStatus(reimbursement.reimbId, 'Accepted')" value='Accepted' name="approve" class="btn btn-secondary btn-sm">Approve</button>
+                                <button type="submit" (click)="updateStatus(reimbursement.reimbId, 'Declined')" value='Declined' name="deny" class="btn btn-secondary btn-sm">Deny</button>
                             </div>
                         </form>
                     </td>

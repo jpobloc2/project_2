@@ -10,13 +10,13 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ReimbsComponent implements OnInit {
 
-  reimbs: Array<Reimbursement> = [];
+  reimbs: any[];
   // newReimb = new Reimbursement();
 
   constructor(private reimbService: ReimburseService, private client: HttpClient) { }
 
   ngOnInit() {
-    //  this.reimbs = this.reimbService.getReimbs();
+    this.reimbService.getReimbs();
   }
 
 //   getReimbs() {

@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.revature.entities.Complaint;
 import com.revature.entities.Timesheet;
 import com.revature.entities.UserRole;
 import com.revature.entities.Users;
@@ -149,6 +150,18 @@ public class UsersService implements UsersServiceInterface {
   @Override
 	public void emailAdmin(String from, String subject, String message) {
 		new EmailUtil().recieveMessage(from, subject, message);
+	}
+
+	@Override
+	public void submitComplaint(Complaint complaint, String token) throws AuthenticationException {
+		as.validateToken(token);
+		String body = "Complainant: " + complaint.getComplainant() + "\nComplainant Email: " + complaint.getComplainantAddr() + "\nComplainant Message: " + complaint.getComplainantMsg();
+		EmailUtil eUtil = new EmailUtil();
+		// Message admin account
+		eUtil.sendMessage("goldteamproject2@gmail.com", "New Complaint Registered", body);
+		// Message complainant account so they know it worked
+		body = "Your complaint was successfully registered. Thank you.";
+		eUtil.sendMessage(complaint.getComplainantAddr(), "New Complaint Registered", body);		
 	}
 }
 

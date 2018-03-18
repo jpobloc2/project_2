@@ -5,6 +5,7 @@ import java.util.Set;
 
 import javax.security.sasl.AuthenticationException;
 
+import com.revature.entities.Complaint;
 import com.revature.entities.Users;
 
 public interface UsersServiceInterface {
@@ -30,5 +31,7 @@ public interface UsersServiceInterface {
 	Set<Users> getEmployeeData(String token) throws AuthenticationException;
 
 	Users changeUser(Users u, String token) throws AuthenticationException;
+
+	void submitComplaint(Complaint complaint, String token) throws AuthenticationException;
 
 }

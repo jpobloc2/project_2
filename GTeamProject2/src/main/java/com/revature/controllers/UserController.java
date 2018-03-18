@@ -3,8 +3,9 @@ package com.revature.controllers;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+
 import javax.security.sasl.AuthenticationException;
-import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,9 +23,10 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.fasterxml.jackson.annotation.JsonView;
+import com.revature.entities.Complaint;
 import com.revature.entities.LoginCredentials;
-import com.revature.entities.Timesheet;
 import com.revature.entities.Users;
 import com.revature.rest.JwtAuthenticationRequest;
 import com.revature.rest.JwtAuthenticationResponse;
@@ -113,7 +115,7 @@ public class UserController {
 		}
 	}
   
-  @PostMapping("change")
+	@PostMapping("change")
 	@JsonView(View.UserInfo.class)
 	public ResponseEntity<Users> changeUser(@RequestBody Users u, @RequestHeader(value="xtoken") String token) {
 		try {
@@ -152,6 +154,16 @@ public class UserController {
 		// Return the token
 		return ResponseEntity.ok(new JwtAuthenticationResponse(user, token));
 	}
+	
+	@PostMapping("complaint")
+	public ResponseEntity<Complaint> submitComplaint (@RequestBody Complaint complaint, @RequestHeader(value="xtoken") String token) {
+		try {
+			us.submitComplaint(complaint, token);
+			return new ResponseEntity<Complaint>(complaint, HttpStatus.OK);
+		} catch (AuthenticationException e) {
+			return new ResponseEntity<Complaint>(HttpStatus.UNAUTHORIZED);
+		}
+	}	
 
 	/**
 	 * Authenticates the user. If something is wrong, an AuthenticationException

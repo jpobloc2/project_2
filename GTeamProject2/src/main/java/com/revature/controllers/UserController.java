@@ -96,7 +96,7 @@ public class UserController {
 		return us.findById(id);
 	}
 
-	@JsonView(View.Summary.class)
+	@JsonView(View.UserInfo.class)
 	@GetMapping()
 	public ResponseEntity<Users> getUserData(@RequestHeader(value = "xtoken") String token) {
 		try {
@@ -155,16 +155,17 @@ public class UserController {
 		// Return the token
 		return ResponseEntity.ok(new JwtAuthenticationResponse(user, token));
 	}
-	
+
 	@PostMapping("complaint")
-	public ResponseEntity<Complaint> submitComplaint (@RequestBody Complaint complaint, @RequestHeader(value="xtoken") String token) {
+	public ResponseEntity<Complaint> submitComplaint(@RequestBody Complaint complaint,
+			@RequestHeader(value = "xtoken") String token) {
 		try {
 			us.submitComplaint(complaint, token);
 			return new ResponseEntity<Complaint>(complaint, HttpStatus.OK);
 		} catch (AuthenticationException e) {
 			return new ResponseEntity<Complaint>(HttpStatus.UNAUTHORIZED);
 		}
-	}	
+	}
 
 	/**
 	 * Authenticates the user. If something is wrong, an AuthenticationException

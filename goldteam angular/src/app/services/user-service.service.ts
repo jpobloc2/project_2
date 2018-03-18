@@ -12,6 +12,8 @@ export class UserServiceService {
   header;
   obv: Subject<any> = new Subject;
 
+  user;
+
   getMyInfo() {
     this.header = new HttpHeaders({ xtoken: `${localStorage.getItem('token')}` });
     this.client.get('http://localhost:8080/users/', { headers: this.header })
@@ -20,6 +22,7 @@ export class UserServiceService {
           console.log('User service returned ' + succ);
           console.log(succ);
           this.obv.next(succ);
+          this.user = succ;
         }, err => {
           alert('failed to retrieve this user');
         }
@@ -55,6 +58,25 @@ export class UserServiceService {
         }
 
       );
+  }
+
+  changePassword(user: any) {
+    console.log('user service attempting to change password');
+    this.header = new HttpHeaders({ xtoken: `${localStorage.getItem('token')}` });
+    this.client.put('http://localhost:8080/users/changePass', user, { headers: this.header })
+    .subscribe(
+      succ => {
+        alert('Password successfully changed!');
+        this.router.navigateByUrl('/account-info');
+      }, err => {
+        alert('Failed to change password');
+      }
+    );
+
+  }
+
+  getStoredUser() {
+    return this.user;
   }
 
 }

@@ -160,4 +160,17 @@ public class UsersService implements UsersServiceInterface {
 		body = "Your complaint was successfully registered. Thank you.";
 		eUtil.sendMessage(complaint.getComplainantAddr(), "New Complaint Registered", body);		
 	}
+
+	@Override
+	public Users changeSub(Users u, String token) throws AuthenticationException {
+		Users manager = as.validateToken(token);
+		as.validateManager(manager);
+		Users subordinate = usersRepo.findByUserId(u.getUserId());
+		if(manager.getSubordinates().contains(subordinate)) {
+			subordinate.setWage(u.getWage());
+			return usersRepo.save(subordinate);
+		} else {
+			throw new AuthenticationException();
+		}
+	}
 }

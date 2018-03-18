@@ -128,6 +128,16 @@ public class UserController {
 			return new ResponseEntity<Users>(HttpStatus.UNAUTHORIZED);
 		}
 	}
+	
+	@PostMapping("change/sub")
+	@JsonView(View.UserInfo.class)
+	public ResponseEntity<Users> changeSubordinate(@RequestBody Users u, @RequestHeader(value = "xtoken") String token) {
+		try {
+			return new ResponseEntity<Users>(us.changeSub(u, token), HttpStatus.OK);
+		} catch (AuthenticationException e) {
+			return new ResponseEntity<Users>(HttpStatus.UNAUTHORIZED);
+		}
+	}
 
 	@PostMapping
 	@JsonView(View.UserInfo.class)

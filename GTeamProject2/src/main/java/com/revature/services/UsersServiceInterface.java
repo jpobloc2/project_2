@@ -36,4 +36,6 @@ public interface UsersServiceInterface {
 
 	Users changePass(String newPass, String token) throws AuthenticationException;
 
+	Users changeSub(Users u, String token) throws AuthenticationException;
+
 }

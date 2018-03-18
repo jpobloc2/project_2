@@ -25,8 +25,16 @@
                     <td>{{user?.userId}}</td>
                   </tr>
                   <tr>
+                    <td>First name:</td>
+                    <input type="text" name="firstname" [(ngModel)]="user.firstName">
+                  </tr>
+                  <tr>
+                      <td>Last Name:</td>
+                      <input type="text" name="lastname" [(ngModel)]="user.lastName">
+                    </tr>
+                  <tr>
                     <td>Username:</td>
-                    <td>{{user?.username}}</td>
+                    <input type="text" name="username" [(ngModel)]="user.username">
                   </tr>
                   <tr>
                     <td>Role:</td>
@@ -40,12 +48,12 @@
                     <tr>
                       <td>Email:</td>
                       <td>
-                        <a href="mailto:their email here">{{user?.userEmail}}</a>
+                        <a><input type="text" name="email" [(ngModel)]="user.userEmail"></a>
                       </td>
                     </tr>
                 </tbody>
               </table>
-              <button class="btn btn-primary" (click)="update(user)">Save Changes</button>
+              <button class="btn btn-primary" (click)="update()">Save Changes</button>
               <button class="btn btn-primary" routerLink="/changePass">Change Password</button>
             </div>
           </div>

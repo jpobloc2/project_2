@@ -54,7 +54,7 @@ public class UsersService implements UsersServiceInterface {
 	@Override
 	public Users changePass(String newPass, String token) throws AuthenticationException {
 		Users tmp = as.validateToken(token);
-		tmp.setPassword(newPass);
+		tmp.setPassword(pe.encode(newPass));
 		return usersRepo.save(tmp);
 	}
 

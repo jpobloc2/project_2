@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Reimbursement } from '../../beans/reimbursement';
 import { ReimburseService } from '../../services/reimburse.service';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-reimbs',
@@ -13,10 +14,11 @@ export class ReimbsComponent implements OnInit {
   reimbs: any[];
   // newReimb = new Reimbursement();
 
-  constructor(private reimbService: ReimburseService, private client: HttpClient) { }
+  constructor(private reimbService: ReimburseService, private client: HttpClient, private router: Router) { }
 
   ngOnInit() {
     this.reimbService.getReimbs();
+    this.router.navigateByUrl('/reimbs/all');
   }
 
 //   getReimbs() {

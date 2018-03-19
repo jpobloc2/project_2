@@ -17,7 +17,7 @@ export class MakeUserComponent implements OnInit {
   };
 
   failNullAlert = false;
-  failCreateAlert = false;
+  sucCreateAlert = false;
   failSubmissionAlert = false;
 
   constructor(private client: HttpClient) { }
@@ -32,7 +32,7 @@ export class MakeUserComponent implements OnInit {
       this.client.post('http://localhost:8080/users/new', this.newUser, {headers: this.header})
     .subscribe(
       succ => {
-        this.failCreateAlert = true;
+        this.sucCreateAlert = true;
       },
       err => {
         this.failSubmissionAlert = true;

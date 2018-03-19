@@ -133,15 +133,13 @@ public class UsersService implements UsersServiceInterface {
 	@Override
 	public Set<Users> getEmployeeData(String token) throws AuthenticationException {
 		Users u = as.validateToken(token);
-		if (validateManager(u) == true) {
-			return u.getSubordinates();
-		} else {
-			throw new AuthenticationException();
-		}
+		as.validateManager(u);
+		return u.getSubordinates();
+
 	}
 
 	public boolean validateManager(Users u) throws AuthenticationException {
-		boolean b = (u.getRole().equals("Manager"));
+		boolean b = (u.getRole().getUserRole().equals("Manager"));
 		if (!b) {
 			throw new AuthenticationException();
 		}

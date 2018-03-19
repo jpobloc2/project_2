@@ -110,11 +110,13 @@ public class UserController {
 		}
 	}
 
-	@JsonView(View.Summary.class)
+	@JsonView(View.UserInfo.class)
 	@GetMapping("employeeData")
 	public ResponseEntity<Set<Users>> getEmployeeData(@RequestHeader(value = "xtoken") String token) {
 		try {
-			return new ResponseEntity<Set<Users>>(us.getEmployeeData(token), HttpStatus.OK);
+			Set<Users> su = us.getEmployeeData(token);
+			System.out.println(su);
+			return new ResponseEntity<Set<Users>>(su, HttpStatus.OK);
 		} catch (AuthenticationException e) {
 			return new ResponseEntity<Set<Users>>(HttpStatus.UNAUTHORIZED);
 		}

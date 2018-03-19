@@ -18,10 +18,11 @@ export class ManagerComponent implements OnInit {
   failGetAlert = false;
 
   ngOnInit() {
-    this.client.get('http://localhost:8080/users/all', {headers: this.header})
+    this.client.get('http://localhost:8080/users/employeeData', {headers: this.header})
       .subscribe(
         succ => {
           this.userList = succ;
+          console.log(this.userList);
           return this.userList;
         }, err => {
           this.failGetAlert = true;

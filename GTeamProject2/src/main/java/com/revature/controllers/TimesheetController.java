@@ -1,6 +1,5 @@
 package com.revature.controllers;
 
-import java.sql.Timestamp;
 import java.util.List;
 import java.util.Set;
 
@@ -42,17 +41,18 @@ public class TimesheetController {
 
 	@PostMapping(path = "submit")
 	@JsonView(View.Summary.class)
-	public ResponseEntity<Timesheet> submitTimesheet(@RequestBody Timesheet ts, @RequestHeader(value="xtoken") String token) {
+	public ResponseEntity<Timesheet> submitTimesheet(@RequestBody Timesheet ts,
+			@RequestHeader(value = "xtoken") String token) {
 		try {
 			return new ResponseEntity<Timesheet>(tss.submitTimesheet(ts, token), HttpStatus.OK);
 		} catch (AuthenticationException e) {
 			return new ResponseEntity<Timesheet>(HttpStatus.UNAUTHORIZED);
 		}
 	}
-  
+
 	@JsonView(View.Summary.class)
 	@GetMapping
-	public ResponseEntity<Set<Timesheet>> findByuserid(@RequestHeader(value="xtoken") String token) {
+	public ResponseEntity<Set<Timesheet>> findByuserid(@RequestHeader(value = "xtoken") String token) {
 		try {
 			return new ResponseEntity<Set<Timesheet>>(tss.findByuserid(token), HttpStatus.OK);
 		} catch (AuthenticationException e) {
@@ -62,12 +62,13 @@ public class TimesheetController {
 
 	@PutMapping
 	@JsonView(View.Summary.class)
-	public ResponseEntity<Timesheet> resolve(@RequestBody ResolveCredentials rc, @RequestHeader(value="xtoken") String token) {
+	public ResponseEntity<Timesheet> resolve(@RequestBody ResolveCredentials rc,
+			@RequestHeader(value = "xtoken") String token) {
 		System.out.println(rc);
 		try {
 			return new ResponseEntity<Timesheet>(tss.resolve(rc.getItemId(), rc.getResolution(), token), HttpStatus.OK);
 		} catch (AuthenticationException e) {
-			return new ResponseEntity<Timesheet>(HttpStatus.UNAUTHORIZED); 
+			return new ResponseEntity<Timesheet>(HttpStatus.UNAUTHORIZED);
 		} catch (Exception e) {
 			return new ResponseEntity<Timesheet>(HttpStatus.UNAUTHORIZED);
 		}

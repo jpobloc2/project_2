@@ -58,7 +58,8 @@ export class NewTimesheetComponent implements OnInit {
     tsComment: ''
 
   };
-
+  sucTSAlert = false;
+  failTSAlert = false;
   ck;
 
 
@@ -95,12 +96,11 @@ export class NewTimesheetComponent implements OnInit {
     this.client.post('http://localhost:8080/timesheet/submit', this.fullSheet, { headers: this.header })
       .subscribe(
         succ => {
-          alert('Timesheet submitted');
-          console.log(succ);
+          this.sucTSAlert = true;
           this.router.navigateByUrl('/timesheet');
         },
         err => {
-          alert('Submission failed');
+          this.failTSAlert = true;
         }
       );
 

@@ -14,15 +14,8 @@ import { Router } from '@angular/router';
 export class AdvancepaymentComponent implements OnInit {
 
   header = new HttpHeaders({ xtoken: `${localStorage.getItem('token')}` });
-
-
   payments: any = [];
-
-  string = '';
-
-
   private newPayment = {
-
     amount: 0,
     advComment: '',
     author: {
@@ -31,21 +24,19 @@ export class AdvancepaymentComponent implements OnInit {
     status: {
       status: 'Pending'
     }
-
   };
   private ck;
-
-
-
   updatePayment = {
     itemId: 0,
     resolution: '',
     userId: 0
-
   };
+  failTableAlert = false;
+  failSubmitAlert = false;
+  sucSubmitAlert = false;
+  updateAlert = false;
 
   constructor(private client: HttpClient, private cookie: CookieService, private router: Router) { }
-
 
   ngOnInit() {
     this.ck = this.cookie.getObject('user');
@@ -54,14 +45,11 @@ export class AdvancepaymentComponent implements OnInit {
       .subscribe(
         succ => {
           this.payments = succ;
-          console.log(this.payments);
           return this.payments;
         }, err => {
-          alert('failed to retrieve payments');
+          this.failTableAlert = true;
         }
       );
-
-
   }
 
   submitPayment() {
@@ -70,17 +58,14 @@ export class AdvancepaymentComponent implements OnInit {
     this.client.post('http://localhost:8080/advpay/submit', this.newPayment, { headers: this.header })
       .subscribe(
         (succ: any) => {
-          alert('advance payment submitted');
-          console.log(succ);
+          this.sucSubmitAlert = true;
           this.ngOnInit();
         },
         err => {
-          alert('advance payment failed');
+          this.failSubmitAlert = true;
         }
       );
   }
-
-
 
   updateStatus(payId: number, payStatus: string) {
     this.updatePayment.itemId = payId;
@@ -91,11 +76,11 @@ export class AdvancepaymentComponent implements OnInit {
       .subscribe(
         succ => {
           if (payStatus === 'Accepted') {
-            this.string = 'Advanced payment has been approved';
+            this.updateAlert = true;
             this.ngOnInit();
           }
           if (payStatus === 'Declined') {
-            this.string = 'Advanced payment has been denied';
+            this.updateAlert = true;
             this.ngOnInit();
           }
         },

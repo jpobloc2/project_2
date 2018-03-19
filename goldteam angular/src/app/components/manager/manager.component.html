@@ -2,6 +2,9 @@
 
 <p>Click on a user to view their info</p>
 
+<div *ngIf="failGetAlert" class="alert alert-danger" role="alert">
+    Failed to get all users.
+</div>
 <div class="container">
     <table class="table table-hover">
         <thead class="thead-light">

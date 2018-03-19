@@ -20,7 +20,6 @@ export class NavComponent implements OnInit {
 
   logOut() {
     sessionStorage.clear();
-    console.log('logging out');
     this.cookie.remove('user');
     this.cookie.removeAll();
     localStorage.clear();

@@ -1,14 +1,19 @@
+<app-nav>
+</app-nav>
 
-<app-nav></app-nav>
 
-
-<p>{{string}}</p>
+<div *ngIf="failSubmitAlert" class="alert alert-danger" role="alert">
+  Failed to submit advanced payment.
+</div>
+<div *ngIf="sucSubmitAlert" class="alert alert-success" role="alert">
+  Successfully submitted request.
+</div>
 
 <div class="container">
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
       <div class="well well-sm">
-        <form class="form-horizontal" >
+        <form class="form-horizontal">
           <fieldset>
             <legend class="text-center">Advanced Payment</legend>
 
@@ -29,7 +34,7 @@
 
             <div class="form-group">
               <div class="col-md-12 text-right">
-                <button class="btn btn-primary" (click)="submitPayment()" >Submit Advance Payment Request</button>
+                <button class="btn btn-primary" (click)="submitPayment()">Submit Advance Payment Request</button>
               </div>
             </div>
           </fieldset>
@@ -40,6 +45,9 @@
 </div>
 <div class="container1"></div>
 
+<div *ngIf="failTableAlert" class="alert alert-danger" role="alert">
+  Failed to retrieve records.
+</div>
 <table class="table table-striped table-bordered" cellspacing="0" width="100%">
   <thead>
     <tr>
@@ -77,16 +85,16 @@
       <td *ngIf="advpay.resolver else b">{{advpay.resolver.firstName}}</td>
       <ng-template #b>
         <td>N/A</td>
-    </ng-template>
+      </ng-template>
 
-    <td>
-      <form class="managerbutton" *ngIf="ck.roleId === 1 && ck.firstName != advpay.author.firstName && advpay.status.status === 'Pending'">
+      <td>
+        <form class="managerbutton" *ngIf="ck.roleId === 1 && ck.firstName != advpay.author.firstName && advpay.status.status === 'Pending'">
           <div class="btn-group" role="group" aria-label="Basic example">
-              <button type="submit" (click)="updateStatus(advpay.advId, 'Accepted')" value='Accepted' name="approve" class="btn btn-secondary btn-sm">Approve</button>
-              <button type="submit" (click)="updateStatus(advpay.advId, 'Declined')" value='Declined' name="deny" class="btn btn-secondary btn-sm">Deny</button>
+            <button type="submit" (click)="updateStatus(advpay.advId, 'Accepted')" value='Accepted' name="approve" class="btn btn-secondary btn-sm">Approve</button>
+            <button type="submit" (click)="updateStatus(advpay.advId, 'Declined')" value='Declined' name="deny" class="btn btn-secondary btn-sm">Deny</button>
           </div>
-      </form>
-  </td>
+        </form>
+      </td>
     </tr>
   </tbody>
 </table>

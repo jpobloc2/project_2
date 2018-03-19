@@ -25,7 +25,8 @@ export class CreateReimbComponent implements OnInit {
       status: 'Pending'
     }
   };
-
+  failAmountAlert = false;
+  failDescripAlert = false;
   ck;
 
   constructor(private client: HttpClient, private cookie: CookieService, private router: Router, private reimbService: ReimburseService
@@ -37,9 +38,9 @@ export class CreateReimbComponent implements OnInit {
 
   submitReimbursement() {
     if (this.reimbursement.reimbAmount < 0) {
-      alert('Amount must be greater than zero');
+      this.failAmountAlert = true;
     } else if (this.reimbursement.reimbDescription === '') {
-      alert('Description cannot be left empty!');
+      this.failDescripAlert = true;
     } else {
 
       this.reimbursement.reimbAuthor.userId = this.ck.uId;

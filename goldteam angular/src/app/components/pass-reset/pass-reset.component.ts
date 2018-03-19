@@ -10,6 +10,7 @@ export class PassResetComponent implements OnInit {
 
 password1;
 password2;
+failPassAlert = false;
 
 user;
 
@@ -17,15 +18,13 @@ user;
 
   ngOnInit() {
     this.user = this.userService.getStoredUser();
-    console.log(this.user);
   }
 
   changePass() {
     if (this.password1 !== this.password2) {
-      alert('Passwords do not match!');
+      this.failPassAlert = true;
     } else {
       this.user.password = this.password1;
-      console.log(this.user);
       this.userService.changePassword(this.password1);
 
     }

@@ -17,7 +17,6 @@ export class TimesheetService {
     this.client.get('http://localhost:8080/timesheet/', {headers: this.header})
     .subscribe(
       succ => {
-        console.log(succ);
         this.obv.next(succ);
       }, err => {
         alert('failed to retrieve all timesheets');

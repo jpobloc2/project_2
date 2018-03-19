@@ -1,40 +1,44 @@
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
+<link href="https://fonts.googleapis.com/css?family=Oleo+Script:400,700" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Teko:400,700" rel="stylesheet">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
-    <link href="https://fonts.googleapis.com/css?family=Oleo+Script:400,700" rel="stylesheet">
-   	<link href="https://fonts.googleapis.com/css?family=Teko:400,700" rel="stylesheet">
-   	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-  
-	<section id="contact">
-			<div class="section-content">
-				<h1 class="section-header">Are you having <span class="content-header wow fadeIn " data-wow-delay="0.2s" data-wow-duration="2s"> issues with your account?</span></h1>
-				<h3>Contact your administrator!</h3>
-			</div>
-			<div class="contact-section">
-			<div class="container">
-				<form (ngSubmit)="submitIssue()">
-					<div class="col-md-6 form-line">
-			  			<div class="form-group">
-			  				<label for="exampleInputUsername">Employee Name</label>
-					    	<input name="empName" type="text" class="form-control" id="" placeholder=" Enter Name" [(ngModel)]="complaintEmail.complainant">
-				  		</div>
-				  		<div class="form-group">
-					    	<label for="exampleInputEmail">Email Address</label>
-					    	<input name="empEmail" type="email" class="form-control" id="exampleInputEmail" placeholder=" Enter Email id" [(ngModel)]="complaintEmail.complainantAddr">
-					  	</div>
-			  		</div>
-			  		<div class="col-md-6">
-			  			<div class="form-group">
-			  				<label for ="description"> Message</label>
-			  			 	<textarea name="empMsg" class="form-control" id="description" placeholder="Enter Your Message" [(ngModel)]="complaintEmail.complainantMsg"></textarea>
-			  			</div>
-			  			<div>
-
-			  				<button type="Submit" class="btn btn-default submit"><i class="fa fa-paper-plane" aria-hidden="true"></i>  Send Message</button>
-			  			</div>
-			  			
+<section id="contact">
+	<div class="section-content">
+		<h1 class="section-header">Are you having
+			<span class="content-header wow fadeIn " data-wow-delay="0.2s" data-wow-duration="2s"> issues with your account?</span>
+		</h1>
+		<h3>Contact your administrator!</h3>
+	</div>
+	<div class="contact-section">
+		<div class="container">
+			<form (ngSubmit)="submitIssue()">
+				<div class="col-md-6 form-line">
+					<div class="form-group">
+						<label for="exampleInputUsername">Employee Name</label>
+						<input name="empName" type="text" class="form-control" id="" placeholder=" Enter Name" [(ngModel)]="complaintEmail.complainant">
 					</div>
-				</form>
-			</div>
+					<div class="form-group">
+						<label for="exampleInputEmail">Email Address</label>
+						<input name="empEmail" type="email" class="form-control" id="exampleInputEmail" placeholder=" Enter Email id" [(ngModel)]="complaintEmail.complainantAddr">
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="description"> Message</label>
+						<textarea name="empMsg" class="form-control" id="description" placeholder="Enter Your Message" [(ngModel)]="complaintEmail.complainantMsg"></textarea>
+					</div>
+					<div>
+
+						<button type="Submit" class="btn btn-default submit">
+							<i class="fa fa-paper-plane" aria-hidden="true"></i> Send Message</button>
+					</div>
+
+				</div>
+			</form>
+		</div>
+		<div *ngIf="sucAlert" class="alert alert-success" role="alert">
+			Complaint successfully submitted.
+		</div>
+		<div *ngIf="failAlert" class="alert alert-danger" role="alert">
+			Complaint failed to submit. Try again later.
+		</div>

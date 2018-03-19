@@ -18,14 +18,15 @@ import { ViewUserComponent } from './components/view-user/view-user.component';
 import { ViewMeComponent } from './components/view-me/view-me.component';
 import { ForgotPassComponent } from './components/forgot-pass/forgot-pass.component';
 import { PassResetComponent } from './components/pass-reset/pass-reset.component';
+import { ManagerGuard } from './guard/manager.guard';
 
 export const appRoutes: Routes = [
   {
     path: 'reimb',
     component: ReimbursementComponent,
-    // canActivate: [
-    //   LoggedInGuard
-    // ]
+    canActivate: [
+      LoggedInGuard
+    ]
   },
   {
     path: 'login',
@@ -37,53 +38,82 @@ export const appRoutes: Routes = [
   },
   {
     path: 'manager',
-    component: ManagerComponent
+    component: ManagerComponent,
+    canActivate: [
+      LoggedInGuard,
+      ManagerGuard
+    ],
   },
   {
     path: 'view-user',
-    component: ViewUserComponent
+    component: ViewUserComponent,
+    canActivate: [
+      LoggedInGuard,
+      ManagerGuard
+    ]
   },
   {
     path: 'account-info',
-    component: ViewMeComponent
+    component: ViewMeComponent,
+    canActivate: [
+      LoggedInGuard
+    ]
   },
   {
     path: 'changePass',
-    component: PassResetComponent
+    component: PassResetComponent,
+    canActivate: [
+      LoggedInGuard
+    ]
   },
   {
     path: 'timesheet',
-    component: TimesheetsComponent
+    component: TimesheetsComponent,
+    canActivate: [
+      LoggedInGuard
+    ]
   },
   {
     path: 'new-timesheet',
-    component: NewTimesheetComponent
+    component: NewTimesheetComponent,
+    canActivate: [
+      LoggedInGuard
+    ]
   },
   {
     path: 'advance',
-    component: AdvancepaymentComponent
+    component: AdvancepaymentComponent,
+    canActivate: [
+      LoggedInGuard
+    ]
   },
   {
     path: 'new-reimbursement',
     component: CreateReimbComponent,
-    // canActivate: [
-    //   LoggedInGuard
-    // ]
+    canActivate: [
+      LoggedInGuard
+    ]
   },
   {
     path: 'home',
-    component: HomeComponent
+    component: HomeComponent,
+    canActivate: [
+      LoggedInGuard
+    ],
   },
   {
     path: 'welcome',
-    component: WelcomeComponent
+    component: WelcomeComponent,
+    canActivate: [
+      LoggedInGuard
+    ],
   },
   {
     path: 'reimbs',
     component: ReimbsComponent,
-    // canActivate: [
-    //   LoggedInGuard
-    // ],
+    canActivate: [
+      LoggedInGuard
+    ],
     children: [
       {
         path: 'all',

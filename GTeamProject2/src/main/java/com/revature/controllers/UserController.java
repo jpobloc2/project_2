@@ -88,6 +88,7 @@ public class UserController {
 		try {
 			return new ResponseEntity<Users>(us.createNew(u, token), HttpStatus.OK);
 		} catch (AuthenticationException e) {
+			e.printStackTrace();
 			return new ResponseEntity<Users>(HttpStatus.UNAUTHORIZED);
 		}
 	}
@@ -124,6 +125,16 @@ public class UserController {
 	public ResponseEntity<Users> changeUser(@RequestBody Users u, @RequestHeader(value = "xtoken") String token) {
 		try {
 			return new ResponseEntity<Users>(us.changeUser(u, token), HttpStatus.OK);
+		} catch (AuthenticationException e) {
+			return new ResponseEntity<Users>(HttpStatus.UNAUTHORIZED);
+		}
+	}
+	
+	@PostMapping("change/sub")
+	@JsonView(View.UserInfo.class)
+	public ResponseEntity<Users> changeSubordinate(@RequestBody Users u, @RequestHeader(value = "xtoken") String token) {
+		try {
+			return new ResponseEntity<Users>(us.changeSub(u, token), HttpStatus.OK);
 		} catch (AuthenticationException e) {
 			return new ResponseEntity<Users>(HttpStatus.UNAUTHORIZED);
 		}

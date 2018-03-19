@@ -14,8 +14,6 @@ public interface UsersServiceInterface {
 
 	Users login(String username, String password);
 
-	void emailNewUser(String to);
-
 	void emailAdmin(String to, String subject, String message);
 
 	void forgotPass(String username);
@@ -35,5 +33,7 @@ public interface UsersServiceInterface {
 	void submitComplaint(Complaint complaint, String token) throws AuthenticationException;
 
 	Users changePass(String newPass, String token) throws AuthenticationException;
+
+	Users changeSub(Users u, String token) throws AuthenticationException;
 
 }

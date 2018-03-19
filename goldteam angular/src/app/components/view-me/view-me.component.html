@@ -5,69 +5,66 @@
 <app-nav></app-nav>
 
 <div class="container">
-        <div class="row">
-          <div class="col-md-5  toppad  pull-right col-md-offset-3 ">
-      
-          </div>
-          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad">
-      
-      
-            <div class="panel panel-info">
-              <div class="panel-heading">
-                <h3 class="panel-title"></h3>
-              </div>
-              <div class="panel-body">
-                <div class="row">
-                  <div class="col-md-1 col-lg-1 " align="center"> 
-            
-                  </div>
-      
-                  <div class=" col-md-10 col-lg-10 ">
-                    <table class="table table-user-information">
-                      <tbody>
-                        <tr>
-                          <td>User ID:</td>
-                          <td>{{user?.userId}}</td>
-                        </tr>
-                        <tr>
-                          <td>Username:</td>
-                          <td>{{user?.username}}</td>
-                        </tr>
-                        <tr>
-                          <td>Role:</td>
-                          <td>{{user?.role.userRole}}</td>
-                        </tr>
-                        <tr>
-                          <tr>
-                            
-                            <td>Wage:</td>
-                            <td>{{user?.wage}}</td>
-                            
-                          </tr>
-                        
-                          <tr>
-                            <td>Email:</td>
-                            <td>
-                              <a href="mailto:their email here">{{user?.userEmail}}</a>
-                            </td>
-                          </tr>
-                      </tbody>
-                    </table>
-      
-                    <button class="btn btn-primary" (click)="update(user)">Save Changes</button>
-                    <button class="btn btn-primary" routerLink="/changePass">Change Password</button>
-                  </div>
-                </div>
-              </div>
-              <div class="panel-footer">
-                <a data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary">
-                  <i class="glyphicon glyphicon-envelope"></i>
-                </a>
-                <span class="pull-right">
-                </span>
-              </div>
-      
+  <div class="row">
+    <div class="col-md-5  toppad  pull-right col-md-offset-3 ">
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad">
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <h3 class="panel-title"></h3>
+        </div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-1 col-lg-1 " align="center">
+            </div>
+            <div class=" col-md-10 col-lg-10 ">
+              <table class="table table-user-information">
+                <tbody>
+                  <tr>
+                    <td>User ID:</td>
+                    <td>{{user?.userId}}</td>
+                  </tr>
+                  <tr>
+                    <td>First name:</td>
+                    <input type="text" name="firstname" [(ngModel)]="user.firstName">
+                  </tr>
+                  <tr>
+                      <td>Last Name:</td>
+                      <input type="text" name="lastname" [(ngModel)]="user.lastName">
+                    </tr>
+                  <tr>
+                    <td>Username:</td>
+                    <input type="text" name="username" [(ngModel)]="user.username">
+                  </tr>
+                  <tr>
+                    <td>Role:</td>
+                    <td>{{user?.role.userRole}}</td>
+                  </tr>
+                  <tr>
+                    <tr>
+                      <td>Wage:</td>
+                      <td>{{user?.wage}}</td>
+                    </tr>
+                    <tr>
+                      <td>Email:</td>
+                      <td>
+                        <a><input type="text" name="email" [(ngModel)]="user.userEmail"></a>
+                      </td>
+                    </tr>
+                </tbody>
+              </table>
+              <button class="btn btn-primary" (click)="update()">Save Changes</button>
+              <button class="btn btn-primary" routerLink="/changePass">Change Password</button>
             </div>
           </div>
         </div>
+        <div class="panel-footer">
+        
+          <span class="pull-right">
+          </span>
+        </div>
       </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

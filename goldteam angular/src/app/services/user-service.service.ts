@@ -45,6 +45,21 @@ export class UserServiceService {
       );
 
   }
+  updateSub(user: any) {
+    this.header = new HttpHeaders({ xtoken: `${localStorage.getItem('token')}` });
+    console.log('User updated test to see service runs');
+    this.client.post('http://localhost:8080/users/change/sub', user, { headers: this.header })
+      .subscribe(
+        succ => {
+          alert('user successfully updated');
+          console.log(succ);
+          this.router.navigateByUrl('/manager');
+        }, err => {
+          alert('failed to update this user');
+        }
+      );
+
+  }
 
   resetPassword(username: string) {
     console.log('user service resetting ' + username + `'s password`);

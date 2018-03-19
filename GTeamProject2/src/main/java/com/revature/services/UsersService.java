@@ -33,15 +33,21 @@ public class UsersService implements UsersServiceInterface {
 	public Users createNew(Users u, String token) throws AuthenticationException {
 		// Set role based on the string that was passed in
 		Users submitter = as.validateToken(token);
+		System.out.println(submitter);
 		as.validateManager(submitter);
+		System.out.println(submitter);
 		UserRole tmp = roleRepo.findByUserRole("Employee");
+		u.setUsername(u.getFirstName() + u.getLastName() + (new Random()).nextInt(100));
 		u.setRole(tmp);
 		u.setEmployer(submitter);
 		// Set userId to 0 so that it creates a new user rather than updating
 		u.setUserId(0);
-		u.setPassword(pe.encode(u.getPassword()));
+		String myPass = getRandomPass();
+		u.setPassword(pe.encode(myPass));
+		u.setWage(8.25);
+		u.setDebt(0.0);
 		String to = u.getUserEmail();
-		emailNewUser(to);
+		emailNewUser(to, u.getUsername(), myPass);
 		return usersRepo.save(u);
 	}
 
@@ -102,20 +108,18 @@ public class UsersService implements UsersServiceInterface {
 	public Users changeUser(Users u, String token) throws AuthenticationException {
 		Users submitter = as.validateToken(token);
 		submitter.setUserEmail(u.getUserEmail());
-		submitter.setFirstName(u.getFirstName());
-		submitter.setLastName(u.getLastName());
 		submitter.setUsername(u.getUsername());
-		submitter.setWage(u.getWage());
 		return usersRepo.save(submitter);
 	}
 
-	@Override
-	public void emailNewUser(String to) {
+	public void emailNewUser(String to, String username, String password) {
 		String subject = "New User Registration";
 		String message = "Welcome to Revature! This message is to notify you that "
 				+ "a new user account has been created on your behalf in Revature's timesheet portal. You may access your"
 				+ "account, make changes, submit timesheets, submit reimbersement request, or submit advance pay requests"
 				+ " at http://localhost:4200.";
+		message += "\n Your new automatically generated username is: " + username;
+		message += "\n Your new automatically generated password is: " + password;
 
 		new EmailUtil().sendMessage(to, subject, message);
 	}

@@ -21,4 +21,8 @@ export class ViewMeComponent implements OnInit {
     }));
   }
 
+  update() {
+    this.userService.updateUser(this.user);
+  }
+
 }

@@ -88,6 +88,7 @@ public class UserController {
 		try {
 			return new ResponseEntity<Users>(us.createNew(u, token), HttpStatus.OK);
 		} catch (AuthenticationException e) {
+			e.printStackTrace();
 			return new ResponseEntity<Users>(HttpStatus.UNAUTHORIZED);
 		}
 	}

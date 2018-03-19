@@ -38,6 +38,7 @@ import { AdvpaymentService } from './services/advpayment.service';
 import { ViewMeComponent } from './components/view-me/view-me.component';
 import { UserServiceService } from './services/user-service.service';
 import { PassResetComponent } from './components/pass-reset/pass-reset.component';
+import { MakeUserComponent } from './components/make-user/make-user.component';
 import { ManagerGuard } from './guard/manager.guard';
 
 
@@ -73,7 +74,8 @@ import { ManagerGuard } from './guard/manager.guard';
     ViewUserComponent,
     ForgotPassComponent,
     ViewMeComponent,
-    PassResetComponent
+    PassResetComponent,
+    MakeUserComponent
   ],
   providers: [
     ReimburseService,

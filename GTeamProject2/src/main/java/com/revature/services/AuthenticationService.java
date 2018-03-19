@@ -25,7 +25,7 @@ public class AuthenticationService implements AuthenticationServiceInterface {
 
 	@Override
 	public boolean validateManager(Users u) throws AuthenticationException {
-		boolean b = (u.getRole().equals("Manager"));
+		boolean b = (u.getRole().getUserRole().equals("Manager"));
 		if(!b) {
 			throw new AuthenticationException();
 		}

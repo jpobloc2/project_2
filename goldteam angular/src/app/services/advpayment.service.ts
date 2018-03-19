@@ -16,12 +16,10 @@ export class AdvpaymentService {
       .subscribe(
         succ => {
           this.payments = succ;
-          console.log(this.payments);
           return this.payments;
         }, err => {
           alert('failed to retrieve payments');
         }
       );
   }
-
 }

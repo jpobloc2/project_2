@@ -15,17 +15,16 @@ export class ManagerComponent implements OnInit {
   userList: any = [];
 
   constructor(private cookie: CookieService, private client: HttpClient, private router: Router) { }
+  failGetAlert = false;
 
   ngOnInit() {
     this.client.get('http://localhost:8080/users/all', {headers: this.header})
       .subscribe(
         succ => {
           this.userList = succ;
-          console.log(succ);
           return this.userList;
-
         }, err => {
-          alert('failed to retrieve all users');
+          this.failGetAlert = true;
         }
 
       );

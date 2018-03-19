@@ -16,6 +16,10 @@ export class MakeUserComponent implements OnInit {
     userEmail: ''
   };
 
+  failNullAlert = false;
+  failCreateAlert = false;
+  failSubmissionAlert = false;
+
   constructor(private client: HttpClient) { }
 
   ngOnInit() {
@@ -23,17 +27,15 @@ export class MakeUserComponent implements OnInit {
 
   makeUser() {
     if ((this.newUser.firstName === '' || this.newUser.lastName === '' || this.newUser.userEmail === '')) {
-      alert('Cannot have null fields');
-      console.log(this.newUser);
+      this.failNullAlert = true;
     } else {
       this.client.post('http://localhost:8080/users/new', this.newUser, {headers: this.header})
     .subscribe(
       succ => {
-        alert('User Created');
-        console.log(succ);
+        this.failCreateAlert = true;
       },
       err => {
-        alert('Submission failed');
+        this.failSubmissionAlert = true;
       }
     );
     }

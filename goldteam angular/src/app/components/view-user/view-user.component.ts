@@ -17,14 +17,12 @@ export class ViewUserComponent implements OnInit {
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
-      console.log('the query paramters: ' + params['user']);
       this.userId = params['user'];
     });
     this.client.get(`http://localhost:8080/users/${this.userId}`)
     .subscribe(
       succ => {
         this.user = succ;
-        console.log(succ);
         return this.user;
 
       }, err => {
@@ -32,11 +30,9 @@ export class ViewUserComponent implements OnInit {
       }
 
     );
-    console.log(this.user);
   }
 
   update(user: any) {
-    console.log('updating user');
      this.userService.updateSub(this.user);
   }
 

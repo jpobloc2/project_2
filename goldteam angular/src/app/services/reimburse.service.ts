@@ -22,12 +22,9 @@ export class ReimburseService {
 
   getReimbs(): any {
     this.header = new HttpHeaders({xtoken: `${localStorage.getItem('token')}`});
-    console.log('reimb service called');
     this.client.get('http://localhost:8080/reimb/', {headers: this.header})
     .subscribe(
       succ => {
-        console.log('result of the service: ');
-        console.log(succ);
         this.reimbs = succ;
       },
       err => {
@@ -37,21 +34,15 @@ export class ReimburseService {
     );
 }
   submitReimb(reimbursement: any) {
-    console.log('submitting reimbursement from service, which is ');
-    console.log(reimbursement);
     this.header = new HttpHeaders({xtoken: `${localStorage.getItem('token')}`});
     this.client.post('http://localhost:8080/reimb/submit', reimbursement, {headers: this.header})
     .subscribe(
       (succ) => {
-        alert('submit successful');
-        console.log(succ);
         this.router.navigateByUrl('reimbs');
       },
       (err) => {
         alert('failed to submit reimbursement');
       }
-
-
     );
   }
 

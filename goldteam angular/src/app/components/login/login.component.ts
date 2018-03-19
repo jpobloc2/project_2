@@ -36,9 +36,6 @@ export class LoginComponent implements OnInit {
       )
       .subscribe(
         (succ: any) => {
-          alert(this.credentials.username +  ` has logged in`);
-          // console.log(succ);
-          // console.log(succ.token);
           this.token = succ.token;
           this.user = succ.user;
           this.ck.uId = succ.user.userId;
@@ -49,7 +46,7 @@ export class LoginComponent implements OnInit {
           this.router.navigateByUrl('home');
         },
         (err) => {
-          alert('failed to log in');
+          alert('Failed to login.');
         }
       );
 

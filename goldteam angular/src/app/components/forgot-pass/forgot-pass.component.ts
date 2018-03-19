@@ -17,7 +17,6 @@ export class ForgotPassComponent implements OnInit {
   }
 
   forgot() {
-    console.log('forgot password button pressed');
     this.userService.resetPassword(this.username);
   }
 

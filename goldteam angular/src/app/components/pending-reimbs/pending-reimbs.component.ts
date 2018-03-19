@@ -23,7 +23,7 @@ export class PendingReimbsComponent implements OnInit {
     userId: 0
 
   };
-
+  failUpdateAlert = false;
 
 
   constructor(private reimbService: ReimburseService, private client: HttpClient, private router: Router, private cookie: CookieService) { }
@@ -55,7 +55,7 @@ export class PendingReimbsComponent implements OnInit {
           }
         },
         err => {
-          alert('failed to update status');
+          alert('Failed to update status.');
         }
       );
       /*     this.reimbService.updateReimbursement(this.updateReimb); */

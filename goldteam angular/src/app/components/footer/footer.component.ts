@@ -14,6 +14,8 @@ export class FooterComponent implements OnInit {
     complainantAddr: '',
     complainantMsg: ''
   };
+  sucAlert = false;
+  failAlert = false;
 
   constructor(private client: HttpClient) { }
 
@@ -31,10 +33,10 @@ export class FooterComponent implements OnInit {
       this.client.post('http://localhost:8080/users/complaint', this.complaintEmail, {headers: this.header})
       .subscribe(
         (succ) => {
-          alert('Complaint successfully registered.');
+          this.sucAlert = true;
         },
         (err) => {
-          alert('Error. Try again later.');
+          this.failAlert = true;
         }
       );
     }

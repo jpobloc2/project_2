@@ -1,6 +1,8 @@
 package com.revature.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,9 +23,12 @@ public class UserController {
 	private UsersServiceInterface us;
 
 	@PostMapping("newUser")
-	public Users createNew(@RequestBody Users u) {
-		return us.createNew(u);
-	}
+	@JsonView(View.UserInfo.class)
+	public ResponseEntity<Users> createNew(@RequestBody Users u) {
+		us.createNew(u);
+		return new ResponseEntity<>(HttpStatus.OK);
+  }
+	
 
 	@PostMapping
 	@JsonView(View.UserInfo.class)
